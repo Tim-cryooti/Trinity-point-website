@@ -102,6 +102,14 @@ p{margin:0;max-width:62ch}
 .hero .lede{color:var(--bone);opacity:.9;max-width:52ch;animation:fade 1s .5s var(--ease) both}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;animation:fade 1s .7s var(--ease) both}
 @keyframes fade{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.revbtn{display:inline-flex;align-items:center;gap:12px;padding:0 22px;min-height:60px;border-radius:999px;background:rgba(13,21,16,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1.5px solid rgba(195,176,108,.55);color:var(--bone);text-decoration:none;font-family:var(--f-label);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:16px;transition:all .3s var(--ease)}
+.revbtn b{color:var(--gold);font-size:20px}
+.revbtn .stars svg{width:17px;height:17px}
+.revbtn .arr{width:18px;height:18px;color:var(--gold);transition:transform .3s var(--ease)}
+.revbtn:hover{border-color:var(--gold);background:rgba(195,176,108,.14)}
+.revbtn:hover .arr{transform:translate(3px,-3px)}
+.revbtn span:not(.stars){white-space:nowrap}
+@media (max-width:520px){.revbtn{width:100%;justify-content:center;gap:10px;font-size:14px;padding:0 14px;min-height:56px}.revbtn .stars svg{width:14px;height:14px}.revbtn b{font-size:17px}}
 .trust{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:34px;padding:0;list-style:none;animation:fade 1s .9s var(--ease) both}
 .trust li{display:flex;align-items:center;gap:9px;font-family:var(--f-label);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:14px;color:var(--bone)}
 .trust svg{width:18px;height:18px;color:var(--gold);flex:none}
@@ -238,6 +246,7 @@ section{position:relative}
 .reviews .review{break-inside:avoid;margin:0 0 18px}
 .rtop{display:flex;justify-content:space-between;align-items:center}
 .review .g{width:22px;height:22px}
+.fbrev{border-color:rgba(24,119,242,.35)}
 .review.tall p{font-size:21px}
 .gbadge{justify-self:end;display:flex;align-items:center;gap:16px;padding:16px 22px;border-radius:20px;background:var(--forest);border:1px solid rgba(195,176,108,.35);text-decoration:none;transition:transform .35s var(--ease),border-color .35s}
 .gbadge:hover{transform:translateY(-4px);border-color:var(--gold)}
@@ -246,7 +255,11 @@ section{position:relative}
 .gbadge .meta{display:grid;gap:4px;font-size:14px;color:var(--sage)}
 .gbadge .arrow{width:22px;height:22px;color:var(--gold);transition:transform .35s var(--ease)}
 .gbadge:hover .arrow{transform:translate(4px,-4px)}
-@media (max-width:820px){.gbadge{justify-self:start}}
+.badges{justify-self:end;display:flex;flex-wrap:wrap;gap:12px}
+.fbadge .score{font-size:44px}
+.rec{display:inline-flex;align-items:center;gap:7px;font-family:var(--f-label);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:var(--gold)}
+.rec svg{width:16px;height:16px}
+@media (max-width:820px){.gbadge,.badges{justify-self:start}}
 .review{background:var(--forest);border:1px solid var(--moss);border-radius:22px;padding:36px;display:flex;flex-direction:column;gap:22px;transition:transform .4s var(--ease),border-color .4s}
 .review:hover{transform:translateY(-6px);border-color:rgba(195,176,108,.45)}
 .stars{display:flex;gap:4px;color:var(--gold)}
@@ -320,6 +333,7 @@ footer.site p{color:var(--sage);font-size:14px}
   <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></g></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
   <symbol id="i-g" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.2-2.1 3.5-5.2 3.5-8.8z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.4 14.4a7.2 7.2 0 0 1 0-4.7V6.6h-4a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.4 6.6l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path fill="#fff" d="M15.4 15.5l.5-3.5h-3.3V9.8c0-1 .5-1.9 2-1.9H16V4.9s-1.4-.2-2.7-.2c-2.8 0-4.6 1.7-4.6 4.7V12H5.6v3.5h3.1V24c.6.1 1.3.1 1.9.1s1.3 0 1.9-.1v-8.5z"/></symbol>
   <symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></symbol>
   <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></symbol>
   <symbol id="i-drag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></symbol>
@@ -330,6 +344,7 @@ footer.site p{color:var(--sage);font-size:14px}
     <a class="brand" href="#home" aria-label="Trinity Point Landscaping, home"><img src="assets/logo.webp" alt="Trinity Point Landscaping logo" width="74" height="54"></a>
     <nav class="nav" aria-label="Main">
       <a class="link" href="#services">Services</a>
+      <a class="link" href="#reviews">Reviews</a>
       <a class="link" href="#work">Our work</a>
       <a class="link" href="#crew">Crew</a>
       <a class="link" href="#contact">Contact</a>
@@ -351,6 +366,7 @@ footer.site p{color:var(--sage);font-size:14px}
       <div class="ctas">
         <a class="btn big" href="tel:+18457181328"><svg><use href="#i-phone"/></svg>Call 845-718-1328</a>
         <a class="btn big ghost" href="sms:+18457181328"><svg><use href="#i-text"/></svg>Text for a free quote</a>
+        <a class="revbtn" href="#reviews"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span>See our <b data-rev-total>13</b> reviews</span><svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <ul class="trust">
         <li><svg><use href="#i-shield"/></svg>Fully insured · General liability</li>
@@ -421,6 +437,95 @@ footer.site p{color:var(--sage);font-size:14px}
         <a class="card rv d2" href="#contact"><img src="assets/mulching.webp" alt="Crew member spreading fresh dark mulch around an evergreen" loading="lazy"><div class="in"><span class="num">04</span><h3>Mulch &amp; beds</h3><p>Fresh mulch and clean bed edges that make the whole property look cared for.</p></div></a>
         <a class="card rv" href="#contact"><img src="assets/lawn-mowing-stripes.webp" style="object-position:50% 62%" alt="Trinity Point crew member mowing clean stripes into a large lawn on a zero-turn mower" loading="lazy"><div class="in"><span class="num">05</span><h3>Lawn care</h3><p>Regular cuts and upkeep so it stays the way we left it.</p></div></a>
         <a class="card wide vcard rv d1" href="#contact"><video muted loop playsinline preload="none" poster="assets/property-walk-poster.jpg" aria-label="Walk past freshly mulched beds, rounded shrubs and a stone walkway at a finished property"><source src="assets/property-walk.mp4" type="video/mp4"></video><span class="play label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><span class="hov">Hover to watch</span></span><div class="in"><span class="num">06</span><h3>Full property transformations</h3><p>Brush, trimming, mulch and cleanup handled together by one crew.</p></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="reviews" aria-labelledby="rev-h">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="label rv">Real reviews · Google &amp; Facebook</span><h2 id="rev-h" class="rv d1">Don't take our word for it.</h2></div>
+        <div class="badges rv d2">
+        <a class="gbadge" href="https://maps.google.com/?cid=13397259408242732591" target="_blank" rel="noopener">
+          <svg class="g" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-g"/></svg>
+          <span class="score">5.0</span>
+          <span class="meta"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span>11 reviews on Google · See them all</span></span>
+          <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+        <a class="gbadge fbadge" href="https://www.facebook.com/profile.php?id=61581132414438&amp;sk=reviews" target="_blank" rel="noopener">
+          <svg class="g" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-fb"/></svg>
+          <span class="score" data-fb-count>2</span>
+          <span class="meta"><span class="rec"><svg><use href="#i-check"/></svg>Recommended</span><span>reviews on Facebook · See them</span></span>
+          <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+        </div>
+      </div>
+      <div class="reviews">
+        <figure class="review rv tall">
+          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
+          <p>"I recently hired Trinity Point to clear approximately half an acre of heavily overgrown land on my property. The area was so bad that it was practically impossible to walk through. Two young gentlemen showed up and did an incredible job transforming the space. It's refreshing to see young guys with such a strong work ethic and dedication to getting the job done right. I'm extremely pleased with the results and wouldn't hesitate to recommend Trinity Point to anyone needing land clearing services."</p>
+          <footer>Hector R. · Land clearing, ½ acre</footer>
+        </figure>
+        <figure class="review fbrev rv d2">
+          <div class="rtop"><span class="rec"><svg><use href="#i-check"/></svg>Recommends us</span><svg class="g" viewBox="0 0 24 24" aria-label="Facebook review"><use href="#i-fb"/></svg></div>
+          <p>"These guys are amazing! They cleared my wicked overgrown horse pasture of gigantic pricker bushes, waist high weeds, and other brush. Could not be happier with the results!"</p>
+          <footer>Heather F. · Pasture clearing · Facebook</footer>
+        </figure>
+        <figure class="review rv d1 tall">
+          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
+          <p>"Tim did a great job clearing the overgrown brush for us. As you can see in the before and after photos."</p>
+          <footer>Christine H. · Brush clearing</footer>
+        </figure>
+        <figure class="review rv d1 tall">
+          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
+          <p>"I called Tim from Trinity point for a weekly mowing at a property in Hyde Park. He was able to work me into the schedule that week. (Even though the weather wasn't on his side) He was friendly, fair and took pride in his work. It's a pleasure to see a young entrepreneur with the work ethic and pride of an old school craftsman. I wouldn't hesitate using or referring Trinity to any of my friends or neighbors."</p>
+          <footer>Dave S. · Weekly mowing, Hyde Park</footer>
+        </figure>
+        <figure class="review rv d2">
+          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
+          <p>"It has been a pleasure to work with Tim at Trinity Point Landscaping. He is kind, reliable and professional. He has done an excellent job keeping our property looking neat and well-maintained."</p>
+          <footer>Heather M. · Property maintenance</footer>
+        </figure>
+        <figure class="review fbrev rv d2">
+          <div class="rtop"><span class="rec"><svg><use href="#i-check"/></svg>Recommends us</span><svg class="g" viewBox="0 0 24 24" aria-label="Facebook review"><use href="#i-fb"/></svg></div>
+          <p>"He did a lot of work in one day a very good job. I will definitely be hiring again."</p>
+          <footer>Liz P. · Landscaping · Facebook</footer>
+        </figure>
+        <figure class="review rv">
+          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
+          <p>"Very happy with the landscaping services I have received. Tim has been great to work with, his prices are fair and reasonable and his work is excellent. Would highly recommend him."</p>
+          <footer>Christine M. · Landscaping</footer>
+        </figure>
+        <figure class="review rv d1">
+          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
+          <p>"This landscaping company is awesome! I am using this company to maintain my mother's lawn and they do a really good job and always courteous and friendly. I would highly recommend Trinity Point Landscaping!"</p>
+          <footer>Lois C. · Lawn maintenance</footer>
+        </figure>
+        <figure class="review rv d2">
+          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
+          <p>"I am extremely happy with the service I received from Trinity Point Landscaping. They provided a very professional and thorough cutting and cleaning to my neglected yard. I would use them in the future and highly recommend them for your yard."</p>
+          <footer>Paul · Yard cleanup</footer>
+        </figure>
+        <figure class="review rv">
+          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
+          <p>"Timmy Laffin did landscaping for my garden. He did a wonderful job. I will definitely hire him again in the spring."</p>
+          <footer>Pamela J. · Garden</footer>
+        </figure>
+        <figure class="review rv d1">
+          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
+          <p>"Tim did a great fall clean-up for me. He is thorough, polite and friendly. My yard thanks him and so do I."</p>
+          <footer>Lynda L. · Fall cleanup</footer>
+        </figure>
+        <figure class="review rv d2">
+          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
+          <p>"Quick and thorough. Very pleased with his work."</p>
+          <footer>Charles H. · Landscaping</footer>
+        </figure>
+      </div>
+      <div class="rv" style="margin-top:34px;display:flex;flex-wrap:wrap;gap:14px">
+        <a class="btn" href="https://maps.google.com/?cid=13397259408242732591" target="_blank" rel="noopener"><svg><use href="#i-g"/></svg>Read all reviews on Google</a>
+        <a class="btn ghost" href="https://www.facebook.com/profile.php?id=61581132414438&amp;sk=reviews" target="_blank" rel="noopener"><svg><use href="#i-fb"/></svg>Facebook reviews</a>
+        <a class="btn ghost" href="https://maps.google.com/?cid=13397259408242732591" target="_blank" rel="noopener"><svg><use href="#i-star"/></svg>Worked with us? Leave a review</a>
       </div>
     </div>
   </section>
@@ -507,75 +612,6 @@ footer.site p{color:var(--sage);font-size:14px}
     </div>
   </section>
 
-  <section class="band" id="reviews" aria-labelledby="rev-h">
-    <div class="wrap">
-      <div class="head">
-        <div><span class="label rv">Real Google reviews</span><h2 id="rev-h" class="rv d1">Don't take our word for it.</h2></div>
-        <a class="gbadge rv d2" href="https://maps.google.com/?cid=13397259408242732591" target="_blank" rel="noopener">
-          <svg class="g" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-g"/></svg>
-          <span class="score">5.0</span>
-          <span class="meta"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span>11 reviews on Google · See them all</span></span>
-          <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
-        </a>
-      </div>
-      <div class="reviews">
-        <figure class="review rv tall">
-          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
-          <p>"I recently hired Trinity Point to clear approximately half an acre of heavily overgrown land on my property. The area was so bad that it was practically impossible to walk through. Two young gentlemen showed up and did an incredible job transforming the space. It's refreshing to see young guys with such a strong work ethic and dedication to getting the job done right. I'm extremely pleased with the results and wouldn't hesitate to recommend Trinity Point to anyone needing land clearing services."</p>
-          <footer>Hector R. · Land clearing, ½ acre</footer>
-        </figure>
-        <figure class="review rv d1 tall">
-          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
-          <p>"Tim did a great job clearing the overgrown brush for us. As you can see in the before and after photos."</p>
-          <footer>Christine H. · Brush clearing</footer>
-        </figure>
-        <figure class="review rv d1 tall">
-          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
-          <p>"I called Tim from Trinity point for a weekly mowing at a property in Hyde Park. He was able to work me into the schedule that week. (Even though the weather wasn't on his side) He was friendly, fair and took pride in his work. It's a pleasure to see a young entrepreneur with the work ethic and pride of an old school craftsman. I wouldn't hesitate using or referring Trinity to any of my friends or neighbors."</p>
-          <footer>Dave S. · Weekly mowing, Hyde Park</footer>
-        </figure>
-        <figure class="review rv d2">
-          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
-          <p>"It has been a pleasure to work with Tim at Trinity Point Landscaping. He is kind, reliable and professional. He has done an excellent job keeping our property looking neat and well-maintained."</p>
-          <footer>Heather M. · Property maintenance</footer>
-        </figure>
-        <figure class="review rv">
-          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
-          <p>"Very happy with the landscaping services I have received. Tim has been great to work with, his prices are fair and reasonable and his work is excellent. Would highly recommend him."</p>
-          <footer>Christine M. · Landscaping</footer>
-        </figure>
-        <figure class="review rv d1">
-          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
-          <p>"This landscaping company is awesome! I am using this company to maintain my mother's lawn and they do a really good job and always courteous and friendly. I would highly recommend Trinity Point Landscaping!"</p>
-          <footer>Lois C. · Lawn maintenance</footer>
-        </figure>
-        <figure class="review rv d2">
-          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
-          <p>"I am extremely happy with the service I received from Trinity Point Landscaping. They provided a very professional and thorough cutting and cleaning to my neglected yard. I would use them in the future and highly recommend them for your yard."</p>
-          <footer>Paul · Yard cleanup</footer>
-        </figure>
-        <figure class="review rv">
-          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
-          <p>"Timmy Laffin did landscaping for my garden. He did a wonderful job. I will definitely hire him again in the spring."</p>
-          <footer>Pamela J. · Garden</footer>
-        </figure>
-        <figure class="review rv d1">
-          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
-          <p>"Tim did a great fall clean-up for me. He is thorough, polite and friendly. My yard thanks him and so do I."</p>
-          <footer>Lynda L. · Fall cleanup</footer>
-        </figure>
-        <figure class="review rv d2">
-          <div class="rtop"><span class="stars" aria-label="5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><svg class="g" viewBox="0 0 24 24" aria-label="Google review"><use href="#i-g"/></svg></div>
-          <p>"Quick and thorough. Very pleased with his work."</p>
-          <footer>Charles H. · Landscaping</footer>
-        </figure>
-      </div>
-      <div class="rv" style="margin-top:34px;display:flex;flex-wrap:wrap;gap:14px">
-        <a class="btn" href="https://maps.google.com/?cid=13397259408242732591" target="_blank" rel="noopener"><svg><use href="#i-g"/></svg>Read all reviews on Google</a>
-        <a class="btn ghost" href="https://maps.google.com/?cid=13397259408242732591" target="_blank" rel="noopener"><svg><use href="#i-star"/></svg>Worked with us? Leave a review</a>
-      </div>
-    </div>
-  </section>
 
   <section style="padding-bottom:40px" aria-labelledby="land-h">
     <div class="wrap">
@@ -709,6 +745,12 @@ footer.site p{color:var(--sage);font-size:14px}
       es.forEach(function(e){ if (e.isIntersecting && !reduce){ var p = ev.play(); if (p && p.catch) p.catch(function(){}); } else ev.pause(); });
     }, {threshold:.35}).observe(ev);
   }
+  // hero review total = Google count + Facebook count
+  (function(){
+    var g = document.querySelector('#reviews .gbadge .meta'), f = document.querySelector('[data-fb-count]'), t = document.querySelector('[data-rev-total]');
+    var m = g && g.textContent.match(/(\d+)\s+reviews on Google/);
+    if (m && f && t) t.textContent = (+m[1]) + (+f.textContent || 0);
+  })();
   // service card video: plays on hover (desktop) or while on screen (phones)
   document.querySelectorAll('.vcard').forEach(function(card){
     var v = card.querySelector('video');
