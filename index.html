@@ -492,13 +492,13 @@ html.qlock,html.qlock body{overflow:hidden}
 .qhero:active{transform:translateY(1px) scale(.97)}
 .qhero .qping{position:relative;width:14px;height:14px;border-radius:50%;background:#1a0f08;flex:none}
 .qhero .qping::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid #1a0f08;animation:qping 1.8s ease-out infinite}
-.qhero b{display:block;font-family:var(--f-label);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:19px;line-height:1.1}
+.qhero b{display:block;font-family:var(--f-label);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:20px;line-height:1.1}
 .qhero small{display:block;font-size:13.5px;font-weight:600;opacity:.8;line-height:1.2}
 .qhero .arr{width:20px;height:20px;flex:none;transition:transform .3s var(--ease)}
 .qhero:hover .arr{transform:translate(3px,-3px)}
 @keyframes qping{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.8);opacity:0}}
 @keyframes qnudge{0%,86%,100%{transform:none}88%{transform:rotate(-2.5deg) scale(1.03)}90%{transform:rotate(2.5deg) scale(1.03)}92%{transform:rotate(-1.5deg) scale(1.02)}94%{transform:rotate(1deg)}96%{transform:none}}
-@media (max-width:520px){.qhero{width:100%;justify-content:flex-start;min-height:64px;padding:10px 18px}.qhero b{font-size:18px;letter-spacing:.04em}.qhero .xtra{display:none}.qhero .arr{margin-left:auto}}
+@media (max-width:520px){.qhero{width:100%;justify-content:center;min-height:62px;padding:0 16px;gap:10px}.qhero b{font-size:clamp(14px,4.3vw,19px);letter-spacing:.03em;white-space:nowrap}.qhero .arr{display:none}.qhero .qping{width:11px;height:11px}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LandscapingBusiness","name":"Trinity Point Landscaping","telephone":"+1-845-718-1328","email":"trinitypointlandscaping@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Poughkeepsie","addressRegion":"NY","addressCountry":"US"},"areaServed":"Hudson Valley, NY","url":"https://trintypoint.com/","image":"https://trintypoint.com/assets/hero-poster.jpg","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"11"},"sameAs":["https://maps.google.com/?cid=13397259408242732591"]}</script>
 </head>
@@ -526,9 +526,9 @@ html.qlock,html.qlock body{overflow:hidden}
   <div class="wrap">
     <a class="brand" href="#home" aria-label="Trinity Point Landscaping, home"><img src="assets/logo.webp" alt="Trinity Point Landscaping logo" width="74" height="54"></a>
     <nav class="nav" aria-label="Main">
-      <a class="link" href="#quote">Instant quote</a>
       <a class="link" href="#services">Services</a>
       <a class="link" href="#reviews">Reviews</a>
+      <a class="link" href="#quote">Instant quote</a>
       <a class="link" href="#work">Our work</a>
       <a class="link" href="#crew">Crew</a>
       <a class="link" href="#contact">Contact</a>
@@ -550,7 +550,7 @@ html.qlock,html.qlock body{overflow:hidden}
       <div class="ctas">
         <a class="btn big" href="tel:+18457181328"><svg><use href="#i-phone"/></svg>Call 845-718-1328</a>
         <a class="btn big ghost" href="sms:+18457181328"><svg><use href="#i-text"/></svg>Text for a free quote</a>
-        <a class="qhero" href="#quote"><span class="qping" aria-hidden="true"></span><span><b>Get my price in 60 seconds</b><small>Instant brush clearing quote<span class="xtra"> · no address needed</span></small></span><svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="qhero" href="#quote"><span class="qping" aria-hidden="true"></span><b>Get my price in 60 seconds</b><svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <ul class="trust">
         <li><svg><use href="#i-shield"/></svg>Fully insured · General liability</li>
@@ -583,22 +583,6 @@ html.qlock,html.qlock body{overflow:hidden}
           <small>Good for realtors, property managers and bigger lots.</small>
         </a>
       </div>
-    </div>
-  </section>
-
-  <section class="band qsec" id="quote" aria-labelledby="q-h">
-    <div class="wrap">
-      <div class="head">
-        <div><span class="label rv"><i class="dot"></i>Instant quote · Brush clearing</span><h2 id="q-h" class="rv d1">Your price in 60 seconds.</h2></div>
-        <p class="lede rv d2">Tap the one that looks most like your land. Answer a few quick questions and see a real price range right now. No street address needed.</p>
-      </div>
-      <div class="qcards">
-        <button class="qcard rv" type="button" data-quote-level="1"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">Knee to waist high</span></span><span class="qtx"><span class="num">Level 1</span><strong>Overgrown pasture</strong><span class="qd">Tall grass and weeds that got away from you. Needs a heavy cut.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
-        <button class="qcard rv d1" type="button" data-quote-level="2"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">Up to 6 ft</span></span><span class="qtx"><span class="num">Level 2</span><strong>Thick brush</strong><span class="qd">Grass and weeds up to 6 ft tall with small bushes mixed in.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
-        <button class="qcard rv d2" type="button" data-quote-level="3"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">6 ft+ · thorny</span></span><span class="qtx"><span class="num">Level 3</span><strong>Briars &amp; bushes</strong><span class="qd">Thick bushes and pricker briars over your head. You can't walk through it.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
-        <button class="qcard rv d3" type="button" data-quote-level="4"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">Small trees · slopes</span></span><span class="qtx"><span class="num">Level 4</span><strong>Saplings &amp; thicket</strong><span class="qd">Small trees, thick brush and briars, often on a hill.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
-      </div>
-      <p class="qnote rv">Ballpark pricing for brush clearing. Your final price comes after a free walk-through with Tim.</p>
     </div>
   </section>
 
@@ -727,6 +711,22 @@ html.qlock,html.qlock body{overflow:hidden}
         <a class="btn ghost" href="https://www.facebook.com/profile.php?id=61581132414438&amp;sk=reviews" target="_blank" rel="noopener"><svg><use href="#i-fb"/></svg>Facebook reviews</a>
         <a class="btn ghost" href="https://maps.google.com/?cid=13397259408242732591" target="_blank" rel="noopener"><svg><use href="#i-star"/></svg>Worked with us? Leave a review</a>
       </div>
+    </div>
+  </section>
+
+  <section class="band qsec" id="quote" aria-labelledby="q-h">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="label rv"><i class="dot"></i>Instant quote · Brush clearing</span><h2 id="q-h" class="rv d1">Your price in 60 seconds.</h2></div>
+        <p class="lede rv d2">Tap the one that looks most like your land. Answer a few quick questions and see a real price range right now. No street address needed.</p>
+      </div>
+      <div class="qcards">
+        <button class="qcard rv" type="button" data-quote-level="1"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">Knee to waist high</span></span><span class="qtx"><span class="num">Level 1</span><strong>Overgrown pasture</strong><span class="qd">Tall grass and weeds that got away from you. Needs a heavy cut.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
+        <button class="qcard rv d1" type="button" data-quote-level="2"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">Up to 6 ft</span></span><span class="qtx"><span class="num">Level 2</span><strong>Thick brush</strong><span class="qd">Grass and weeds up to 6 ft tall with small bushes mixed in.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
+        <button class="qcard rv d2" type="button" data-quote-level="3"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">6 ft+ · thorny</span></span><span class="qtx"><span class="num">Level 3</span><strong>Briars &amp; bushes</strong><span class="qd">Thick bushes and pricker briars over your head. You can't walk through it.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
+        <button class="qcard rv d3" type="button" data-quote-level="4"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">Small trees · slopes</span></span><span class="qtx"><span class="num">Level 4</span><strong>Saplings &amp; thicket</strong><span class="qd">Small trees, thick brush and briars, often on a hill.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
+      </div>
+      <p class="qnote rv">Ballpark pricing for brush clearing. Your final price comes after a free walk-through with Tim.</p>
     </div>
   </section>
 
