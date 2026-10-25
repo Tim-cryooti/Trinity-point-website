@@ -473,6 +473,32 @@ html.qlock,html.qlock body{overflow:hidden}
 @media (max-width:340px){.qf2{grid-template-columns:1fr}}
 @media (max-width:420px){.qchips span:not(:first-child){display:none}.qs{gap:12px}}
 @media (prefers-reduced-motion:reduce){.qs,.qs.on,.qs.past{transform:none}}
+
+/* two questions per slide: compact 3-up option rows */
+.qopts.row{grid-template-columns:repeat(3,1fr);gap:8px}
+.qopts.row .qopt{padding:13px 12px;text-align:left;align-content:start}
+.qopts.row .qopt b{font-size:19px}
+.qopts.row .qopt span{font-size:13px;line-height:1.3}
+.qopts.row .qopt:hover{transform:translateY(-2px)}
+.qopts.row .qopt[aria-checked="true"]{box-shadow:inset 0 0 0 1px var(--gold)}
+.qs h4+.qopts{margin-top:2px}
+@media (max-width:420px){.qopts.row .qopt{padding:11px 9px}.qopts.row .qopt b{font-size:17px}.qopts.row .qopt span{font-size:12px}}
+.qtax{color:var(--bone)}
+
+/* hero: the instant price button */
+.qhero{position:relative;display:inline-flex;align-items:center;gap:14px;padding:0 24px 0 18px;min-height:64px;border-radius:999px;background:var(--tape);color:#1a0f08;text-decoration:none;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 14px 34px -12px rgba(239,106,42,.75),0 2px 0 #a8461a;transition:transform .25s var(--ease),box-shadow .25s var(--ease);animation:qnudge 6s 2.5s ease-in-out infinite;transform-origin:50% 60%}
+.qhero:hover{transform:translateY(-3px) scale(1.02);animation-play-state:paused;box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 22px 44px -14px rgba(239,106,42,.9),0 3px 0 #a8461a}
+.qhero:active{transform:translateY(1px) scale(.97)}
+.qhero .qping{position:relative;width:14px;height:14px;border-radius:50%;background:#1a0f08;flex:none}
+.qhero .qping::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid #1a0f08;animation:qping 1.8s ease-out infinite}
+.qhero b{display:block;font-family:var(--f-label);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:19px;line-height:1.1}
+.qhero small{display:block;font-size:13.5px;font-weight:600;opacity:.8;line-height:1.2}
+.qhero .arr{width:20px;height:20px;flex:none;transition:transform .3s var(--ease)}
+.qhero:hover .arr{transform:translate(3px,-3px)}
+@keyframes qping{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.8);opacity:0}}
+@keyframes qnudge{0%,86%,100%{transform:none}88%{transform:rotate(-2.5deg) scale(1.03)}90%{transform:rotate(2.5deg) scale(1.03)}92%{transform:rotate(-1.5deg) scale(1.02)}94%{transform:rotate(1deg)}96%{transform:none}}
+@media (max-width:520px){.qhero{width:100%;justify-content:flex-start;min-height:64px;padding:10px 18px}.qhero b{font-size:18px;letter-spacing:.04em}.qhero .xtra{display:none}.qhero .arr{margin-left:auto}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LandscapingBusiness","name":"Trinity Point Landscaping","telephone":"+1-845-718-1328","email":"trinitypointlandscaping@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Poughkeepsie","addressRegion":"NY","addressCountry":"US"},"areaServed":"Hudson Valley, NY","url":"https://trintypoint.com/","image":"https://trintypoint.com/assets/hero-poster.jpg","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"11"},"sameAs":["https://maps.google.com/?cid=13397259408242732591"]}</script>
 </head>
@@ -524,7 +550,7 @@ html.qlock,html.qlock body{overflow:hidden}
       <div class="ctas">
         <a class="btn big" href="tel:+18457181328"><svg><use href="#i-phone"/></svg>Call 845-718-1328</a>
         <a class="btn big ghost" href="sms:+18457181328"><svg><use href="#i-text"/></svg>Text for a free quote</a>
-        <a class="revbtn" href="#reviews"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span>See our <b data-rev-total>14</b> reviews</span><svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="qhero" href="#quote"><span class="qping" aria-hidden="true"></span><span><b>Get my price in 60 seconds</b><small>Instant brush clearing quote<span class="xtra"> · no address needed</span></small></span><svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <ul class="trust">
         <li><svg><use href="#i-shield"/></svg>Fully insured · General liability</li>
@@ -882,33 +908,24 @@ html.qlock,html.qlock body{overflow:hidden}
           <div class="qnav"><button type="button" class="qback" data-back>Back</button><button type="button" class="btn big" data-next>Next<svg aria-hidden="true"><use href="#i-right"/></svg></button></div>
         </div>
 
-        <div class="qs" data-step="ground"></div>
-        <div class="qs" data-step="slope"></div>
-        <div class="qs" data-step="thorns"></div>
+        <div class="qs" data-step="land"></div>
         <div class="qs" data-step="access"></div>
 
-        <div class="qs" data-step="extras">
-          <span class="label">Last couple things</span>
+        <div class="qs" data-step="debris">
+          <span class="label">Last question</span>
           <h3>Where should the brush go?</h3>
-          <div class="qchiprow" data-pick="debris" data-required>
-            <button type="button" class="qchip big on" data-v="pile"><b>Pile it on site</b><span>Included in the price</span></button>
-            <button type="button" class="qchip big" data-v="haul"><b>Haul it away</b><span>Adds to the price</span></button>
+          <p class="qsub">Pick one and you'll see your price.</p>
+          <div class="qopts" role="radiogroup" aria-label="Where should the brush go?">
+            <button type="button" class="qopt" role="radio" aria-checked="false" data-k="debris" data-v="pile"><b>Pile it on site</b><span>Neat piles at the edge of the woods. Included.</span><i aria-hidden="true"></i></button>
+            <button type="button" class="qopt" role="radio" aria-checked="false" data-k="debris" data-v="haul"><b>Haul it away</b><span>We take it all with us. Adds to the price.</span><i aria-hidden="true"></i></button>
           </div>
-          <h4>When do you want it done?</h4>
-          <div class="qchiprow" data-pick="timing">
-            <button type="button" class="qchip" data-v="As soon as possible">ASAP</button><button type="button" class="qchip" data-v="Within a month">Within a month</button><button type="button" class="qchip" data-v="This spring">This spring</button><button type="button" class="qchip" data-v="Just pricing it out">Just pricing it out</button>
-          </div>
-          <h4>What's it for? <small>(optional)</small></h4>
-          <div class="qchiprow" data-pick="purpose">
-            <button type="button" class="qchip" data-v="Take back the yard">Take back the yard</button><button type="button" class="qchip" data-v="Pasture or horses">Pasture or horses</button><button type="button" class="qchip" data-v="Selling the land">Selling the land</button><button type="button" class="qchip" data-v="Building, fence or solar">Building, fence or solar</button><button type="button" class="qchip" data-v="Something else">Something else</button>
-          </div>
-          <div class="qnav"><button type="button" class="qback" data-back>Back</button><button type="button" class="btn big" id="qGetPrice">Get my price<svg aria-hidden="true"><use href="#i-right"/></svg></button></div>
+          <div class="qnav"><button type="button" class="qback" data-back>Back</button></div>
         </div>
 
         <div class="qs" data-step="result">
-          <span class="label">Your ballpark price</span>
+          <span class="label">Your instant price</span>
           <p class="qbig"><span id="qLo">$0</span><i>to</i><span id="qHi">$0</span></p>
-          <p class="qtax">plus sales tax</p>
+          <p class="qtax">Estimated price · before sales tax</p>
           <ul class="qsum" id="qSum"></ul>
           <ul class="checks qinc">
             <li><svg><use href="#i-check"/></svg>Brush, briars, vines and saplings up to 3" cut down</li>
@@ -930,6 +947,10 @@ html.qlock,html.qlock body{overflow:hidden}
           <h4>Days that work</h4>
           <div class="qchiprow" data-pick="days" data-multi>
             <button type="button" class="qchip" data-v="Mon">Mon</button><button type="button" class="qchip" data-v="Tue">Tue</button><button type="button" class="qchip" data-v="Wed">Wed</button><button type="button" class="qchip" data-v="Thu morning">Thu AM</button><button type="button" class="qchip" data-v="Fri">Fri</button><button type="button" class="qchip" data-v="Any weekday">Any weekday</button>
+          </div>
+          <h4>When do you want it done?</h4>
+          <div class="qchiprow" data-pick="timing">
+            <button type="button" class="qchip" data-v="As soon as possible">ASAP</button><button type="button" class="qchip" data-v="Within a month">Within a month</button><button type="button" class="qchip" data-v="This spring">This spring</button><button type="button" class="qchip" data-v="Just pricing it out">Just pricing it out</button>
           </div>
           <h4>Time of day</h4>
           <div class="qchiprow" data-pick="time">
@@ -1149,7 +1170,7 @@ var BrushScene = (function(){
     this.cur = {wet:0, slope:0, thorns:0, plot:0, acres:1, piles:1, haul:0};
     this.level = 1; this.t = 0; this.cleared = 0; this.clr = null; this.parts = [];
     this.fade = 0; this.snap = document.createElement('canvas'); this.running = false; this.last = 0;
-    this.bg = document.createElement('canvas'); this.bgKey = '';
+    this.bg = document.createElement('canvas'); this.bgKey = ''; this.farC = document.createElement('canvas'); this.farKey = ''; this.skyC = document.createElement('canvas'); this.skyKey = '';
     this.resize(); this.gen(1);
   }
   var S = Scene.prototype;
@@ -1161,7 +1182,7 @@ var BrushScene = (function(){
     this.w = w; this.h = h; this.dpr = dpr;
     this.c.width = Math.round(w * dpr); this.c.height = Math.round(h * dpr);
     this.bg.width = this.c.width; this.bg.height = this.c.height;
-    this.snap.width = this.c.width; this.snap.height = this.c.height;
+    this.snap.width = this.c.width; this.snap.height = this.c.height; this.farC.width = this.c.width; this.farC.height = this.c.height; this.farKey = ''; this.skyC.width = this.c.width; this.skyC.height = this.c.height; this.skyKey = '';
     this.hy = h * .43; this.bgKey = '';
     if (this.plants) this.gen(this.level, true);
   };
@@ -1174,19 +1195,22 @@ var BrushScene = (function(){
   /* leafy sprites are painted once per size, then drawn with a wind skew */
   S.sprite = function(o, p, wM, hM, paint){
     var key = Math.round(p * 10); if (o.sp && o.spk === key) return o.sp;
-    var d = this.dpr, cw = Math.ceil(wM * p * d) + 4, ch = Math.ceil(hM * p * d) + 4; if (cw < 3 || ch < 3) return null;
+    var d = this.dpr, big = Math.max(wM, hM) * p * d; if (big > 640) d *= 640 / big; var cw = Math.ceil(wM * p * d) + 4, ch = Math.ceil(hM * p * d) + 4; if (cw < 3 || ch < 3) return null;
     var cv = document.createElement('canvas'); cv.width = cw; cv.height = ch; var g = cv.getContext('2d');
     g.setTransform(d, 0, 0, d, cw / 2, ch - 2); paint.call(this, g, p, o);
     o.sp = cv; o.spk = key; o.spw = cw / d; o.sph = ch / d; return cv;
   };
-  S.leaves = function(g, p, o, n, place, fall, sz){
-    var R = rng((o.seed * 1e9) | 0), f = clamp(p / 140, .22, 1), L = [], i;
-    n = Math.min(1600, n * f | 0); sz = (sz || 1) / Math.sqrt(f);
-    for (i = 0; i < n; i++){ var q = place(R); var lit = clamp(q.lit + (R() - .5) * .28, .45, 1.35); var b = R() < fall ? FALL[(R() * FALL.length) | 0] : LEAF[(R() * LEAF.length) | 0];
-      L.push({x:q.x, y:q.y, r:(.03 + R() * .03) * sz, a:R() * 3.14, lit:lit, c:css(this.haze(mul(b, lit), o.z))}); }
+  S.leaves = function(g, p, o, n, place, fall, sz, pal, narrow){
+    var R = rng((o.seed * 1e9) | 0), f = clamp(p / 160, .18, 1), L = [], i;
+    n = Math.min(3200, n * f | 0); sz = (sz || 1) / Math.sqrt(f);
+    for (i = 0; i < n; i++){ var q = place(R); var lit = clamp(q.lit + (R() - .5) * .3, .42, 1.38);
+      var b = pal ? pal[(R() * pal.length) | 0] : (R() < fall ? FALL[(R() * FALL.length) | 0] : LEAF[(R() * LEAF.length) | 0]);
+      L.push({x:q.x, y:q.y, r:(.02 + R() * .022) * sz, a:q.a != null ? q.a + (R() - .5) * .6 : R() * 3.14, lit:lit, c:css(this.haze(mul(b, lit), o.z))}); }
     L.sort(function(a, b){ return a.lit - b.lit; });
-    for (i = 0; i < L.length; i++){ var l = L[i]; g.fillStyle = l.c; g.beginPath(); g.ellipse(l.x * p, -l.y * p, Math.max(.7, l.r * p), Math.max(.45, l.r * .55 * p), l.a, 0, 6.283); g.fill(); }
+    var ry = narrow ? .3 : .52;
+    for (i = 0; i < L.length; i++){ var l = L[i]; g.fillStyle = l.c; g.beginPath(); g.ellipse(l.x * p, -l.y * p, Math.max(.6, l.r * p), Math.max(.4, l.r * ry * p), l.a, 0, 6.283); g.fill(); }
   };
+  S.shadow = function(x, X, Y, p, wd, a){ x.fillStyle = 'rgba(22,30,16,' + (a || .26) + ')'; x.beginPath(); x.ellipse(X - wd * .22 * p, Y + .01 * p, wd * .62 * p, Math.max(1, wd * .1 * p), 0, 0, 6.283); x.fill(); };
   S.drawSprite = function(x, o, X, Y, sk){ x.save(); x.translate(X, Y); x.transform(1, 0, -sk, 1, 0, 0); x.drawImage(o.sp, -o.spw / 2, -o.sph + 2 / this.dpr, o.spw, o.sph); x.restore(); };
 
   S.gen = function(level, keepSeed){
@@ -1194,60 +1218,61 @@ var BrushScene = (function(){
     var R = rng(level * 7919 + 13), w = this.w, d = clamp(w / 1000, .5, 1.25), self = this;
     var P = [];
     function z0(){ return .07 + 1.15 * Math.pow(R(), .8); }
+    function zn(){ return .3 + .92 * Math.pow(R(), .85); }
     function pick(a){ return a[(R() * a.length) | 0]; }
     function add(o){ o.seed = R(); o.ph = R() * 6.28; P.push(o); return o; }
+    function U(){ return -1.8 + R() * 3.6; }
 
-    function tuft(u, z, hmin, hmax, straw, plume){
-      var n = 6 + (R() * 7 | 0), bl = [], hh = hmin + R() * (hmax - hmin);
+    function tuft(u, z, hmin, hmax, straw, head){
+      var n = 9 + (R() * 9 | 0), bl = [], hh = hmin + R() * (hmax - hmin);
       for (var i = 0; i < n; i++){
         var c = R() < straw ? pick(STRAW) : pick(GRASS);
-        c = mul(c, .82 + R() * .3);
-        bl.push({dx:(R() - .5) * .22, h:hh * (.55 + R() * .5), lean:(R() - .5) * .35 * hh, w:.006 + R() * .008, c:css(self.haze(c, z))});
+        c = mul(c, .78 + R() * .34);
+        bl.push({dx:(R() - .5) * .26, h:hh * (.45 + R() * .6), lean:(R() - .5) * .45 * hh, w:.004 + R() * .006, c:css(self.haze(c, z))});
       }
+      bl.sort(function(a, b){ return b.h - a.h; });
       var o = add({t:'g', u:u, z:z, b:bl, h:hh});
-      if (plume){ var pc = []; for (var k = 0; k < 9; k++) pc.push({a:R(), r:.025 + R() * .03}); o.pl = pc; o.pc = css(self.haze(mul(pick(STRAW), 1.05), z)); }
-      o.stub = []; for (var s = 0; s < 4; s++) o.stub.push({dx:(R() - .5) * .25, h:.05 + R() * .07, c:css(self.haze(mul(pick(STRAW), .95 + R() * .2), z))});
+      if (head){ var pc = [], k, nh = head === 2 ? 14 : 8; for (k = 0; k < nh; k++) pc.push({a:R(), r:.012 + R() * .02}); o.pl = pc; o.hk = head; o.pc = css(self.haze(head === 2 ? [200, 182, 150] : mul(pick(STRAW), 1.02), z)); }
+      o.stub = []; for (var s = 0; s < 5; s++) o.stub.push({dx:(R() - .5) * .28, h:.04 + R() * .07, c:css(self.haze(mul(pick(STRAW), .9 + R() * .25), z))});
       return o;
     }
     function gold(u, z, h){
-      var dots = [], c = self.haze([200, 170, 64], z), c2 = self.haze([168, 140, 56], z), c3 = self.haze([214, 188, 92], z);
-      for (var i = 0; i < 30; i++) dots.push({a:R(), s:(R() - .5) * .2 * (1 - R() * .5), r:.008 + R() * .012, c:css([c, c2, c3][(R() * 3) | 0])});
-      return add({t:'gr', u:u, z:z, h:h, d:dots, sc:css(self.haze([96, 110, 50], z)), lean:(R() - .5) * .3});
+      var dots = [], c = self.haze([200, 170, 64], z), c2 = self.haze([168, 140, 56], z), c3 = self.haze([214, 188, 92], z), dead = R() < .35;
+      if (dead){ c = self.haze([170, 150, 112], z); c2 = self.haze([150, 132, 100], z); c3 = self.haze([190, 172, 136], z); }
+      for (var i = 0; i < 36; i++) dots.push({a:R(), s:(R() - .5) * .22 * (1 - R() * .5), r:.007 + R() * .01, c:css([c, c2, c3][(R() * 3) | 0])});
+      var lv = []; for (var k = 0; k < 6; k++) lv.push({p:.15 + R() * .55, d:R() < .5 ? -1 : 1});
+      return add({t:'gr', u:u, z:z, h:h, d:dots, lv:lv, sc:css(self.haze([96, 110, 50], z)), lc:css(self.haze(dead ? [120, 112, 70] : [84, 106, 46], z)), lean:(R() - .5) * .3});
     }
-    function weed(u, z, h){ return add({t:'w', u:u, z:z, h:h, sc:css(self.haze([110, 118, 64], z)), fc:css(self.haze([236, 232, 214], z)), lean:(R() - .5) * .25}); }
-    function bush(u, z, h, wid, fall){
-      var bl = [], n = 26 + (R() * 22 | 0);
-      for (var i = 0; i < n; i++){
-        var a = R() * Math.PI, rr = Math.sqrt(R());
-        var dx = Math.cos(a) * wid * .5 * rr, dy = Math.sin(a) * h * .8 * rr + h * .12;
-        var lit = clamp(.75 + (dx / wid) * .35 + (dy / h) * .35, .6, 1.25);
-        var base = R() < fall ? pick(FALL) : pick(LEAF);
-        bl.push({dx:dx, dy:dy, r:(.12 + R() * .16) * Math.max(h, .8) * .5, c:css(self.haze(mul(base, lit), z))});
-      }
-      bl.sort(function(a, b){ return a.dy - b.dy; });
-      var tw = []; for (var k = 0; k < 6; k++) tw.push({a:.3 + R() * 2.5, l:.4 + R() * .5});
-      return add({t:'b', u:u, z:z, h:h, wd:wid, fall:fall, tw:tw, tc:css(self.haze([84, 70, 56], z))});
+    function weed(u, z, h){ return add({t:'w', u:u, z:z, h:h, sc:css(self.haze([110, 118, 64], z)), fc:css(self.haze(R() < .5 ? [236, 232, 214] : [200, 190, 160], z)), lean:(R() - .5) * .25}); }
+    function thistle(u, z, h){ return add({t:'th', u:u, z:z, h:h, sc:css(self.haze([100, 116, 70], z)), hc:css(self.haze(R() < .5 ? [168, 92, 160] : [226, 220, 204], z)), lean:(R() - .5) * .2}); }
+    var KINDS = {
+      rose:  {leaf:[[98,134,54],[120,150,62],[84,120,46],[150,156,64],[176,150,60]], wM:1.2, hM:1.0, sz:.75},
+      olive: {leaf:[[108,132,84],[132,150,104],[92,116,72],[168,178,146],[80,104,64]], wM:.9, hM:1.0, sz:.9, narrow:1},
+      buck:  {leaf:[[46,74,38],[58,88,42],[40,64,34],[196,170,70],[150,150,58]], wM:.85, hM:1.05, sz:.95},
+      sumac: {leaf:[[196,52,36],[214,92,40],[178,40,40],[226,132,52],[160,36,34]], wM:1, hM:1.05},
+      cedar: {leaf:[[44,66,48],[60,86,58],[38,58,44],[84,106,66]], wM:.55, hM:.85}
+    };
+    function bush(u, z, h, wid, kind){
+      var tw = []; for (var k = 0; k < 7; k++) tw.push({a:.35 + R() * 2.4, l:.4 + R() * .5});
+      return add({t:'b', u:u, z:z, h:h, wd:wid * KINDS[kind].wM, kind:kind, tw:tw, tc:css(self.haze([84, 70, 56], z))});
     }
     function briar(u, z, h, thr){
       var canes = [], n = 4 + (R() * 5 | 0);
       for (var i = 0; i < n; i++){
         var dir = R() < .5 ? -1 : 1, reach = (.4 + R() * .9) * h * dir;
         var lv = [], b = [];
-        for (var k = 0; k < 7; k++) lv.push({p:.25 + R() * .7, c:css(self.haze(R() < .35 ? [150, 70, 54] : pick(LEAF), z))});
+        for (var k = 0; k < 6; k++) lv.push({p:.2 + R() * .78, c:css(self.haze(R() < .35 ? [150, 70, 54] : pick(LEAF), z))});
         for (var j = 0; j < 4; j++) b.push({p:.3 + R() * .65});
         canes.push({r:reach, h:h * (.7 + R() * .45), c:css(self.haze(pick(CANE), z)), lv:lv, be:b});
       }
       return add({t:'br', u:u, z:z, h:h, cn:canes, thr:thr || 0, bc:css(self.haze([196, 40, 36], z))});
     }
-    function sap(u, z, h){
-      var cr = [], n = 18 + (R() * 14 | 0);
-      for (var i = 0; i < n; i++){
-        var base = R() < .45 ? pick(FALL) : pick(LEAF);
-        cr.push({dx:(R() - .5) * h * .45, dy:h * (.55 + R() * .5), r:h * (.05 + R() * .05), c:css(self.haze(mul(base, .85 + R() * .35), z))});
-      }
-      return add({t:'s', u:u, z:z, h:h, lean:(R() - .5) * .25, cr:cr, tw:.025 + R() * .025, bc:css(self.haze(pick(BARK), z))});
+    function sap(u, z, h, vine){
+      var birch = R() < .12, stems = R() < .35 ? 2 + (R() * 2 | 0) : 1, st = [];
+      for (var k = 0; k < stems; k++) st.push({dx:(R() - .5) * .25, lean:(R() - .5) * .35, h:h * (.75 + R() * .3)});
+      return add({t:'s', u:u, z:z, h:h, lean:(R() - .5) * .25, st:st, tw:.022 + R() * .022, vine:vine, birch:birch, bc:css(self.haze(birch ? [190, 184, 170] : pick(BARK), z)), mk:css(self.haze([60, 56, 50], z))});
     }
-    function cat(u, z, thr){ var o = add({t:'c', u:u, z:z, h:1.4 + R() * .6, thr:thr, sc:css(self.haze([108, 120, 60], z)), hc:css(self.haze([96, 62, 38], z)), lean:(R() - .5) * .2}); return o; }
+    function cat(u, z, thr){ return add({t:'c', u:u, z:z, h:1.4 + R() * .6, thr:thr, sc:css(self.haze([108, 120, 60], z)), hc:css(self.haze([96, 62, 38], z)), lean:(R() - .5) * .2}); }
 
     var i, n;
     /* mature trees that always stay */
@@ -1260,42 +1285,47 @@ var BrushScene = (function(){
     if (this.person) add({t:'P', u:-.78, z:.62});
     if (level === 1){
       add({t:'F', u:0, z:.3});
-      n = 330 * d; for (i = 0; i < n; i++) tuft(-1.8 + R() * 3.6, z0(), .35, .95, .45, R() < .2);
-      n = 40 * d; for (i = 0; i < n; i++) weed(-1.8 + R() * 3.6, z0(), .8 + R() * .5);
-      n = 10 * d; for (i = 0; i < n; i++) gold(-1.8 + R() * 3.6, z0(), .9 + R() * .4);
-      for (i = 0; i < 3; i++) bush(-1.5 + R() * 3, .2 + R() * .3, .7 + R() * .4, 1.2, .3);
+      n = 520 * d; for (i = 0; i < n; i++) tuft(U(), z0(), .45, 1.15, .5, R() < .35 ? 1 : 0);
+      n = 60 * d; for (i = 0; i < n; i++) gold(U(), z0(), .8 + R() * .45);
+      n = 55 * d; for (i = 0; i < n; i++) weed(U(), z0(), .7 + R() * .5);
+      n = 26 * d; for (i = 0; i < n; i++) thistle(U(), z0(), .6 + R() * .5);
+      n = 10 * d; for (i = 0; i < n; i++) briar(U(), zn(), .6 + R() * .5);
+      for (i = 0; i < 7; i++) bush(-1.6 + R() * 3.2, .27 + R() * .08, .9 + R() * .6, 1.1 + R() * .6, pick(['rose', 'olive', 'rose', 'cedar']));
+      for (i = 0; i < 3; i++) bush(U(), .4 + R() * .5, .7 + R() * .4, .9 + R() * .5, pick(['rose', 'olive']));
     } else if (level === 2){
-      n = 360 * d; for (i = 0; i < n; i++) tuft(-1.8 + R() * 3.6, z0(), 1.1, 2.0, .55, R() < .5);
-      n = 90 * d; for (i = 0; i < n; i++) gold(-1.8 + R() * 3.6, z0(), 1.2 + R() * .7);
-      n = 14 * d; for (i = 0; i < n; i++) bush(-1.7 + R() * 3.4, z0(), .8 + R() * .7, 1 + R() * .8, .25);
-      n = 8 * d; for (i = 0; i < n; i++) briar(-1.7 + R() * 3.4, z0(), 1 + R() * .6);
+      n = 460 * d; for (i = 0; i < n; i++) tuft(U(), z0(), 1.1, 2.0, .6, R() < .5 ? (R() < .4 ? 2 : 1) : 0);
+      n = 110 * d; for (i = 0; i < n; i++) gold(U(), z0(), 1.2 + R() * .7);
+      n = 14 * d; for (i = 0; i < n; i++) thistle(U(), z0(), 1 + R() * .5);
+      n = 16 * d; for (i = 0; i < n; i++) bush(U(), z0(), .9 + R() * .8, 1 + R() * .8, pick(['rose', 'olive', 'rose', 'sumac', 'cedar']));
+      n = 12 * d; for (i = 0; i < n; i++) briar(U(), z0(), 1 + R() * .6);
       n = 4; for (i = 0; i < n; i++) sap(-1.6 + R() * 3.2, .2 + R() * .5, 2 + R());
     } else if (level === 3){
-      n = 200 * d; for (i = 0; i < n; i++) tuft(-1.8 + R() * 3.6, z0(), .9, 1.6, .45, R() < .3);
-      n = 30 * d; for (i = 0; i < n; i++) gold(-1.8 + R() * 3.6, z0(), 1.2 + R() * .6);
-      n = 60 * d; for (i = 0; i < n; i++) bush(-1.8 + R() * 3.6, z0(), 1.6 + R() * 1.1, 1.6 + R() * 1.4, .2);
-      n = 55 * d; for (i = 0; i < n; i++) briar(-1.8 + R() * 3.6, z0(), 1.7 + R() * .9);
-      n = 10; for (i = 0; i < n; i++) sap(-1.7 + R() * 3.4, .15 + R() * .8, 2.6 + R() * 1.4);
+      n = 220 * d; for (i = 0; i < n; i++) tuft(U(), z0(), .9, 1.6, .5, R() < .3 ? 1 : 0);
+      n = 34 * d; for (i = 0; i < n; i++) gold(U(), z0(), 1.2 + R() * .6);
+      n = 62 * d; for (i = 0; i < n; i++) bush(U(), z0(), 1.6 + R() * 1.1, 1.5 + R() * 1.4, pick(['rose', 'rose', 'olive', 'buck', 'sumac', 'rose', 'buck', 'rose', 'olive']));
+      n = 60 * d; for (i = 0; i < n; i++) briar(U(), z0(), 1.7 + R() * .9);
+      n = 10; for (i = 0; i < n; i++) sap(-1.7 + R() * 3.4, .15 + R() * .8, 2.6 + R() * 1.4, R() < .3);
     } else {
-      n = 150 * d; for (i = 0; i < n; i++) tuft(-1.8 + R() * 3.6, z0(), .8, 1.5, .4, R() < .25);
-      n = 62 * d; for (i = 0; i < n; i++) bush(-1.8 + R() * 3.6, z0(), 1.7 + R() * 1.2, 1.6 + R() * 1.4, .25);
-      n = 55 * d; for (i = 0; i < n; i++) briar(-1.8 + R() * 3.6, z0(), 1.8 + R() * .9);
-      n = 55 * d; for (i = 0; i < n; i++) sap(-1.8 + R() * 3.6, z0(), 2.6 + R() * 3);
-      n = 9; for (i = 0; i < n; i++) add({t:'L', u:-1.5 + R() * 3, z:.35 + R() * .75, l:1.6 + R() * 1.8, a:(R() - .5) * .25, c:css(this.haze([96, 82, 64], .7))});
+      n = 150 * d; for (i = 0; i < n; i++) tuft(U(), z0(), .8, 1.5, .45, R() < .25 ? 1 : 0);
+      n = 60 * d; for (i = 0; i < n; i++) bush(U(), z0(), 1.7 + R() * 1.2, 1.5 + R() * 1.4, pick(['buck', 'olive', 'rose', 'buck', 'sumac', 'rose', 'buck']));
+      n = 55 * d; for (i = 0; i < n; i++) briar(U(), z0(), 1.8 + R() * .9);
+      n = 60 * d; for (i = 0; i < n; i++) sap(U(), z0(), 2.6 + R() * 3, R() < .3);
+      n = 10; for (i = 0; i < n; i++) add({t:'L', u:-1.5 + R() * 3, z:.35 + R() * .75, l:1.6 + R() * 1.8, a:(R() - .5) * .25, c:css(this.haze([96, 82, 64], .7)), m:css(this.haze([70, 92, 50], .7))});
     }
     /* extra briars for "thorns" and cattails for "wet" fade in by threshold */
-    n = 60 * d; for (i = 0; i < n; i++) briar(-1.8 + R() * 3.6, z0(), 1.2 + R() * (level > 2 ? 1.2 : .6), .05 + R() * .95);
-    n = 70 * d; for (i = 0; i < n; i++) cat(-1.8 + R() * 3.6, .15 + R() * 1.05, .3 + R() * .7);
+    n = 60 * d; for (i = 0; i < n; i++) briar(U(), z0(), 1.2 + R() * (level > 2 ? 1.2 : .6), .05 + R() * .95);
+    n = 80 * d; for (i = 0; i < n; i++) cat(U(), .15 + R() * 1.05, .3 + R() * .7);
     /* debris piles left after clearing */
-    this.piles = [];
-    if (level > 1){ for (i = 0; i < 3; i++){ var pl = add({t:'K', u:-1.25 + i * 1.1 + (R() - .5) * .25, z:.2 + R() * .06, sticks:[]}); for (var k = 0; k < 46; k++) pl.sticks.push({a:R() * 3.14, x:(R() - .5) * 2.6, y:R(), l:.5 + R() * .9}); } }
-    /* ground texture + puddles */
-    this.specks = []; for (i = 0; i < 900; i++){ var zz = Math.pow(R(), .7) * 1.25; this.specks.push({u:-1.8 + R() * 3.6, z:zz, c:css(this.haze(mul(pick(GRASS), .7 + R() * .5), Math.min(zz, 1))), m:css(this.haze(R() < .5 ? [150, 120, 80] : [190, 170, 110], Math.min(zz, 1))), l:R()}); }
+    for (i = 0; i < 3; i++){ var pl = add({t:'K', u:-1.25 + i * 1.1 + (R() - .5) * .25, z:.2 + R() * .06, sticks:[]}); for (var k = 0; k < 60; k++) pl.sticks.push({a:R() * 3.14, x:(R() - .5) * 2.6, y:R(), l:.5 + R() * .9, c:R() < .3 ? 1 : 0}); }
+    /* ground texture: specks, dry thatch, puddles */
+    this.specks = []; for (i = 0; i < 900; i++){ var zz = Math.pow(R(), .7) * 1.25; this.specks.push({u:U(), z:zz, c:css(this.haze(mul(pick(GRASS), .7 + R() * .5), Math.min(zz, 1))), m:css(this.haze(R() < .5 ? [150, 120, 80] : [190, 170, 110], Math.min(zz, 1))), l:R()}); }
+    this.thatch = []; for (i = 0; i < 3200; i++){ var tz = Math.pow(R(), .6) * 1.3; this.thatch.push({u:U(), z:tz, h:.04 + R() * (level === 1 ? .2 : .14), l:(R() - .5) * .12, c:css(this.haze(R() < .55 ? mul(pick(STRAW), .75 + R() * .3) : mul(pick(GRASS), .7 + R() * .3), Math.min(tz, 1)))}); }
     this.pud = []; for (i = 0; i < 16; i++) this.pud.push({u:-1.5 + R() * 3, z:.2 + R() * .85, r:.35 + R() * .9, thr:R() * .95});
     this.far = []; for (i = 0; i <= 140; i++) this.far.push(R());
-    this.canopy = []; for (i = 0; i < 1400; i++){ var fx = R(); this.canopy.push({x:-.15 + fx * 1.3, y:Math.pow(R(), 1.3), r:.004 + R() * .011, c:R() < .3 ? pick(FALL) : pick(LEAF), l:R()}); }
+    this.canopy = []; for (i = 0; i < 1800; i++){ var fx = R(); this.canopy.push({x:-.15 + fx * 1.3, y:Math.pow(R(), 1.3), r:.003 + R() * .009, c:R() < .3 ? pick(FALL) : pick(LEAF), l:R()}); }
     P.sort(function(a, b){ return a.z - b.z; });
-    this.plants = P; this.bgKey = '';
+    this.KINDS = KINDS;
+    this.plants = P; this.bgKey = ''; this.farKey = ''; this.skyKey = '';
   };
 
   S.set = function(k, v){ this.target[k] = v; if (this.still || reduceMotion) this.cur[k] = v; this.kick(); };
@@ -1328,16 +1358,21 @@ var BrushScene = (function(){
 
   /* ---------- static background: sky, hills, tree line, ground ---------- */
   S.drawBg = function(){
-    var c = this.cur, key = [this.level, this.w, this.h, c.slope.toFixed(3), c.wet.toFixed(2)].join('|');
+    var c = this.cur, sq = this.sq(), wq = Math.round(c.wet * 10) / 10, key = [this.level, this.w, this.h, sq, wq].join('|');
     if (key === this.bgKey) return; this.bgKey = key;
-    var x = this.bg.getContext('2d'), w = this.w, h = this.h, hy = this.hy, i;
-    x.setTransform(this.dpr, 0, 0, this.dpr, 0, 0); x.clearRect(0, 0, w, h);
+    var w = this.w, h = this.h, hy = this.hy, i, x;
+    var skyKey = [this.level, this.w, this.h, sq].join('|');
+    if (skyKey !== this.skyKey){ this.skyKey = skyKey;
+    x = this.skyC.getContext('2d'); x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, this.skyC.width, this.skyC.height);
+    x.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     var sk = x.createLinearGradient(0, 0, 0, hy + h * .1);
     sk.addColorStop(0, '#6d97b4'); sk.addColorStop(.55, '#b9cfd0'); sk.addColorStop(1, '#f1ddae');
     x.fillStyle = sk; x.fillRect(0, 0, w, h);
     var sg = x.createRadialGradient(w * .8, hy - h * .1, 0, w * .8, hy - h * .1, h * .55);
     sg.addColorStop(0, 'rgba(255,240,200,.95)'); sg.addColorStop(.12, 'rgba(255,226,160,.55)'); sg.addColorStop(1, 'rgba(255,220,150,0)');
     x.fillStyle = sg; x.fillRect(0, 0, w, h);
+    var sky = x; this.tmpC = this.tmpC || document.createElement('canvas'); this.tmpC.width = this.skyC.width; this.tmpC.height = this.skyC.height;
+    x = this.tmpC.getContext('2d'); x.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     this.shear(x);
     /* far hills */
     var hills = [[hy - h * .075, [132, 150, 150], .9, 0], [hy - h * .045, [104, 126, 112], 1.4, 2]];
@@ -1355,17 +1390,26 @@ var BrushScene = (function(){
       var q = this.canopy[i], qx = q.x * w, qy = cy - h * (.0 + q.y * .13), lit = .8 + (q.x - .3) * .25 + (1 - q.y) * -.1 + q.l * .2;
       x.fillStyle = css(mix(mul(q.c, lit * .85), [150, 165, 150], .35)); x.beginPath(); x.arc(qx, qy, q.r * h, 0, 6.283); x.fill();
     }
+    sky.setTransform(1, 0, 0, 1, 0, 0); if ('filter' in sky) sky.filter = 'blur(' + (this.w > 700 ? 1.6 : .9) * this.dpr + 'px)'; sky.drawImage(this.tmpC, 0, 0); if ('filter' in sky) sky.filter = 'none';
+    }
+    x = this.bg.getContext('2d'); x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, this.bg.width, this.bg.height); x.drawImage(this.skyC, 0, 0);
+    x.setTransform(this.dpr, 0, 0, this.dpr, 0, 0); this.shear(x);
     /* ground */
     var gc1 = this.level === 1 ? [150, 156, 84] : [138, 134, 76], gc2 = this.level === 1 ? [92, 112, 50] : [74, 84, 44];
-    var mud1 = [118, 112, 80], mud2 = [58, 58, 40], wt = c.wet * .55;
+    var mud1 = [118, 112, 80], mud2 = [58, 58, 40], wt = wq * .55;
     var gg = x.createLinearGradient(0, hy, 0, h);
     gg.addColorStop(0, css(mix(mix(gc1, HAZE, .45), mud1, wt * .6))); gg.addColorStop(.35, css(mix(gc1, mud1, wt))); gg.addColorStop(1, css(mix(gc2, mud2, wt)));
     x.fillStyle = gg; x.fillRect(-w * .3, hy, w * 1.6, h * 1.4);
     x.fillStyle = 'rgba(255,236,190,.35)'; x.fillRect(-w * .3, hy - 1, w * 1.6, 2);
+    /* dry thatch and old grass on the ground */
+    x.lineCap = 'round';
+    for (i = 0; i < this.thatch.length; i++){ var th = this.thatch[i], tx = this.X(th.u, th.z), ty = this.Y(th.z), tp = this.PX(th.z); if (tx < -10 || tx > w + 10) continue;
+      x.strokeStyle = th.c; x.lineWidth = Math.max(.5, tp * .008); x.beginPath(); x.moveTo(tx, ty); x.lineTo(tx + th.l * tp, ty - th.h * tp); x.stroke(); }
+    x.lineCap = 'butt';
     /* puddles */
     for (i = 0; i < this.pud.length; i++){
-      var pd = this.pud[i], a = clamp((c.wet - pd.thr) * 3, 0, 1); if (a <= 0) continue;
-      var px3 = this.X(pd.u, pd.z), py = this.Y(pd.z), pp = this.PX(pd.z), rx = pd.r * pp * (.45 + c.wet * .55), ry = rx * (.1 + pd.z * .1);
+      var pd = this.pud[i], a = clamp((wq - pd.thr) * 3, 0, 1); if (a <= 0) continue;
+      var px3 = this.X(pd.u, pd.z), py = this.Y(pd.z), pp = this.PX(pd.z), rx = pd.r * pp * (.32 + wq * .4), ry = rx * (.1 + pd.z * .1); a *= .8;
       x.fillStyle = 'rgba(56,58,38,' + (.55 * a) + ')'; x.beginPath(); x.ellipse(px3, py, rx * 1.12, ry * 1.25, 0, 0, 6.283); x.fill();
       var pg = x.createLinearGradient(0, py - ry, 0, py + ry); pg.addColorStop(0, 'rgba(150,180,196,' + (.85 * a) + ')'); pg.addColorStop(1, 'rgba(232,214,170,' + (.8 * a) + ')');
       x.fillStyle = pg; x.beginPath(); x.ellipse(px3, py, rx, ry, 0, 0, 6.283); x.fill();
@@ -1373,7 +1417,19 @@ var BrushScene = (function(){
     }
   };
 
-  S.shear = function(x){ var k = this.cur.slope * .17; x.transform(1, -k, 0, 1, 0, k * this.w * .5); x.translate(0, this.cur.slope * this.h * .05); };
+  /* plants in the back third barely move, so they're painted once into a cache */
+  var ZS = .36;
+  S.isFar = function(o){ return o.z < ZS && o.t !== 'P' && o.t !== 'K'; };
+  S.drawFar = function(){
+    var c = this.cur, key = [this.level, this.w, this.h, this.sq(), Math.round(c.wet * 10), Math.round(c.thorns * 10)].join('|');
+    if (key === this.farKey) return; this.farKey = key;
+    var g = this.farC.getContext('2d'), P = this.plants, w = this.w;
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, this.farC.width, this.farC.height);
+    g.setTransform(this.dpr, 0, 0, this.dpr, 0, 0); this.shear(g);
+    for (var i = 0; i < P.length; i++){ var o = P[i]; if (!this.isFar(o)) continue; var X = this.X(o.u, o.z); if (X < -w * .25 || X > w * 1.25) continue; this['d_' + o.t](g, o, X, this.Y(o.z), this.PX(o.z), 0, false); }
+  };
+  S.sq = function(){ return Math.round(this.cur.slope * 40) / 40; };
+  S.shear = function(x){ var q = this.sq(), k = q * .17; x.transform(1, -k, 0, 1, 0, k * this.w * .5); x.translate(0, q * this.h * .05); };
 
   /* ---------- the frame ---------- */
   S.draw = function(){
@@ -1396,17 +1452,24 @@ var BrushScene = (function(){
     }
     /* far brush band at the field's back edge */
     var fz = .06, fy = this.Y(fz), fp = this.PX(fz), bh = [0, .7, 1.7, 2.1, 2.4][this.level];
-    x.fillStyle = css(this.haze(this.level > 2 ? [70, 92, 50] : [150, 150, 80], .05));
+    x.fillStyle = css(this.haze(this.level > 2 ? [62, 84, 46] : [120, 128, 66], .25));
     x.beginPath(); x.moveTo(-w * .2, fy + 2);
-    for (i = 0; i <= 140; i++){ var bu = -1.9 + i / 140 * 3.8, bx = this.X(bu, fz), tall = this.isCut(bu, fz) ? .1 : bh * (.6 + this.far[i] * .6); x.lineTo(bx, fy - tall * fp); }
+    for (i = 0; i <= 140; i++){ var bu = -1.9 + i / 140 * 3.8, bx = this.X(bu, fz), tall = this.isCut(bu, fz) ? .1 : bh * (.75 + (this.far[i] + this.far[(i + 1) % 141]) * .2); x.lineTo(bx, fy - tall * fp); }
     x.lineTo(w * 1.2, fy + 2); x.closePath(); x.fill();
 
+    /* the cached back third, trimmed to the uncut side while clearing */
+    this.drawFar();
+    x.save();
+    if (this.cleared > 0){ x.beginPath(); x.moveTo(this.X(uc - .175, 0), -h * 2); for (var cz = 0; cz <= 1.3; cz += .05) x.lineTo(this.X(uc + (cz - .7) * .25, cz), this.Y(cz)); x.lineTo(w * 3, h * 2); x.lineTo(w * 3, -h * 2); x.closePath(); x.clip(); }
+    x.setTransform(1, 0, 0, 1, 0, 0); x.drawImage(this.farC, 0, 0);
+    x.restore();
     /* plants, far to near; the machine slots in by depth */
     var mz = .93, drawnM = false, mach = this.clr || (this.cleared > 0 && this.cleared < 1);
     var wind = function(u, ph){ return Math.sin(t * 1.25 + u * 2.2 + ph) * .06 + Math.sin(t * 2.9 + u * 5 + ph * 1.7) * .025; };
     var P = this.plants, piles = this.piles;
     for (i = 0; i < P.length; i++){
       var o = P[i];
+      if (this.isFar(o) && !this.isCut(o.u, o.z)) continue;
       if (mach && !drawnM && o.z > mz){ this.drawMachine(x, uc, mz); drawnM = true; }
       var X = this.X(o.u, o.z); if (X < -w * .25 || X > w * 1.25) continue;
       var Y = this.Y(o.z), p = this.PX(o.z); if (Y - p * 0.2 > h * 1.25) continue;
@@ -1454,6 +1517,7 @@ var BrushScene = (function(){
     if (cut) return;
     var s = (sw * 1.1 + o.lean * .3) * o.h, tx = X + s * p, ty = Y - o.h * p;
     x.strokeStyle = o.sc; x.lineWidth = Math.max(.5, p * .012); x.beginPath(); x.moveTo(X, Y); x.quadraticCurveTo(X + s * .2 * p, Y - o.h * .6 * p, tx, ty); x.stroke();
+    x.fillStyle = o.lc; for (var k = 0; k < o.lv.length; k++){ var lv = o.lv[k], ly = Y - o.h * lv.p * p, lx = X + s * lv.p * lv.p * p; x.beginPath(); x.ellipse(lx + lv.d * .05 * p, ly, Math.max(.6, .06 * p), Math.max(.4, .012 * p), lv.d * .5, 0, 6.283); x.fill(); }
     for (var i = 0; i < o.d.length; i++){ var d = o.d[i], dy = d.a * .35 * o.h, dx = s * (1 - d.a * .3) + d.s * (.4 + d.a); x.fillStyle = d.c; x.beginPath(); x.arc(X + dx * p, ty + dy * p, Math.max(.6, d.r * p), 0, 6.283); x.fill(); }
   };
   S.d_w = function(x, o, X, Y, p, sw, cut){
@@ -1464,14 +1528,56 @@ var BrushScene = (function(){
   };
   S.d_b = function(x, o, X, Y, p, sw, cut){
     if (cut){ x.fillStyle = 'rgba(128,104,70,.75)'; for (var m = 0; m < 5; m++){ x.beginPath(); x.arc(X + (o.tw[m % o.tw.length].a - 1.6) * o.wd * .25 * p, Y - m * .006 * p, Math.max(.6, .025 * p), 0, 6.283); x.fill(); } return; }
-    var sp = this.sprite(o, p, o.wd * 1.25, o.h * 1.12, function(g, p, o){
-      var wd = o.wd, h = o.h, i;
+    var K = this.KINDS[o.kind], self = this;
+    var sp = this.sprite(o, p, o.wd * 1.3, o.h * 1.18, function(g, p, o){
+      var wd = o.wd, h = o.h, i, R = rng((o.seed * 5e8) | 0), kind = o.kind;
+      var dark = css(this.haze(mul(K.leaf[0], .45), o.z));
+      if (kind === 'cedar'){
+        g.fillStyle = dark; g.beginPath(); g.moveTo(0, -h * p); g.quadraticCurveTo(wd * .55 * p, -h * .25 * p, wd * .42 * p, -.05 * p); g.lineTo(-wd * .42 * p, -.05 * p); g.quadraticCurveTo(-wd * .55 * p, -h * .25 * p, 0, -h * p); g.fill();
+        this.leaves(g, p, o, wd * h / .0022, function(R){ var y = Math.pow(R(), .8) * h, half = (1 - y / h) * wd * .46 + .04, x = (R() - .5) * 2 * half; return {x:x, y:Math.max(.04, y), lit:.6 + .55 * x / wd + .25 * y / h}; }, 0, 1.5, K.leaf);
+        return;
+      }
+      if (kind === 'sumac'){
+        var stems = 4 + (R() * 4 | 0), tops = [];
+        g.lineCap = 'round';
+        for (i = 0; i < stems; i++){ var bx = (R() - .5) * wd * .3, tx = bx + (R() - .5) * wd * .5, ty = h * (.6 + R() * .4); g.strokeStyle = css(this.haze([110, 92, 72], o.z)); g.lineWidth = Math.max(.8, .03 * p); g.beginPath(); g.moveTo(bx * p, 0); g.quadraticCurveTo(bx * p, -ty * .6 * p, tx * p, -ty * p); g.stroke(); tops.push([tx, ty]); }
+        tops.forEach(function(t){
+          for (var k = 0; k < 8; k++){
+            var side = k % 2 ? -1 : 1, len = .45 + R() * .35, dx = side * len * (.55 + R() * .45), up = len * (.15 + R() * .3);
+            var x0 = t[0], y0 = t[1], cx = x0 + dx * .45, cy = y0 + up, ex = x0 + dx, ey = y0 + up * .2 - len * (.1 + R() * .3);
+            g.strokeStyle = css(self.haze([150, 60, 40], o.z)); g.lineWidth = Math.max(.5, .01 * p); g.beginPath(); g.moveTo(x0 * p, -y0 * p); g.quadraticCurveTo(cx * p, -cy * p, ex * p, -ey * p); g.stroke();
+            for (var j = 2; j <= 11; j++){ var q = j / 11, lx = (1 - q) * (1 - q) * x0 + 2 * (1 - q) * q * cx + q * q * ex, ly = (1 - q) * (1 - q) * y0 + 2 * (1 - q) * q * cy + q * q * ey;
+              var tdx = 2 * (1 - q) * (cx - x0) + 2 * q * (ex - cx), tdy = 2 * (1 - q) * (cy - y0) + 2 * q * (ey - cy), ang = Math.atan2(-tdy, tdx);
+              var c = K.leaf[(R() * K.leaf.length) | 0], lit = .75 + .35 * (lx / wd) + R() * .3, ll = .075 * (1 - q * .35);
+              g.fillStyle = css(self.haze(mul(c, lit), o.z));
+              for (var sd = -1; sd <= 1; sd += 2){ var la = ang + sd * 1.2, mx = lx + Math.cos(la) * ll * .5, my = ly - Math.sin(la) * ll * .5; g.beginPath(); g.ellipse(mx * p, -my * p, Math.max(.6, ll * p * .5), Math.max(.35, .014 * p), -la, 0, 6.283); g.fill(); } } }
+          g.fillStyle = css(self.haze([128, 36, 36], o.z)); g.beginPath(); g.ellipse(t[0] * p, -(t[1] + .1) * p, Math.max(.8, .04 * p), Math.max(1.2, .1 * p), 0, 0, 6.283); g.fill();
+        });
+        return;
+      }
+      var shape = kind === 'rose' ? function(R){ var a = R() * Math.PI, rr = Math.pow(R(), .55); var dx = Math.cos(a) * wd * .5 * rr, dy = h * .1 + Math.sin(a) * h * .82 * rr * (1 - Math.abs(dx) / wd * .5); return {x:dx, y:Math.max(.03, dy), lit:.5 + .6 * dy / h + .3 * dx / wd}; }
+        : kind === 'buck' ? function(R){ var y = h * (.25 + Math.pow(R(), .7) * .75), spread = wd * (.18 + .38 * y / h), dx = (R() - .5) * 2 * spread * Math.sqrt(R()); return {x:dx, y:y, lit:.5 + .55 * y / h + .3 * dx / wd}; }
+        : function(R){ var a = R() * 6.283, rr = Math.pow(R(), .6); var dx = Math.cos(a) * wd * .48 * rr, dy = h * .5 + Math.sin(a) * h * .48 * rr; return {x:dx, y:Math.max(.03, dy), lit:.5 + .55 * dy / h + .3 * dx / wd, a:kind === 'olive' ? -.6 + (R() - .5) : null}; };
       g.strokeStyle = o.tc; g.lineWidth = Math.max(.5, p * .014);
-      for (i = 0; i < o.tw.length; i++){ var tw = o.tw[i]; g.beginPath(); g.moveTo(0, 0); g.lineTo(Math.cos(tw.a) * wd * .58 * p, -Math.sin(tw.a) * h * (.7 + tw.l * .45) * p); g.stroke(); }
-      g.fillStyle = css(this.haze([34, 48, 28], o.z)); g.beginPath(); g.ellipse(0, -h * .44 * p, wd * .44 * p, h * .44 * p, 0, 0, 6.283); g.fill();
-      this.leaves(g, p, o, wd * h / .0032, function(R){ var a = R() * 6.283, rr = Math.pow(R(), .6) * (R() < .1 ? 1.08 : 1); var dx = Math.cos(a) * wd * .5 * rr, dy = h * .46 + Math.sin(a) * h * .46 * rr; if (dy < .02) dy = .02 + R() * .05; return {x:dx, y:dy, lit:.55 + .55 * dy / h + .28 * dx / wd}; }, o.fall);
+      for (i = 0; i < o.tw.length; i++){ var tw = o.tw[i]; g.beginPath(); g.moveTo(0, 0); g.quadraticCurveTo(Math.cos(tw.a) * wd * .2 * p, -h * .3 * p, Math.cos(tw.a) * wd * .55 * p, -Math.sin(tw.a) * h * (.75 + tw.l * .4) * p); g.stroke(); }
+      if (kind !== 'buck'){ g.fillStyle = dark; g.beginPath(); g.ellipse(0, -h * .45 * p, wd * .4 * p, h * .4 * p, 0, 0, 6.283); g.fill(); }
+      this.leaves(g, p, o, wd * h / .0018, shape, 0, K.sz, K.leaf, K.narrow);
+      if (kind === 'rose'){
+        g.lineCap = 'round';
+        for (i = 0; i < 9; i++){ var dir = R() < .5 ? -1 : 1, rx = dir * wd * (.3 + R() * .3), ry = h * (.5 + R() * .45); g.strokeStyle = css(this.haze([126, 70, 58], o.z)); g.lineWidth = Math.max(.5, .012 * p); g.beginPath(); g.moveTo(rx * .3 * p, -ry * .6 * p); g.quadraticCurveTo(rx * .7 * p, -(ry + .25) * p, rx * 1.2 * p, -ry * .55 * p); g.stroke(); }
+        g.fillStyle = css(this.haze([196, 46, 38], o.z));
+        for (i = 0; i < 26; i++){ var q = shape(R); g.beginPath(); g.arc(q.x * p, -q.y * p, Math.max(.6, .014 * p), 0, 6.283); g.fill(); }
+      } else if (kind === 'olive'){
+        g.fillStyle = css(this.haze([206, 64, 52], o.z));
+        for (i = 0; i < 40; i++){ var q2 = shape(R); g.beginPath(); g.arc(q2.x * p, -q2.y * p, Math.max(.5, .01 * p), 0, 6.283); g.fill(); }
+      } else if (kind === 'buck'){
+        g.fillStyle = css(this.haze([34, 30, 36], o.z));
+        for (i = 0; i < 30; i++){ var q3 = shape(R); g.beginPath(); g.arc(q3.x * p, -q3.y * p, Math.max(.5, .011 * p), 0, 6.283); g.fill(); }
+      }
     });
-    if (sp) this.drawSprite(x, o, X, Y, sw * .35);
+    if (!sp) return;
+    this.shadow(x, X, Y, p, o.wd);
+    this.drawSprite(x, o, X, Y, sw * (o.kind === 'cedar' ? .15 : .35));
   };
   S.d_br = function(x, o, X, Y, p, sw, cut){
     if (cut) return;
@@ -1488,18 +1594,37 @@ var BrushScene = (function(){
   };
   S.d_s = function(x, o, X, Y, p, sw, cut){
     if (cut){ x.fillStyle = o.bc; x.fillRect(X - o.tw * p * .6, Y - .07 * p, o.tw * p * 1.2, .07 * p); return; }
-    var s = (sw * .7 + o.lean * .15) * o.h, tx = X + s * p, ty = Y - o.h * p;
-    x.strokeStyle = o.bc; x.lineWidth = Math.max(.6, o.tw * p); x.lineCap = 'round';
-    x.beginPath(); x.moveTo(X, Y); x.quadraticCurveTo(X + s * .2 * p, Y - o.h * .5 * p, tx, ty); x.stroke();
-    x.lineWidth = Math.max(.4, o.tw * p * .45);
-    x.beginPath(); x.moveTo(X + s * .35 * p, Y - o.h * .55 * p); x.lineTo(X + (s * .6 - .4) * p, Y - o.h * .8 * p); x.moveTo(X + s * .5 * p, Y - o.h * .7 * p); x.lineTo(X + (s * .8 + .45) * p, Y - o.h * .92 * p); x.stroke();
+    this.shadow(x, X, Y, p, o.h * .3, .18);
+    var tops = [], i;
+    x.lineCap = 'round';
+    for (i = 0; i < o.st.length; i++){
+      var st = o.st[i], bx = X + st.dx * p, s = (sw * .7 + st.lean * .15) * st.h, tx = bx + s * p, ty = Y - st.h * p;
+      x.strokeStyle = o.bc; x.lineWidth = Math.max(.6, o.tw * p * (i ? .75 : 1));
+      x.beginPath(); x.moveTo(bx, Y); x.quadraticCurveTo(bx + s * .2 * p, Y - st.h * .5 * p, tx, ty); x.stroke();
+      if (o.birch && p > 60){ x.strokeStyle = o.mk; x.lineWidth = Math.max(.5, o.tw * p * .5); for (var k = 1; k < 6; k++){ var q = k / 6, mx = bx + (s * .2 * 2 * (1 - q) * q + s * q * q) * p, my = Y - st.h * q * p; x.beginPath(); x.moveTo(mx - o.tw * p * .4, my); x.lineTo(mx + o.tw * p * .2, my - 1); x.stroke(); } }
+      x.strokeStyle = o.bc; x.lineWidth = Math.max(.4, o.tw * p * .4);
+      x.beginPath(); x.moveTo(bx + s * .35 * p, Y - st.h * .55 * p); x.lineTo(bx + (s * .6 - .4) * p, Y - st.h * .8 * p); x.moveTo(bx + s * .5 * p, Y - st.h * .7 * p); x.lineTo(bx + (s * .8 + .45) * p, Y - st.h * .92 * p); x.stroke();
+      tops.push([tx, ty, st.h]);
+    }
     x.lineCap = 'butt';
-    var cw = o.h * .62, chh = o.h * .62;
-    var sp = this.sprite(o, p, cw * 1.1, chh * 1.1, function(g, p, o){
-      var cl = [], R = rng((o.seed * 7e8) | 0); for (var k = 0; k < 5; k++) cl.push({x:(R() - .5) * cw * .55, y:chh * (.3 + R() * .45), r:cw * (.16 + R() * .12)});
-      this.leaves(g, p, o, cw * chh / .0045, function(R){ var c = cl[(R() * cl.length) | 0], a = R() * 6.283, rr = Math.sqrt(R()); var dx = c.x + Math.cos(a) * c.r * rr, dy = c.y + Math.sin(a) * c.r * rr * .8; return {x:dx, y:dy, lit:.6 + .5 * dy / chh + .3 * dx / cw}; }, .5);
+    var cw = o.h * .6, chh = o.h * .58, self = this;
+    var sp = this.sprite(o, p, cw * 1.15, chh * 1.15, function(g, p, o){
+      var cl = [], R = rng((o.seed * 7e8) | 0), k; for (k = 0; k < 6; k++) cl.push({x:(R() - .5) * cw * .55, y:chh * (.3 + R() * .45), r:cw * (.12 + R() * .1)});
+      var pal = o.birch ? [[214,186,74],[198,170,62],[226,204,108],[176,160,70]] : null;
+      this.leaves(g, p, o, cw * chh / .0032, function(R){ var c = cl[(R() * cl.length) | 0], a = R() * 6.283, rr = Math.sqrt(R()); var dx = c.x + Math.cos(a) * c.r * rr, dy = c.y + Math.sin(a) * c.r * rr * .8; return {x:dx, y:dy, lit:.6 + .5 * dy / chh + .3 * dx / cw}; }, .55, .9, pal);
+      if (o.vine){ g.strokeStyle = css(self.haze([110, 86, 60], o.z)); g.lineWidth = Math.max(.5, .012 * p); g.beginPath(); g.moveTo(-cw * .3 * p, -chh * .1 * p); g.bezierCurveTo(cw * .3 * p, -chh * .4 * p, -cw * .3 * p, -chh * .7 * p, cw * .25 * p, -chh * .9 * p); g.stroke();
+        for (k = 0; k < 36; k++){ var t = R(), vx = (-.3 + .55 * t + (R() - .5) * .25) * cw, vy = (.1 + .8 * t + (R() - .5) * .1) * chh; g.fillStyle = css(self.haze(R() < .6 ? [232, 112, 36] : [244, 196, 64], o.z)); g.beginPath(); g.arc(vx * p, -vy * p, Math.max(.6, .016 * p), 0, 6.283); g.fill(); } }
     });
-    if (sp) this.drawSprite(x, o, tx, ty + chh * .35 * p, sw * .25);
+    if (sp){ var tp = tops[0]; this.drawSprite(x, o, tp[0], tp[1] + chh * .35 * p, sw * .25); }
+  };
+  S.d_th = function(x, o, X, Y, p, sw, cut){
+    if (cut) return;
+    var s = (sw + o.lean * .2) * o.h, tx = X + s * p, ty = Y - o.h * p;
+    x.strokeStyle = o.sc; x.lineWidth = Math.max(.6, p * .014); x.beginPath(); x.moveTo(X, Y); x.quadraticCurveTo(X, Y - o.h * .5 * p, tx, ty); x.stroke();
+    x.lineWidth = Math.max(.5, p * .01);
+    for (var k = 0; k < 3; k++){ var ly = Y - o.h * (.25 + k * .2) * p, d = k % 2 ? 1 : -1, lx = X + s * (.25 + k * .2) * p; x.beginPath(); x.moveTo(lx, ly); for (var j = 1; j <= 4; j++) x.lineTo(lx + d * j * .06 * p, ly - (j % 2 ? .05 : -.01) * p); x.stroke(); }
+    x.fillStyle = o.sc; x.beginPath(); x.arc(tx, ty + .03 * p, Math.max(.8, .035 * p), 0, 6.283); x.fill();
+    x.fillStyle = o.hc; x.beginPath(); x.ellipse(tx, ty - .01 * p, Math.max(1, .04 * p), Math.max(.8, .03 * p), 0, 0, 6.283); x.fill();
   };
   S.d_c = function(x, o, X, Y, p, sw, cut){
     var a = clamp((this.cur.wet - o.thr) * 4, 0, 1); if (a <= 0 || cut) return;
@@ -1511,10 +1636,11 @@ var BrushScene = (function(){
   };
   S.d_L = function(x, o, X, Y, p, sw, cut){
     var l = o.l * p * .5; x.strokeStyle = o.c; x.lineWidth = Math.max(1, .14 * p); x.lineCap = 'round';
-    x.beginPath(); x.moveTo(X - l, Y - .06 * p - o.a * l); x.lineTo(X + l, Y - .06 * p + o.a * l); x.stroke(); x.lineCap = 'butt';
+    x.beginPath(); x.moveTo(X - l, Y - .06 * p - o.a * l); x.lineTo(X + l, Y - .06 * p + o.a * l); x.stroke(); x.strokeStyle = o.m; x.lineWidth = Math.max(.6, .04 * p); x.beginPath(); x.moveTo(X - l * .6, Y - .13 * p - o.a * l * .6); x.lineTo(X + l * .3, Y - .13 * p + o.a * l * .3); x.stroke(); x.lineCap = 'butt';
   };
   S.d_T = function(x, o, X, Y, p){
     var wd = o.wd * p, top = -this.h * .1, bc = o.bc;
+    this.shadow(x, X, Y, p, o.wd * 4, .22);
     var g = x.createLinearGradient(X - wd / 2, 0, X + wd / 2, 0);
     g.addColorStop(0, css(mul(bc, .62))); g.addColorStop(.6, css(bc)); g.addColorStop(1, css(mix(bc, [255, 226, 170], .35)));
     x.fillStyle = g; x.beginPath(); x.moveTo(X - wd * .7, Y + 1); x.quadraticCurveTo(X - wd * .5, Y - wd, X - wd * .42, Y - wd * 2.5); x.lineTo(X - wd * .3, top); x.lineTo(X + wd * .3, top); x.lineTo(X + wd * .42, Y - wd * 2.5); x.quadraticCurveTo(X + wd * .5, Y - wd, X + wd * .7, Y + 1); x.closePath(); x.fill();
@@ -1523,13 +1649,14 @@ var BrushScene = (function(){
     var cw = 15, ch = 12;
     var sp = this.sprite(o, p, cw, ch, function(g, p, o){
       var cl = [], R = rng((o.seed * 3e8) | 0); for (var k = 0; k < 10; k++) cl.push({x:(R() - .5) * cw * .8, y:ch * (.15 + R() * .75), r:1.6 + R() * 1.8});
-      this.leaves(g, p, o, 4200, function(R){ var c = cl[(R() * cl.length) | 0], a = R() * 6.283, rr = Math.sqrt(R()); var dx = c.x + Math.cos(a) * c.r * rr, dy = c.y + Math.sin(a) * c.r * rr * .7; return {x:dx, y:dy, lit:.55 + .3 * dy / ch + .35 * dx / cw}; }, .3, 3.2);
+      this.leaves(g, p, o, 7000, function(R){ var c = cl[(R() * cl.length) | 0], a = R() * 6.283, rr = Math.sqrt(R()); var dx = c.x + Math.cos(a) * c.r * rr, dy = c.y + Math.sin(a) * c.r * rr * .7; return {x:dx, y:dy, lit:.55 + .3 * dy / ch + .35 * dx / cw}; }, .3, 2.2);
     });
     if (sp) this.drawSprite(x, o, X, Y - 5.2 * p, Math.sin(this.t * .8 + o.ph) * .01);
   };
   S.d_P = function(x, o, X, Y, p){
     var H = 1.83 * p, k = H / 1.83; this.pm = {x:X, y:Y, top:Y - H};
-    x.fillStyle = 'rgba(26,32,26,.92)';
+    this.shadow(x, X, Y, p, .7, .3);
+    x.fillStyle = 'rgba(26,32,26,.94)';
     x.beginPath(); x.arc(X, Y - H + .12 * k, .115 * k, 0, 6.283); x.fill();
     x.fillRect(X - .16 * k, Y - H + .08 * k, .32 * k, .05 * k);
     x.beginPath(); x.moveTo(X - .21 * k, Y - H + .3 * k); x.lineTo(X + .21 * k, Y - H + .3 * k); x.lineTo(X + .19 * k, Y - .9 * k); x.lineTo(X - .19 * k, Y - .9 * k); x.closePath(); x.fill();
@@ -1552,7 +1679,7 @@ var BrushScene = (function(){
     x.fillStyle = 'rgba(92,74,52,.9)'; x.beginPath(); x.ellipse(X, Y - .2 * p, 1.5 * p, .55 * p, 0, Math.PI, 0); x.fill();
     x.lineWidth = Math.max(.6, .03 * p);
     for (i = 0; i < pl.sticks.length; i++){ var s = pl.sticks[i], sx = X + s.x * .55 * p, sy = Y - s.y * (1 - Math.abs(s.x) / 1.6) * 1.1 * p;
-      x.strokeStyle = i % 3 ? 'rgba(120,98,70,.95)' : 'rgba(150,130,90,.95)'; x.beginPath(); x.moveTo(sx, sy); x.lineTo(sx + Math.cos(s.a) * s.l * p * .5, sy - Math.sin(s.a) * s.l * p * .25); x.stroke(); }
+      x.strokeStyle = s.c ? 'rgba(96,110,60,.95)' : i % 3 ? 'rgba(120,98,70,.95)' : 'rgba(150,130,90,.95)'; x.beginPath(); x.moveTo(sx, sy); x.lineTo(sx + Math.cos(s.a) * s.l * p * .5, sy - Math.sin(s.a) * s.l * p * .25); x.stroke(); }
     x.globalAlpha = 1;
   };
   S.drawPlot = function(x, a){
@@ -1608,58 +1735,76 @@ var BrushScene = (function(){
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var PREVIEW = !!window.TP_QUOTE_PREVIEW;
 
-  /* ===== PRICING — Tim: change numbers here. Built from the Trinity Point pricing guide v1.1 ===== */
+  /* ===== PRICING — Tim: change numbers here ===== */
   var PRICE = {
-    areaRate:   {1:15, 2:40, 3:60, 4:125},        // $ per 1,000 sq ft, labor (light / light-medium / medium / heavy)
-    acresPerDay:{1:2, 2:1, 3:.5, 4:.25},          // how much a 2-man crew clears in a day
-    add:  {slope:{flat:0, gentle:.10, steep:.20}, ground:{firm:0, soft:.08, wet:.15}, thorns:{none:0, some:.08, lots:.15}, access:{open:0, tight:.10, none:.25}},
-    slow: {slope:{flat:1, gentle:1.1, steep:1.3}, ground:{firm:1, soft:1.1, wet:1.25}, thorns:{none:1, some:1.05, lots:1.12}, access:{open:1, tight:1.15, none:2.2}},
-    equipDay:   {1:105, 2:415, 3:415, 4:519},      // walk-behind brush hog · mini track loader + brush hog · + grapple
-    delivery:   {1:0, 2:200, 3:200, 4:200},
-    fuel:       {1:10, 2:30, 3:30, 4:30},
-    fees: .10, markup: 1.25,
-    laborRate: 85, crew: 2,                        // travel = round trip x crew x $85, every day on site
-    minimum:    {1:1200, 2:2200, 3:2200, 4:2200},
-    haulAway: .18,                                 // rough allowance when they want debris hauled off
-    bigJob: 5000                                   // over this, the range opens up to a couple thousand each side
+    rate: 75,                  // $ per man-hour, on site and for drive time
+    hoursPerDay: 7,            // on-site hours per guy per day
+    bigCrewOver: 10000,        // jobs over this are priced with a 3rd guy
+    thirdGuy: 1.25,            // a 3rd guy doing hand work speeds the job up about 25%
+    /* acres a crew clears in one day, by machine and brush level (1-4) */
+    perDay: {walk:{1:1.5, 2:.7, 3:.3, 4:.15}, mini:{1:3, 2:1.4, 3:.6, 4:.3}, skid:{1:5, 2:2.5, 3:1.1, 4:.55}, hand:{1:.6, 2:.3, 3:.12, 4:.06}},
+    /* rentals (Durants), $ per day; full-size skid steer + brush cutter is an estimate until Tim confirms */
+    machine: {walk:{name:'Walk-behind brush mower', day:105, delivery:0, fuel:10},
+              mini:{name:'Mini skid steer + brush cutter', day:415, delivery:200, fuel:30},
+              skid:{name:'Full-size skid steer + brush cutter', day:620, delivery:250, fuel:45},
+              hand:{name:'Hand work + walk-behind', day:105, delivery:0, fuel:10}},
+    grapple: 104,              // added per day on Level 4 machine jobs
+    rentalFees: .10, rentalMarkup: 1.25,
+    slow: {slope:{flat:1, gentle:1.15, steep:1.35}, ground:{firm:1, soft:1.1, wet:1.3}, thorns:{none:1, some:1.08, lots:1.2}, access:{open:1, tight:1.2, none:1}},
+    minimum: {walk:1200, hand:900, mini:2200, skid:3000},   // before drive time
+    haulAway: .18,             // rough allowance when they want the brush hauled off
+    cushion: .10               // top of the range = estimate + 10%
   };
   /* drive minutes from 12 Patricia Rd (one way, rough) */
-  var ZIPS = {'12601':['Poughkeepsie',12],'12603':['Poughkeepsie',6],'12604':['Poughkeepsie',10],'12538':['Hyde Park',20],'12580':['Staatsburg',25],'12572':['Rhinebeck',32],'12574':['Rhinecliff',34],'12571':['Red Hook',40],'12583':['Tivoli',45],'12504':['Annandale-on-Hudson',42],'12507':['Barrytown',40],'12569':['Pleasant Valley',14],'12578':['Salt Point',20],'12514':['Clinton Corners',25],'12581':['Stanfordville',32],'12567':['Pine Plains',45],'12545':['Millbrook',25],'12540':['LaGrangeville',16],'12590':['Wappingers Falls',18],'12537':['Hughsonville',20],'12512':['Chelsea',22],'12524':['Fishkill',24],'12508':['Beacon',28],'12533':['Hopewell Junction',22],'12582':['Stormville',28],'12570':['Poughquag',28],'12531':['Holmes',33],'12585':['Verbank',25],'12564':['Pawling',36],'12522':['Dover Plains',40],'12594':['Wingdale',43],'12592':['Wassaic',48],'12501':['Amenia',50],'12528':['Highland',15],'12547':['Milton',25],'12542':['Marlboro',30],'12548':['Modena',28],'12515':['Clintondale',25],'12561':['New Paltz',28],'12525':['Gardiner',35],'12589':['Wallkill',35],'12493':['West Park',22],'12487':['Ulster Park',28],'12401':['Kingston',35],'12477':['Saugerties',45],'12498':['Woodstock',48],'12550':['Newburgh',30],'12553':['New Windsor',32],'12584':['Vails Gate',35],'12575':['Rock Tavern',40],'12577':['Salisbury Mills',40],'12520':['Cornwall-on-Hudson',40],'12518':['Cornwall',40],'12586':['Walden',40],'12543':['Maybrook',40],'12549':['Montgomery',42],'12566':['Pine Bush',50],'10516':['Cold Spring',35],'10524':['Garrison',40],'12563':['Patterson',42],'10512':['Carmel',45],'10509':['Brewster',48],'12526':['Germantown',50]};
+  var ZIPS = {'12601':['Poughkeepsie',12],'12603':['Poughkeepsie',6],'12604':['Poughkeepsie',10],'12538':['Hyde Park',20],'12580':['Staatsburg',25],'12572':['Rhinebeck',32],'12574':['Rhinecliff',34],'12571':['Red Hook',40],'12583':['Tivoli',45],'12504':['Annandale-on-Hudson',42],'12507':['Barrytown',40],'12569':['Pleasant Valley',14],'12578':['Salt Point',20],'12514':['Clinton Corners',25],'12581':['Stanfordville',32],'12567':['Pine Plains',45],'12545':['Millbrook',25],'12540':['LaGrangeville',16],'12590':['Wappingers Falls',18],'12537':['Hughsonville',20],'12512':['Chelsea',22],'12524':['Fishkill',24],'12508':['Beacon',28],'12533':['Hopewell Junction',22],'12582':['Stormville',28],'12570':['Poughquag',28],'12531':['Holmes',33],'12585':['Verbank',25],'12564':['Pawling',36],'12522':['Dover Plains',40],'12594':['Wingdale',43],'12592':['Wassaic',48],'12501':['Amenia',50],'12528':['Highland',15],'12547':['Milton',25],'12542':['Marlboro',30],'12548':['Modena',28],'12515':['Clintondale',25],'12561':['New Paltz',28],'12525':['Gardiner',35],'12589':['Wallkill',35],'12493':['West Park',22],'12487':['Ulster Park',28],'12401':['Kingston',35],'12477':['Saugerties',45],'12498':['Woodstock',48],'12550':['Newburgh',30],'12553':['New Windsor',32],'12584':['Vails Gate',35],'12575':['Rock Tavern',40],'12577':['Salisbury Mills',40],'12520':['Cornwall-on-Hudson',40],'12518':['Cornwall',40],'12586':['Walden',40],'12543':['Maybrook',40],'12549':['Montgomery',42],'12566':['Pine Bush',50],'10516':['Cold Spring',35],'10524':['Garrison',40],'12563':['Patterson',42],'10512':['Carmel',45],'10509':['Brewster',48],'10541':['Mahopac',45],'10579':['Putnam Valley',45],'10537':['Lake Peekskill',50],'12531':['Holmes',33],'12526':['Germantown',50]};
 
   function roundUp(n){ var h = Math.floor(n / 100) * 100; if (n <= h) return h; if (n <= h + 90) return h + 90; return h + 100; }
   function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
 
+  function pickMachine(L, acres, access){
+    if (access === 'none') return 'hand';
+    var m = L === 1 ? (acres <= 2 ? 'walk' : acres <= 6 ? 'mini' : 'skid')
+          : L === 2 ? (acres <= .75 ? 'walk' : acres <= 3 ? 'mini' : 'skid')
+          : L === 3 ? (acres <= 1.5 ? 'mini' : 'skid')
+          : (acres <= 1 ? 'mini' : 'skid');
+    if (access === 'tight' && m === 'skid') m = 'mini';
+    return m;
+  }
   function price(a){
-    var L = a.level, sqft = a.acres * 43560, g = a.ground || 'firm', s = a.slope || 'flat', th = a.thorns || 'none', ac = a.access || 'open';
-    var area = sqft / 1000 * PRICE.areaRate[L];
-    var pct = PRICE.add.slope[s] + PRICE.add.ground[g] + PRICE.add.thorns[th] + PRICE.add.access[ac];
-    var areaP = area * (1 + pct);
-    var days = a.acres / PRICE.acresPerDay[L] * PRICE.slow.slope[s] * PRICE.slow.ground[g] * PRICE.slow.thorns[th] * PRICE.slow.access[ac];
-    days = Math.max(1, Math.ceil(days * 2) / 2); var rentDays = Math.ceil(days);
-    var eL = ac === 'none' ? 1 : L, rent = PRICE.equipDay[eL] * rentDays + PRICE.delivery[eL];
-    var equip = (rent * (1 + PRICE.fees) + PRICE.fuel[eL] * rentDays) * PRICE.markup;
-    var mins = a.drive || 35, travel = (mins * 2 / 60) * PRICE.crew * PRICE.laborRate * rentDays;
-    var base = areaP + equip + travel;
-    if (a.debris === 'haul') base *= 1 + PRICE.haulAway;
-    base = Math.max(base, PRICE.minimum[L]);
-    var lo, hi;
-    if (base >= PRICE.bigJob){ lo = base - Math.min(base * .1, 1500); hi = base + Math.min(base * .35, 3000); }
-    else { lo = base * .92; hi = base * 1.3; }
-    lo = roundUp(Math.max(lo, PRICE.minimum[L])); hi = roundUp(hi); if (hi <= lo) hi = roundUp(lo * 1.2);
-    return {lo:lo, hi:hi, base:roundUp(base), area:Math.round(areaP), equip:Math.round(equip), travel:Math.round(travel), days:days, pct:pct};
+    var L = a.level, g = a.ground || 'firm', s = a.slope || 'flat', th = a.thorns || (L >= 3 ? 'some' : 'none'), ac = a.access || 'open';
+    var m = pickMachine(L, a.acres, ac), M = PRICE.machine[m], sl = PRICE.slow;
+    var crewDays = a.acres / PRICE.perDay[m][L] * sl.slope[s] * sl.ground[g] * sl.thorns[th] * sl.access[ac];
+    function run(crew){
+      var days = crewDays / (crew === 3 ? PRICE.thirdGuy : 1);
+      days = Math.max(m === 'walk' || m === 'hand' ? .5 : 1, Math.ceil(days * 2) / 2);
+      var onDays = Math.ceil(days), labor = crew * PRICE.hoursPerDay * days * PRICE.rate;
+      var dayRate = M.day + (L === 4 && m !== 'walk' && m !== 'hand' ? PRICE.grapple : 0);
+      var equip = ((dayRate * onDays + M.delivery) * (1 + PRICE.rentalFees) + M.fuel * onDays) * PRICE.rentalMarkup;
+      var travel = (a.drive || 35) * 2 / 60 * crew * PRICE.rate * onDays;
+      var work = Math.max(labor + equip, PRICE.minimum[m]);   // minimum covers the job itself; drive time always adds on top
+      if (a.debris === 'haul') work *= 1 + PRICE.haulAway;
+      return {crew:crew, days:days, labor:labor, equip:equip, travel:travel, total:work + travel};
+    }
+    var r = run(2); if (r.total > PRICE.bigCrewOver) r = run(3);
+    var lo = roundUp(r.total), hi = roundUp(r.total * (1 + PRICE.cushion));
+    if (hi <= lo) hi = lo + 100;
+    return {lo:lo, hi:hi, base:lo, machine:M.name, crew:r.crew, days:r.days, labor:Math.round(r.labor), equip:Math.round(r.equip), travel:Math.round(r.travel)};
   }
 
   /* ===== copy for each answer ===== */
   var LV = {1:['Overgrown pasture','Tall grass & weeds, knee to waist high'], 2:['Thick brush','Up to 6 ft, grass with small bushes'], 3:['Briars & bushes','Thick bushes and briars 6 ft+'], 4:['Saplings & thicket','Small trees, thick brush, often a slope']};
   var OPTS = {
-    ground:{label:'The ground', title:"What's the ground like?", sub:'Soft or wet ground slows the machine down.', o:[['firm','Firm & dry','You could drive a truck on it'],['soft','A few soft spots','Gets muddy after it rains'],['wet','Wet or swampy','Near a creek, pond or wetland']]},
-    slope:{label:'The lay of the land', title:'Is it flat or on a hill?', sub:'Slopes take more care and more time.', o:[['flat','Flat','Easy walking'],['gentle','Gentle slope','You feel it walking up'],['steep','Steep hill','Hard to walk up']]},
-    thorns:{label:'Thorns & vines', title:'Any thorns or poison ivy?', sub:'Pricker bushes, multiflora rose, bittersweet vines, poison ivy.', o:[['none','Not really','Mostly grass and soft brush'],['some','Some here and there','A few pricker patches'],['lots',"It's full of them","You'd get torn up walking in"]]},
-    access:{label:'Getting in', title:'Can a machine get to it?', sub:'Our track machine needs a path about 4 ft wide.', o:[['open','Wide open','Easy to drive right up to it'],['tight','Tight squeeze','Narrow gate or path, close to buildings'],['none','No machine access','Hand work only: fenced in, blocked or too steep']]}
+    ground:{q:"What's the ground like?", o:[['firm','Firm & dry','Drive a truck on it'],['soft','Soft spots','Muddy after rain'],['wet','Wet / swampy','Creek, pond, wetland']]},
+    slope:{q:'Flat or on a hill?', o:[['flat','Flat','Easy walking'],['gentle','Gentle slope','You feel it'],['steep','Steep hill','Hard to walk up']]},
+    access:{q:'Can a machine get to it?', o:[['open','Wide open','Drive right up'],['tight','Tight squeeze','Narrow gate or path'],['none','No machine','Hand work only']]},
+    thorns:{q:'Thorns, vines or poison ivy?', o:[['none','Not really','Mostly soft brush'],['some','Some','A few patches'],['lots','Full of them',"You'd get torn up"]]}
   };
+  var SLIDES = {land:{label:'The land', title:'Tell us about the ground.', sub:'Wet ground and hills slow the machine down.', keys:['ground', 'slope']},
+                access:{label:'Getting in', title:'How rough is it to get in?', sub:'Our track machine needs a path about 4 ft wide.', keys:['access', 'thorns']}};
   var VIS = {ground:{firm:0, soft:.45, wet:1}, slope:{flat:0, gentle:.45, steep:1}, thorns:{none:0, some:.45, lots:1}};
-  var STEPS = ['contact', 'size', 'ground', 'slope', 'thorns', 'access', 'extras', 'result', 'book', 'done'];
-  var NAMES = {contact:'Contact', size:'Size', ground:'Ground', slope:'Slope', thorns:'Thorns', access:'Access', extras:'Debris & timing', result:'Saw the price', book:'Booking'};
+  var STEPS = ['contact', 'size', 'land', 'access', 'debris', 'result', 'book', 'done'];
+  var QN = 5, RESULT = STEPS.indexOf('result');
+  var NAMES = {contact:'Contact', size:'Size', land:'Ground & slope', access:'Access & thorns', debris:'Debris', result:'Saw the price', book:'Booking'};
 
   var A = {level:1, acres:1, ground:'', slope:'', thorns:'', access:'', debris:'pile', timing:'', purpose:'', drive:35, town:'', days:[], time:''};
   var st = {i:0, started:false, quoted:false, booked:false, left:false, id:'', price:null, maxI:0};
@@ -1669,12 +1814,13 @@ var BrushScene = (function(){
   var cv = $('#qcv'), slides = $('#qSlides'), bar = $('#qBar'), stepN = $('#qStepN');
   var scene = null, lastFocus = null;
 
-  /* build the option steps */
-  Object.keys(OPTS).forEach(function(k){
-    var q = OPTS[k], el = $('.qs[data-step="' + k + '"]');
-    el.innerHTML = '<span class="label">' + q.label + '</span><h3>' + q.title + '</h3><p class="qsub">' + q.sub + '</p><div class="qopts" role="radiogroup" aria-label="' + q.title + '">' +
-      q.o.map(function(o){ return '<button type="button" class="qopt" role="radio" aria-checked="false" data-k="' + k + '" data-v="' + o[0] + '"><b>' + o[1] + '</b><span>' + o[2] + '</span><i aria-hidden="true"></i></button>'; }).join('') +
-      '</div><div class="qnav"><button type="button" class="qback" data-back>Back</button></div>';
+  /* build the two-question slides */
+  Object.keys(SLIDES).forEach(function(id){
+    var S = SLIDES[id], el = $('.qs[data-step="' + id + '"]');
+    el.innerHTML = '<span class="label">' + S.label + '</span><h3>' + S.title + '</h3><p class="qsub">' + S.sub + '</p>' +
+      S.keys.map(function(k){ var q = OPTS[k]; return '<h4>' + q.q + '</h4><div class="qopts row" role="radiogroup" aria-label="' + q.q + '">' +
+        q.o.map(function(o){ return '<button type="button" class="qopt" role="radio" aria-checked="false" data-k="' + k + '" data-v="' + o[0] + '"><b>' + o[1] + '</b><span>' + o[2] + '</span></button>'; }).join('') + '</div>'; }).join('') +
+      '<div class="qnav"><button type="button" class="qback" data-back>Back</button></div>';
   });
 
   function vis(k, v){ if (!scene) return; if (VIS[k]) scene.set(k === 'ground' ? 'wet' : k, VIS[k][v]); }
@@ -1692,7 +1838,10 @@ var BrushScene = (function(){
     var k = b.getAttribute('data-k'), v = b.getAttribute('data-v');
     A[k] = v; $$('.qopt[data-k="' + k + '"]').forEach(function(o){ o.setAttribute('aria-checked', o === b ? 'true' : 'false'); });
     syncScene(); hudChips();
-    setTimeout(function(){ go(st.i + 1); }, reduce ? 0 : 340);
+    var slide = b.closest('.qs'), id = slide.getAttribute('data-step');
+    if (id === 'debris'){ setTimeout(function(){ go(RESULT); }, reduce ? 0 : 340); return; }
+    var done = SLIDES[id].keys.every(function(key){ return !!A[key]; });
+    if (done) setTimeout(function(){ if (STEPS[st.i] === id) go(st.i + 1); }, reduce ? 0 : 450);
   });
   slides.addEventListener('pointerover', function(e){ var b = e.target.closest('.qopt'); if (b && e.pointerType === 'mouse') vis(b.getAttribute('data-k'), b.getAttribute('data-v')); });
   slides.addEventListener('pointerout', function(e){ var b = e.target.closest('.qopt'); if (b && e.pointerType === 'mouse' && !b.contains(e.relatedTarget)) syncScene(); });
@@ -1747,10 +1896,8 @@ var BrushScene = (function(){
       var c = e.target.closest('.qchip'); if (!c) return; var v = c.getAttribute('data-v');
       if (multi){ var i = A[k].indexOf(v); if (v === 'Any weekday'){ A[k] = i < 0 ? [v] : []; } else { A[k] = A[k].filter(function(x){ return x !== 'Any weekday'; }); i = A[k].indexOf(v); i < 0 ? A[k].push(v) : A[k].splice(i, 1); } $$('.qchip', g).forEach(function(o){ o.classList.toggle('on', A[k].indexOf(o.getAttribute('data-v')) >= 0); }); }
       else { A[k] = A[k] === v && !g.hasAttribute('data-required') ? '' : v; $$('.qchip', g).forEach(function(o){ o.classList.toggle('on', o.getAttribute('data-v') === A[k]); }); }
-      if (k === 'debris') syncScene();
     });
   });
-  $('#qGetPrice').addEventListener('click', function(){ go(STEPS.indexOf('result')); });
 
   /* ===== result ===== */
   var lo = $('#qLo'), hi = $('#qHi');
@@ -1760,7 +1907,7 @@ var BrushScene = (function(){
   }
   function summary(){
     var g = OPTS.ground.o, f = function(k){ var o = OPTS[k].o.filter(function(x){ return x[0] === A[k]; })[0]; return o ? o[1] : '—'; };
-    return [['Brush', 'Level ' + A.level + ' · ' + LV[A.level][0]], ['Size', niceAc(A.acres) + ' acre' + (A.acres === 1 ? '' : 's')], ['Ground', f('ground')], ['Slope', f('slope')], ['Thorns', f('thorns')], ['Access', f('access')], ['Debris', A.debris === 'haul' ? 'Haul it away' : 'Piled on site']];
+    return [['Brush', 'Level ' + A.level + ' · ' + LV[A.level][0]], ['Size', niceAc(A.acres) + ' acre' + (A.acres === 1 ? '' : 's')], ['Ground', f('ground')], ['Slope', f('slope')], ['Access', f('access')], ['Thorns', f('thorns')], ['Brush goes', A.debris === 'haul' ? 'Hauled away' : 'Piled on site']];
   }
   function showPrice(animate){
     var p = st.price = price(A);
@@ -1785,13 +1932,12 @@ var BrushScene = (function(){
     var name = STEPS[i], prev = STEPS[st.i];
     st.i = i; st.maxI = Math.max(st.maxI, i);
     $$('.qs', slides).forEach(function(s){ var k = STEPS.indexOf(s.getAttribute('data-step')); s.classList.toggle('on', k === i); s.classList.toggle('past', k < i); s.setAttribute('aria-hidden', k === i ? 'false' : 'true'); s.inert = k !== i; });
-    var qn = 7, n = Math.min(i + 1, qn);
-    bar.style.width = (i >= 7 ? 100 : (i / qn) * 100 + 4) + '%';
-    stepN.textContent = i < 7 ? 'Step ' + n + ' of ' + qn : i === 7 ? 'Your price' : i === 8 ? 'Free walk-through' : 'All set';
+    bar.style.width = (i >= RESULT ? 100 : (i / QN) * 100 + 4) + '%';
+    stepN.textContent = i < RESULT ? 'Step ' + (i + 1) + ' of ' + QN : name === 'result' ? 'Your price' : name === 'book' ? 'Free walk-through' : 'All set';
     if (scene){
-      scene.set('plot', name === 'size' ? 1 : (i > 1 && i < 7 ? .45 : 0));
+      scene.set('plot', name === 'size' ? 1 : (i > 1 && i < RESULT ? .45 : 0));
       if (name === 'result' && prev !== 'result'){ badge('Clearing…'); $('#qReplay').hidden = true; scene.clearRun(); }
-      if (i < 7 && scene.cleared > 0){ scene.unclear(); badge('Before'); $('#qReplay').hidden = true; }
+      if (i < RESULT && scene.cleared > 0){ scene.unclear(); badge('Before'); $('#qReplay').hidden = true; }
     }
     if (name === 'result'){ showPrice(prev !== 'result'); if (!st.quoted){ st.quoted = true; lead('quote'); } }
     if (name === 'size') showAcres();
@@ -1816,7 +1962,7 @@ var BrushScene = (function(){
     scene.resize(); scene.setLevel(level); scene.fade = 0; syncScene(); scene.start();
     hudChips();
     if (!st.id) st.id = 'Q-' + Math.random().toString(36).slice(2, 6).toUpperCase();
-    go(st.started ? Math.max(1, Math.min(st.i, 6)) : 0);
+    go(st.started ? Math.max(1, Math.min(st.i, RESULT - 1)) : 0);
     setTimeout(function(){ try { (st.started ? $('.qs.on button, .qs.on input') : fFirst).focus({preventScroll:true}); } catch (e){} }, 420);
   }
   function close(){
@@ -1843,7 +1989,7 @@ var BrushScene = (function(){
 
   /* ===== leads: every stage goes to Netlify Forms, which emails Tim ===== */
   function collect(stage){
-    var p = st.price || (A.access ? price(A) : null);
+    var p = st.price || (A.slope ? price(A) : null);
     var name = (fFirst.value.trim() + ' ' + fLast.value.trim()).trim();
     var d = {
       'form-name':'quote', stage:stage, lead_id:st.id,
@@ -1854,7 +2000,7 @@ var BrushScene = (function(){
       price_range:p ? money(p.lo) + ' - ' + money(p.hi) : '', price_low:p ? p.lo : '', price_high:p ? p.hi : '',
       last_step:NAMES[STEPS[st.maxI]] || STEPS[st.maxI],
       preferred_days:A.days.join(', '), preferred_time:A.time, email:($('#qEmail').value || '').trim(), street_address:($('#qAddr').value || '').trim(), notes:($('#qNotes').value || '').trim(),
-      internal_breakdown:p ? 'base ' + money(p.base) + ' = area ' + money(p.area) + ' (+' + Math.round(p.pct * 100) + '%) + equipment ' + money(p.equip) + ' + travel ' + money(p.travel) + ' | est ' + p.days + ' day(s), ' + A.drive + ' min drive' : '',
+      internal_breakdown:p ? 'estimate ' + money(p.base) + ' = labor ' + money(p.labor) + ' (' + p.crew + ' guys x ' + p.days + ' day(s) x ' + PRICE.hoursPerDay + ' hrs x $' + PRICE.rate + ') + ' + p.machine + ' ' + money(p.equip) + ' + travel ' + money(p.travel) + ' (' + A.drive + ' min each way)' : '',
       page:location.href.split('#')[0]
     };
     var who = name + ' · ' + fPhone.value;
