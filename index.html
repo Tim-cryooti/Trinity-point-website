@@ -317,6 +317,162 @@ footer.site p{color:var(--sage);font-size:14px}
   .tape .track{animation:none}
   .armed .rv{opacity:1;transform:none}
 }
+/* ---------- instant quote: level cards ---------- */
+.qsec{background:linear-gradient(180deg,var(--ink),var(--forest) 60%,var(--ink))}
+.qsec .label .dot{display:inline-block;margin-right:10px;vertical-align:1px}
+.qcards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.qcard{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:var(--forest);border:1px solid var(--moss);transition:transform .45s var(--ease),border-color .35s,box-shadow .45s var(--ease);position:relative}
+.qcard:hover,.qcard:focus-visible{transform:translateY(-8px);border-color:rgba(195,176,108,.6);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),0 0 0 1px rgba(195,176,108,.2)}
+.qcard:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.qpic{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(#7a9cb4,#c9c59a 55%,#6f7d40 56%)}
+.qpic canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transform:scale(1.04);transition:opacity .8s var(--ease),transform 1.2s var(--ease)}
+.qpic canvas.in{opacity:1;transform:none}
+.qcard:hover .qpic canvas.in{transform:scale(1.07)}
+.qtag{position:absolute;left:12px;bottom:12px;background:rgba(13,21,16,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:6px 11px;border-radius:999px;font-size:12px;letter-spacing:.14em}
+.qtx{display:flex;flex-direction:column;gap:8px;padding:20px 20px 22px;flex:1}
+.qtx .num{font-family:var(--f-label);font-weight:700;color:var(--gold);letter-spacing:.2em;font-size:13px;text-transform:uppercase}
+.qtx strong{font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:clamp(26px,2.4vw,32px);line-height:1;color:var(--bone)}
+.qd{color:var(--sage);font-size:15.5px;line-height:1.5;flex:1}
+.qgo{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-family:var(--f-label);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:15px;color:var(--gold)}
+.qgo svg{width:18px;height:18px;transition:transform .35s var(--ease)}
+.qcard:hover .qgo svg{transform:translate(4px,-4px)}
+.qnote{margin-top:22px;color:var(--sage);font-size:15px}
+@media (max-width:1020px){.qcards{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){
+  .qcards{grid-template-columns:1fr;gap:12px}
+  .qcard{flex-direction:row;min-height:150px}
+  .qpic{aspect-ratio:auto;width:42%;flex:none}
+  .qtx{padding:16px 16px 16px;gap:5px}
+  .qtx strong{font-size:24px}
+  .qd{font-size:14px}
+  .qtag{display:none}
+}
+
+/* ---------- instant quote: the full-screen flow ---------- */
+html.qlock,html.qlock body{overflow:hidden}
+.qx{position:fixed;inset:0;z-index:80;background:rgba(8,13,10,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));opacity:0;transition:opacity .4s var(--ease)}
+.qx.on{opacity:1}
+.qx[hidden]{display:none}
+.qx-in{width:min(1280px,100%);height:min(820px,100%);display:grid;grid-template-columns:1.35fr 1fr;border-radius:28px;overflow:hidden;background:var(--ink);border:1px solid rgba(195,176,108,.3);box-shadow:0 60px 120px -40px rgba(0,0,0,.9);transform:translateY(30px) scale(.98);transition:transform .5s var(--ease)}
+.qx.on .qx-in{transform:none}
+.qstage{position:relative;min-height:0;background:#1a2a1e}
+.qstage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.qhud{position:absolute;left:16px;top:16px;right:16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;pointer-events:none}
+.qpill,.qbadge{background:rgba(13,21,16,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:8px 14px;border-radius:999px;font-size:13px}
+.qbadge{color:var(--bone);border:1px solid rgba(238,233,219,.25);transition:background .4s,color .4s}
+.qbadge.after{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.qchips{position:absolute;left:16px;bottom:16px;right:120px;display:flex;flex-wrap:wrap;gap:6px;pointer-events:none}
+.qchips span{font-family:var(--f-label);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:6px 11px;border-radius:999px;background:rgba(239,106,42,.92);color:#1a0f08;animation:chipin .45s var(--ease) both}
+.qchips span:first-child{background:rgba(13,21,16,.82);color:var(--bone)}
+@keyframes chipin{from{opacity:0;transform:translateY(8px) scale(.9)}}
+.qlevels{position:absolute;right:16px;bottom:16px;display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(13,21,16,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.qlevels button{width:34px;height:34px;border-radius:50%;border:0;background:transparent;color:var(--sage);font-family:var(--f-label);font-weight:700;font-size:15px;cursor:pointer;transition:all .25s var(--ease)}
+.qlevels button:hover{color:var(--bone);background:rgba(238,233,219,.1)}
+.qlevels button[aria-pressed="true"]{background:var(--gold);color:var(--ink)}
+.qreplay{position:absolute;right:16px;top:16px;display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;background:rgba(13,21,16,.82);color:var(--gold);padding:9px 14px;border-radius:999px;font-size:13px;animation:chipin .45s var(--ease) both}
+.qreplay svg{width:16px;height:16px}
+.qreplay[hidden]{display:none}
+.qpanel{display:flex;flex-direction:column;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-left:1px solid var(--moss);background:linear-gradient(180deg,var(--forest),var(--ink))}
+.qtop{position:sticky;top:0;z-index:2;display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px 14px;padding:22px 26px 14px;background:linear-gradient(180deg,var(--forest) 70%,rgba(21,34,26,0))}
+.qprog{grid-column:1/-1;height:4px;border-radius:4px;background:var(--moss);overflow:hidden;order:2}
+.qprog b{display:block;height:100%;width:4%;background:linear-gradient(90deg,var(--gold-deep),var(--gold));border-radius:4px;transition:width .6s var(--ease)}
+.qclose{width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(238,233,219,.3);background:transparent;color:var(--bone);display:grid;place-items:center;cursor:pointer;transition:all .25s var(--ease)}
+.qclose:hover{border-color:var(--gold);color:var(--gold);transform:rotate(90deg)}
+.qclose svg{width:20px;height:20px}
+.qslides{position:relative;flex:1;display:grid}
+.qs{grid-area:1/1;padding:8px 26px 28px;display:flex;flex-direction:column;gap:14px;opacity:0;visibility:hidden;transform:translateX(50px);transition:opacity .4s var(--ease),transform .5s var(--ease),visibility 0s .5s}
+.qs.past{transform:translateX(-50px)}
+.qs.on{opacity:1;visibility:visible;transform:none;transition:opacity .45s .08s var(--ease),transform .55s .05s var(--ease),visibility 0s}
+.qs h3{font-size:clamp(32px,3.2vw,44px);line-height:.95}
+.qs h4{font-family:var(--f-label);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:14px;color:var(--bone);margin:10px 0 -2px}
+.qs h4 small{color:var(--sage);letter-spacing:.06em;text-transform:none;font-family:var(--f-body);font-weight:500}
+.qsub{color:var(--sage);font-size:16px;margin-top:-4px}
+.qfine{color:var(--sage);font-size:14px;display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.qfine svg{width:16px;height:16px;color:var(--gold);flex:none;margin-top:3px}
+/* inputs with floating labels */
+.qf2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.qin{position:relative;display:block}
+.qin input,.qin textarea{width:100%;font:inherit;font-size:17px;color:var(--bone);background:rgba(13,21,16,.6);border:1.5px solid var(--moss);border-radius:16px;padding:24px 16px 10px;outline:none;transition:border-color .25s,background .25s;resize:vertical}
+.qin textarea{min-height:76px}
+.qin span{position:absolute;left:17px;top:17px;color:var(--sage);font-size:16px;pointer-events:none;transform-origin:left top;transition:transform .25s var(--ease),color .25s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100% - 30px)}
+.qin input:focus,.qin textarea:focus{border-color:var(--gold);background:rgba(13,21,16,.9)}
+.qin input:focus+span,.qin input:not(:placeholder-shown)+span,.qin textarea:focus+span,.qin textarea:not(:placeholder-shown)+span{transform:translateY(-10px) scale(.74);color:var(--gold)}
+.qin.bad input{border-color:var(--tape);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.qzip{min-height:20px;font-size:14.5px;margin-top:-6px;color:var(--sage)}
+.qzip.ok{color:var(--gold)}.qzip.ok::before{content:"✓  "}
+.qzip.far{color:var(--tape)}
+/* options */
+.qopts{display:grid;gap:10px}
+.qopt{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:grid;gap:2px;padding:17px 56px 17px 18px;border-radius:18px;border:1.5px solid var(--moss);background:rgba(13,21,16,.55);transition:all .25s var(--ease)}
+.qopt b{font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:24px;line-height:1.05;color:var(--bone);letter-spacing:.01em}
+.qopt span{color:var(--sage);font-size:15px}
+.qopt i{position:absolute;right:18px;top:50%;width:24px;height:24px;margin-top:-12px;border-radius:50%;border:1.5px solid rgba(238,233,219,.35);transition:all .25s var(--ease)}
+.qopt:hover{border-color:rgba(195,176,108,.6);background:rgba(31,49,38,.8);transform:translateX(4px)}
+.qopt:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.qopt[aria-checked="true"]{border-color:var(--gold);background:rgba(195,176,108,.12)}
+.qopt[aria-checked="true"] i{background:var(--gold);border-color:var(--gold);box-shadow:inset 0 0 0 5px var(--ink)}
+.qnav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:14px}
+.qnav .btn{margin-left:auto}
+.qnav.col{flex-direction:column;align-items:stretch}
+.qnav.col .btn{margin:0;justify-content:center}
+.qback,.qlink{background:none;border:0;color:var(--sage);font:inherit;font-size:15px;cursor:pointer;text-decoration:underline;text-underline-offset:4px;padding:8px 0}
+.qback:hover,.qlink:hover{color:var(--gold)}
+.qnav.col .qlink{align-self:center}
+/* size */
+.qacre{display:grid;gap:2px;margin-top:4px}
+.qacre output{font-family:var(--f-display);font-weight:900;font-size:clamp(60px,6vw,84px);line-height:.9;color:var(--gold)}
+.qacre output small{font-size:.42em;color:var(--bone);font-weight:800;text-transform:uppercase;margin-left:6px}
+.qacre span{color:var(--sage);font-size:15px}
+.qrange-in{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--gold-deep),var(--tape));outline:none;margin:10px 0 4px}
+.qrange-in::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:34px;border-radius:50%;background:var(--bone);border:6px solid var(--gold);box-shadow:0 6px 18px rgba(0,0,0,.5);cursor:grab}
+.qrange-in::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--bone);border:6px solid var(--gold);cursor:grab}
+.qrange-in:focus-visible{outline:2px solid var(--gold);outline-offset:6px}
+.qchiprow{display:flex;flex-wrap:wrap;gap:8px}
+.qchip{font:inherit;font-family:var(--f-label);font-weight:700;letter-spacing:.06em;font-size:15px;color:var(--bone);background:rgba(13,21,16,.55);border:1.5px solid var(--moss);border-radius:999px;padding:10px 16px;cursor:pointer;transition:all .22s var(--ease)}
+.qchip:hover{border-color:rgba(195,176,108,.6)}
+.qchip.on{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.qchip.big{flex:1 1 180px;display:grid;gap:2px;text-align:left;border-radius:16px;padding:14px 16px}
+.qchip.big b{font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:.01em;line-height:1}
+.qchip.big span{font-family:var(--f-body);font-weight:500;letter-spacing:0;font-size:14px;opacity:.8}
+/* result */
+.qbig{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;font-family:var(--f-display);font-weight:900;font-size:clamp(50px,5.4vw,78px);line-height:.92;color:var(--gold);max-width:none;margin-top:2px;font-variant-numeric:tabular-nums}
+.qbig i{font-style:normal;font-size:.36em;color:var(--sage);text-transform:uppercase;letter-spacing:.12em;font-weight:800}
+.qtax{color:var(--sage);font-family:var(--f-label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:13px;margin-top:-6px}
+.qsum{list-style:none;margin:4px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--moss);border:1px solid var(--moss);border-radius:16px;overflow:hidden}
+.qsum li{background:rgba(13,21,16,.85);padding:10px 14px;display:grid;gap:1px;min-width:0}
+.qsum li:first-child{grid-column:1/-1}
+.qsum span{font-family:var(--f-label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--sage)}
+.qsum b{font-weight:600;font-size:15px;color:var(--bone)}
+.qinc{gap:8px}
+.qinc li{font-size:15.5px}
+.qcheck{width:84px;height:84px;display:block;margin-top:10px}
+.qcheck svg{width:100%;height:100%;fill:none;stroke:var(--gold);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.qcheck circle{stroke-dasharray:151;stroke-dashoffset:151}
+.qcheck path{stroke-dasharray:40;stroke-dashoffset:40}
+.qs.on .qcheck circle{animation:draw .7s .15s var(--ease) forwards}
+.qs.on .qcheck path{animation:draw .5s .7s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* phones: picture on top, questions below */
+@media (max-width:860px){
+  .qx{padding:0;place-items:stretch}
+  .qx-in{width:100%;height:100%;border-radius:0;border:0;grid-template-columns:1fr;grid-template-rows:minmax(210px,38svh) 1fr}
+  .qpanel{border-left:0;border-top:1px solid var(--moss)}
+  .qtop{padding:14px 18px 10px}
+  .qs{padding:6px 18px calc(22px + env(safe-area-inset-bottom))}
+  .qs h3{font-size:clamp(30px,8vw,40px)}
+  .qopt{padding:14px 52px 14px 16px}
+  .qopt b{font-size:21px}
+  .qhud{left:12px;top:max(12px,env(safe-area-inset-top));right:12px}
+  .qchips{left:12px;bottom:12px;right:160px}
+  .qlevels{right:12px;bottom:12px}
+  .qlevels button{width:30px;height:30px;font-size:14px}
+  .qreplay{right:12px;top:calc(max(12px,env(safe-area-inset-top)) + 44px)}
+  .qnav .btn.big{padding:17px 24px;font-size:18px}
+}
+@media (max-width:340px){.qf2{grid-template-columns:1fr}}
+@media (max-width:420px){.qchips span:not(:first-child){display:none}.qs{gap:12px}}
+@media (prefers-reduced-motion:reduce){.qs,.qs.on,.qs.past{transform:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LandscapingBusiness","name":"Trinity Point Landscaping","telephone":"+1-845-718-1328","email":"trinitypointlandscaping@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Poughkeepsie","addressRegion":"NY","addressCountry":"US"},"areaServed":"Hudson Valley, NY","url":"https://trintypoint.com/","image":"https://trintypoint.com/assets/hero-poster.jpg","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"11"},"sameAs":["https://maps.google.com/?cid=13397259408242732591"]}</script>
 </head>
@@ -344,6 +500,7 @@ footer.site p{color:var(--sage);font-size:14px}
   <div class="wrap">
     <a class="brand" href="#home" aria-label="Trinity Point Landscaping, home"><img src="assets/logo.webp" alt="Trinity Point Landscaping logo" width="74" height="54"></a>
     <nav class="nav" aria-label="Main">
+      <a class="link" href="#quote">Instant quote</a>
       <a class="link" href="#services">Services</a>
       <a class="link" href="#reviews">Reviews</a>
       <a class="link" href="#work">Our work</a>
@@ -371,7 +528,7 @@ footer.site p{color:var(--sage);font-size:14px}
       </div>
       <ul class="trust">
         <li><svg><use href="#i-shield"/></svg>Fully insured · General liability</li>
-        <li><svg><use href="#i-check"/></svg>Free on-site quotes</li>
+        <li><svg><use href="#i-check"/></svg><a href="#quote" style="text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold)">Instant online price</a> · free on-site quotes</li>
         <li><svg><use href="#i-cal"/></svg>Booking brush clearing through December</li>
       </ul>
     </div>
@@ -403,6 +560,22 @@ footer.site p{color:var(--sage);font-size:14px}
     </div>
   </section>
 
+  <section class="band qsec" id="quote" aria-labelledby="q-h">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="label rv"><i class="dot"></i>Instant quote · Brush clearing</span><h2 id="q-h" class="rv d1">Your price in 60 seconds.</h2></div>
+        <p class="lede rv d2">Tap the one that looks most like your land. Answer a few quick questions and see a real price range right now. No street address needed.</p>
+      </div>
+      <div class="qcards">
+        <button class="qcard rv" type="button" data-quote-level="1"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">Knee to waist high</span></span><span class="qtx"><span class="num">Level 1</span><strong>Overgrown pasture</strong><span class="qd">Tall grass and weeds that got away from you. Needs a heavy cut.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
+        <button class="qcard rv d1" type="button" data-quote-level="2"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">Up to 6 ft</span></span><span class="qtx"><span class="num">Level 2</span><strong>Thick brush</strong><span class="qd">Grass and weeds up to 6 ft tall with small bushes mixed in.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
+        <button class="qcard rv d2" type="button" data-quote-level="3"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">6 ft+ · thorny</span></span><span class="qtx"><span class="num">Level 3</span><strong>Briars &amp; bushes</strong><span class="qd">Thick bushes and pricker briars over your head. You can't walk through it.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
+        <button class="qcard rv d3" type="button" data-quote-level="4"><span class="qpic"><canvas aria-hidden="true"></canvas><span class="qtag label">Small trees · slopes</span></span><span class="qtx"><span class="num">Level 4</span><strong>Saplings &amp; thicket</strong><span class="qd">Small trees, thick brush and briars, often on a hill.</span><span class="qgo">Price mine<svg aria-hidden="true"><use href="#i-arrow"/></svg></span></span></button>
+      </div>
+      <p class="qnote rv">Ballpark pricing for brush clearing. Your final price comes after a free walk-through with Tim.</p>
+    </div>
+  </section>
+
   <div class="tape" aria-label="Towns we serve">
     <div class="track" id="tapeTrack">
       <span>Poughkeepsie</span><span>Hyde Park</span><span>Pleasant Valley</span><span>LaGrangeville</span><span>Wappingers Falls</span><span>Fishkill</span><span>East Fishkill</span><span>Hopewell Junction</span><span>Beacon</span><span>Highland</span><span>New Paltz</span><span>Rhinebeck</span><span>Red Hook</span><span>Millbrook</span><span>Pawling</span><span>Newburgh</span><span>Kingston</span><span>Carmel</span>
@@ -428,7 +601,7 @@ footer.site p{color:var(--sage);font-size:14px}
             <li><svg><use href="#i-check"/></svg>Fields, slopes and back lots reclaimed</li>
             <li><svg><use href="#i-check"/></svg>Land cleared before a sale, a build or a fence</li>
           </ul>
-          <div><a class="btn" href="tel:+18457181328"><svg><use href="#i-phone"/></svg>Get a brush clearing quote</a></div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn" href="#quote"><svg><use href="#i-arrow"/></svg>Get an instant price</a><a class="btn ghost" href="tel:+18457181328"><svg><use href="#i-phone"/></svg>Call for a quote</a></div>
         </div>
       </article>
 
@@ -659,6 +832,133 @@ footer.site p{color:var(--sage);font-size:14px}
   <a class="btn" href="tel:+18457181328"><svg><use href="#i-phone"/></svg>Call</a>
   <a class="btn ghost" href="sms:+18457181328" style="background:var(--ink)"><svg><use href="#i-text"/></svg>Text</a>
 </div>
+<div class="qx" id="qx" role="dialog" aria-modal="true" aria-label="Instant brush clearing quote" hidden>
+  <div class="qx-in">
+    <div class="qstage">
+      <canvas id="qcv" aria-label="Animated picture of your land, changing with your answers" role="img"></canvas>
+      <div class="qhud">
+        <span class="qpill label" id="qLvlPill">Level 1</span>
+        <span class="qbadge label" id="qBadge">Before</span>
+      </div>
+      <div class="qchips" id="qHudChips"></div>
+      <div class="qlevels" id="qLevels" role="group" aria-label="Switch brush level">
+        <button type="button" data-level="1" aria-pressed="false" title="Overgrown pasture">1</button><button type="button" data-level="2" aria-pressed="false" title="Thick brush">2</button><button type="button" data-level="3" aria-pressed="false" title="Briars &amp; bushes">3</button><button type="button" data-level="4" aria-pressed="false" title="Saplings &amp; thicket">4</button>
+      </div>
+      <button type="button" class="qreplay label" id="qReplay" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>Watch it again</button>
+    </div>
+    <div class="qpanel">
+      <div class="qtop">
+        <div class="qprog" aria-hidden="true"><b id="qBar"></b></div>
+        <span class="label" id="qStepN">Step 1 of 7</span>
+        <button type="button" class="qclose" id="qClose" aria-label="Close the quote"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="qslides" id="qSlides">
+
+        <div class="qs" data-step="contact">
+          <span class="label">First things first</span>
+          <h3>Who's the price for?</h3>
+          <p class="qsub">Tim, the owner, follows up himself. No spam, ever.</p>
+          <div class="qf2">
+            <label class="qin"><input id="qFirst" autocomplete="given-name" placeholder=" " enterkeyhint="next"><span>First name</span></label>
+            <label class="qin"><input id="qLast" autocomplete="family-name" placeholder=" " enterkeyhint="next"><span>Last name</span></label>
+          </div>
+          <label class="qin"><input id="qPhone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder=" " enterkeyhint="next"><span>Cell phone</span></label>
+          <label class="qin"><input id="qZip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder=" " enterkeyhint="go"><span>ZIP code of the property</span></label>
+          <p class="qzip" id="qZipMsg" aria-live="polite"></p>
+          <p class="qfine"><svg aria-hidden="true"><use href="#i-shield"/></svg>No street address needed. Your ZIP tells us the drive.</p>
+          <div class="qnav"><button type="button" class="btn big" id="qContactGo">Start my quote<svg aria-hidden="true"><use href="#i-right"/></svg></button></div>
+        </div>
+
+        <div class="qs" data-step="size">
+          <span class="label">The size</span>
+          <h3>About how big is the area?</h3>
+          <p class="qsub">Just the part that needs clearing. A guess is fine; Tim measures it at the walk-through.</p>
+          <div class="qacre"><output id="qAcreVal">1 acre</output><span id="qAcreSub"></span></div>
+          <input type="range" class="qrange-in" id="qAcres" min="0" max="1000" value="435" aria-label="Acres to clear">
+          <div class="qchiprow">
+            <button type="button" class="qchip" data-ac="0.25">¼ acre</button><button type="button" class="qchip" data-ac="0.5">½ acre</button><button type="button" class="qchip" data-ac="1">1 acre</button><button type="button" class="qchip" data-ac="2">2 acres</button><button type="button" class="qchip" data-ac="5">5 acres</button><button type="button" class="qchip" data-ac="10">10 acres</button>
+          </div>
+          <p class="qfine">A typical house lot is ¼ to ½ acre. A football field is about 1⅓ acres.</p>
+          <div class="qnav"><button type="button" class="qback" data-back>Back</button><button type="button" class="btn big" data-next>Next<svg aria-hidden="true"><use href="#i-right"/></svg></button></div>
+        </div>
+
+        <div class="qs" data-step="ground"></div>
+        <div class="qs" data-step="slope"></div>
+        <div class="qs" data-step="thorns"></div>
+        <div class="qs" data-step="access"></div>
+
+        <div class="qs" data-step="extras">
+          <span class="label">Last couple things</span>
+          <h3>Where should the brush go?</h3>
+          <div class="qchiprow" data-pick="debris" data-required>
+            <button type="button" class="qchip big on" data-v="pile"><b>Pile it on site</b><span>Included in the price</span></button>
+            <button type="button" class="qchip big" data-v="haul"><b>Haul it away</b><span>Adds to the price</span></button>
+          </div>
+          <h4>When do you want it done?</h4>
+          <div class="qchiprow" data-pick="timing">
+            <button type="button" class="qchip" data-v="As soon as possible">ASAP</button><button type="button" class="qchip" data-v="Within a month">Within a month</button><button type="button" class="qchip" data-v="This spring">This spring</button><button type="button" class="qchip" data-v="Just pricing it out">Just pricing it out</button>
+          </div>
+          <h4>What's it for? <small>(optional)</small></h4>
+          <div class="qchiprow" data-pick="purpose">
+            <button type="button" class="qchip" data-v="Take back the yard">Take back the yard</button><button type="button" class="qchip" data-v="Pasture or horses">Pasture or horses</button><button type="button" class="qchip" data-v="Selling the land">Selling the land</button><button type="button" class="qchip" data-v="Building, fence or solar">Building, fence or solar</button><button type="button" class="qchip" data-v="Something else">Something else</button>
+          </div>
+          <div class="qnav"><button type="button" class="qback" data-back>Back</button><button type="button" class="btn big" id="qGetPrice">Get my price<svg aria-hidden="true"><use href="#i-right"/></svg></button></div>
+        </div>
+
+        <div class="qs" data-step="result">
+          <span class="label">Your ballpark price</span>
+          <p class="qbig"><span id="qLo">$0</span><i>to</i><span id="qHi">$0</span></p>
+          <p class="qtax">plus sales tax</p>
+          <ul class="qsum" id="qSum"></ul>
+          <ul class="checks qinc">
+            <li><svg><use href="#i-check"/></svg>Brush, briars, vines and saplings up to 3" cut down</li>
+            <li><svg><use href="#i-check"/></svg>Your big trees stay standing</li>
+            <li><svg><use href="#i-check"/></svg>Brush piled neatly on site<span id="qHaulNote" hidden> (or hauled away, priced at the walk-through)</span></li>
+            <li><svg><use href="#i-check"/></svg>Free walk-through to lock in your final price</li>
+          </ul>
+          <div class="qnav col">
+            <button type="button" class="btn big" data-next><svg aria-hidden="true"><use href="#i-cal"/></svg>Book my free walk-through</button>
+            <a class="btn ghost" data-sms href="sms:+18457181328"><svg aria-hidden="true"><use href="#i-text"/></svg>Text Tim about it</a>
+          </div>
+          <p class="qfine">An estimate from your answers, not a final price. Stumps stay, and we don't cut anything over 3". <button type="button" class="qlink" id="qRestart">Change my answers</button></p>
+        </div>
+
+        <div class="qs" data-step="book">
+          <span class="label">Free walk-through</span>
+          <h3>When's good for Tim to come out?</h3>
+          <p class="qsub">He walks it with you, measures, and gives you a final price. About 15 minutes.</p>
+          <h4>Days that work</h4>
+          <div class="qchiprow" data-pick="days" data-multi>
+            <button type="button" class="qchip" data-v="Mon">Mon</button><button type="button" class="qchip" data-v="Tue">Tue</button><button type="button" class="qchip" data-v="Wed">Wed</button><button type="button" class="qchip" data-v="Thu morning">Thu AM</button><button type="button" class="qchip" data-v="Fri">Fri</button><button type="button" class="qchip" data-v="Any weekday">Any weekday</button>
+          </div>
+          <h4>Time of day</h4>
+          <div class="qchiprow" data-pick="time">
+            <button type="button" class="qchip" data-v="Morning">Morning</button><button type="button" class="qchip" data-v="Afternoon">Afternoon</button><button type="button" class="qchip" data-v="Either">Either</button>
+          </div>
+          <label class="qin"><input id="qEmail" type="email" autocomplete="email" placeholder=" "><span>Email (optional)</span></label>
+          <label class="qin"><input id="qAddr" autocomplete="street-address" placeholder=" "><span>Street address (optional, Tim can get it when he texts)</span></label>
+          <label class="qin"><textarea id="qNotes" rows="2" placeholder=" "></textarea><span>Anything Tim should know? (optional)</span></label>
+          <div class="qnav"><button type="button" class="qback" data-back>Back</button><button type="button" class="btn big" id="qBookGo">Request my walk-through<svg aria-hidden="true"><use href="#i-right"/></svg></button></div>
+        </div>
+
+        <div class="qs" data-step="done">
+          <span class="qcheck" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg></span>
+          <h3>You're on the list, <span id="qDoneName">friend</span>.</h3>
+          <p class="qsub">Tim will text you at <b id="qDonePhone"></b> to lock in a time, usually the same day.</p>
+          <div class="qnav col">
+            <a class="btn big" href="tel:+18457181328"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call Tim now</a>
+            <a class="btn ghost" data-sms href="sms:+18457181328"><svg aria-hidden="true"><use href="#i-text"/></svg>Text Tim</a>
+            <button type="button" class="qlink" id="qDoneClose">Back to the site</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<form name="quote" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input name="bot-field"><input name="subject"><input name="stage"><input name="lead_id"><input name="first_name"><input name="last_name"><input name="phone"><input name="zip"><input name="town"><input name="level"><input name="acres"><input name="sq_ft"><input name="ground"><input name="slope"><input name="thorns"><input name="access"><input name="debris"><input name="timing"><input name="purpose"><input name="price_range"><input name="price_low"><input name="price_high"><input name="last_step"><input name="preferred_days"><input name="preferred_time"><input name="email"><input name="street_address"><textarea name="notes"></textarea><input name="internal_breakdown"><input name="page">
+</form>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -824,5 +1124,776 @@ footer.site p{color:var(--sage);font-size:14px}
 })();
 </script>
 
+<script>
+/* ---------- Brush scene: a hand-drawn canvas field that shows each level of overgrowth and the clearing ---------- */
+var BrushScene = (function(){
+  function rng(seed){ return function(){ seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function mix(a, b, t){ return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+  function mul(c, f){ return [Math.min(255, c[0] * f), Math.min(255, c[1] * f), Math.min(255, c[2] * f)]; }
+  function css(c, a){ return a == null ? 'rgb(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ')' : 'rgba(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ',' + a.toFixed(3) + ')'; }
+  function clamp(v, a, b){ return v < a ? a : v > b ? b : v; }
+  function ease(k){ return k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; }
+
+  var HAZE = [214, 206, 172];
+  var GRASS = [[128,138,58],[150,146,70],[112,126,52],[176,160,88],[96,112,46],[186,170,104]];
+  var STRAW = [[196,178,112],[176,156,92],[206,190,130]];
+  var LEAF = [[52,78,40],[64,92,44],[44,66,36],[78,104,50],[60,84,38]];
+  var FALL = [[196,160,60],[210,128,52],[180,170,70],[150,150,58],[204,182,84]];
+  var BARK = [[92,80,66],[110,96,78],[78,70,60]];
+  var CANE = [[120,56,52],[104,62,48],[132,74,60]];
+
+  function Scene(canvas, opt){
+    this.c = canvas; this.x = canvas.getContext('2d'); opt = opt || {};
+    this.person = opt.person !== false; this.still = !!opt.still;
+    this.target = {wet:0, slope:0, thorns:0, plot:0, acres:1, piles:1, haul:0};
+    this.cur = {wet:0, slope:0, thorns:0, plot:0, acres:1, piles:1, haul:0};
+    this.level = 1; this.t = 0; this.cleared = 0; this.clr = null; this.parts = [];
+    this.fade = 0; this.snap = document.createElement('canvas'); this.running = false; this.last = 0;
+    this.bg = document.createElement('canvas'); this.bgKey = '';
+    this.resize(); this.gen(1);
+  }
+  var S = Scene.prototype;
+
+  S.resize = function(w, h){
+    var r = this.c.getBoundingClientRect();
+    w = w || r.width || 600; h = h || r.height || 380;
+    var dpr = Math.min(window.devicePixelRatio || 1, w < 700 ? 2 : 1.75);
+    this.w = w; this.h = h; this.dpr = dpr;
+    this.c.width = Math.round(w * dpr); this.c.height = Math.round(h * dpr);
+    this.bg.width = this.c.width; this.bg.height = this.c.height;
+    this.snap.width = this.c.width; this.snap.height = this.c.height;
+    this.hy = h * .43; this.bgKey = '';
+    if (this.plants) this.gen(this.level, true);
+  };
+
+  /* projection: u = side to side (-1.7..1.7), z = depth (0 = horizon, 1 = bottom edge) */
+  S.Y = function(z){ return this.hy + (this.h - this.hy) * Math.pow(z, 1.35); };
+  S.X = function(u, z){ return this.w / 2 + u * this.w * .5 * (.55 + .55 * z); };
+  S.PX = function(z){ return this.h * (.018 + .235 * Math.pow(z, 1.35)); };
+  S.haze = function(c, z){ return mix(c, HAZE, clamp(Math.pow(Math.max(0, 1 - z), 2.2) * .7, 0, .7)); };
+  /* leafy sprites are painted once per size, then drawn with a wind skew */
+  S.sprite = function(o, p, wM, hM, paint){
+    var key = Math.round(p * 10); if (o.sp && o.spk === key) return o.sp;
+    var d = this.dpr, cw = Math.ceil(wM * p * d) + 4, ch = Math.ceil(hM * p * d) + 4; if (cw < 3 || ch < 3) return null;
+    var cv = document.createElement('canvas'); cv.width = cw; cv.height = ch; var g = cv.getContext('2d');
+    g.setTransform(d, 0, 0, d, cw / 2, ch - 2); paint.call(this, g, p, o);
+    o.sp = cv; o.spk = key; o.spw = cw / d; o.sph = ch / d; return cv;
+  };
+  S.leaves = function(g, p, o, n, place, fall, sz){
+    var R = rng((o.seed * 1e9) | 0), f = clamp(p / 140, .22, 1), L = [], i;
+    n = Math.min(1600, n * f | 0); sz = (sz || 1) / Math.sqrt(f);
+    for (i = 0; i < n; i++){ var q = place(R); var lit = clamp(q.lit + (R() - .5) * .28, .45, 1.35); var b = R() < fall ? FALL[(R() * FALL.length) | 0] : LEAF[(R() * LEAF.length) | 0];
+      L.push({x:q.x, y:q.y, r:(.03 + R() * .03) * sz, a:R() * 3.14, lit:lit, c:css(this.haze(mul(b, lit), o.z))}); }
+    L.sort(function(a, b){ return a.lit - b.lit; });
+    for (i = 0; i < L.length; i++){ var l = L[i]; g.fillStyle = l.c; g.beginPath(); g.ellipse(l.x * p, -l.y * p, Math.max(.7, l.r * p), Math.max(.45, l.r * .55 * p), l.a, 0, 6.283); g.fill(); }
+  };
+  S.drawSprite = function(x, o, X, Y, sk){ x.save(); x.translate(X, Y); x.transform(1, 0, -sk, 1, 0, 0); x.drawImage(o.sp, -o.spw / 2, -o.sph + 2 / this.dpr, o.spw, o.sph); x.restore(); };
+
+  S.gen = function(level, keepSeed){
+    this.level = level;
+    var R = rng(level * 7919 + 13), w = this.w, d = clamp(w / 1000, .5, 1.25), self = this;
+    var P = [];
+    function z0(){ return .07 + 1.15 * Math.pow(R(), .8); }
+    function pick(a){ return a[(R() * a.length) | 0]; }
+    function add(o){ o.seed = R(); o.ph = R() * 6.28; P.push(o); return o; }
+
+    function tuft(u, z, hmin, hmax, straw, plume){
+      var n = 6 + (R() * 7 | 0), bl = [], hh = hmin + R() * (hmax - hmin);
+      for (var i = 0; i < n; i++){
+        var c = R() < straw ? pick(STRAW) : pick(GRASS);
+        c = mul(c, .82 + R() * .3);
+        bl.push({dx:(R() - .5) * .22, h:hh * (.55 + R() * .5), lean:(R() - .5) * .35 * hh, w:.006 + R() * .008, c:css(self.haze(c, z))});
+      }
+      var o = add({t:'g', u:u, z:z, b:bl, h:hh});
+      if (plume){ var pc = []; for (var k = 0; k < 9; k++) pc.push({a:R(), r:.025 + R() * .03}); o.pl = pc; o.pc = css(self.haze(mul(pick(STRAW), 1.05), z)); }
+      o.stub = []; for (var s = 0; s < 4; s++) o.stub.push({dx:(R() - .5) * .25, h:.05 + R() * .07, c:css(self.haze(mul(pick(STRAW), .95 + R() * .2), z))});
+      return o;
+    }
+    function gold(u, z, h){
+      var dots = [], c = self.haze([200, 170, 64], z), c2 = self.haze([168, 140, 56], z), c3 = self.haze([214, 188, 92], z);
+      for (var i = 0; i < 30; i++) dots.push({a:R(), s:(R() - .5) * .2 * (1 - R() * .5), r:.008 + R() * .012, c:css([c, c2, c3][(R() * 3) | 0])});
+      return add({t:'gr', u:u, z:z, h:h, d:dots, sc:css(self.haze([96, 110, 50], z)), lean:(R() - .5) * .3});
+    }
+    function weed(u, z, h){ return add({t:'w', u:u, z:z, h:h, sc:css(self.haze([110, 118, 64], z)), fc:css(self.haze([236, 232, 214], z)), lean:(R() - .5) * .25}); }
+    function bush(u, z, h, wid, fall){
+      var bl = [], n = 26 + (R() * 22 | 0);
+      for (var i = 0; i < n; i++){
+        var a = R() * Math.PI, rr = Math.sqrt(R());
+        var dx = Math.cos(a) * wid * .5 * rr, dy = Math.sin(a) * h * .8 * rr + h * .12;
+        var lit = clamp(.75 + (dx / wid) * .35 + (dy / h) * .35, .6, 1.25);
+        var base = R() < fall ? pick(FALL) : pick(LEAF);
+        bl.push({dx:dx, dy:dy, r:(.12 + R() * .16) * Math.max(h, .8) * .5, c:css(self.haze(mul(base, lit), z))});
+      }
+      bl.sort(function(a, b){ return a.dy - b.dy; });
+      var tw = []; for (var k = 0; k < 6; k++) tw.push({a:.3 + R() * 2.5, l:.4 + R() * .5});
+      return add({t:'b', u:u, z:z, h:h, wd:wid, fall:fall, tw:tw, tc:css(self.haze([84, 70, 56], z))});
+    }
+    function briar(u, z, h, thr){
+      var canes = [], n = 4 + (R() * 5 | 0);
+      for (var i = 0; i < n; i++){
+        var dir = R() < .5 ? -1 : 1, reach = (.4 + R() * .9) * h * dir;
+        var lv = [], b = [];
+        for (var k = 0; k < 7; k++) lv.push({p:.25 + R() * .7, c:css(self.haze(R() < .35 ? [150, 70, 54] : pick(LEAF), z))});
+        for (var j = 0; j < 4; j++) b.push({p:.3 + R() * .65});
+        canes.push({r:reach, h:h * (.7 + R() * .45), c:css(self.haze(pick(CANE), z)), lv:lv, be:b});
+      }
+      return add({t:'br', u:u, z:z, h:h, cn:canes, thr:thr || 0, bc:css(self.haze([196, 40, 36], z))});
+    }
+    function sap(u, z, h){
+      var cr = [], n = 18 + (R() * 14 | 0);
+      for (var i = 0; i < n; i++){
+        var base = R() < .45 ? pick(FALL) : pick(LEAF);
+        cr.push({dx:(R() - .5) * h * .45, dy:h * (.55 + R() * .5), r:h * (.05 + R() * .05), c:css(self.haze(mul(base, .85 + R() * .35), z))});
+      }
+      return add({t:'s', u:u, z:z, h:h, lean:(R() - .5) * .25, cr:cr, tw:.025 + R() * .025, bc:css(self.haze(pick(BARK), z))});
+    }
+    function cat(u, z, thr){ var o = add({t:'c', u:u, z:z, h:1.4 + R() * .6, thr:thr, sc:css(self.haze([108, 120, 60], z)), hc:css(self.haze([96, 62, 38], z)), lean:(R() - .5) * .2}); return o; }
+
+    var i, n;
+    /* mature trees that always stay */
+    var trees = [[-1.05,.34,.55],[.62,.27,.42],[1.25,.46,.62],[-.1,.2,.36]];
+    if (level === 1) trees = [[-1.2,.3,.5],[1.1,.24,.42]];
+    trees.forEach(function(t){
+      var br = []; for (var k = 0; k < 3; k++) br.push({y:.62 + R() * .3, dir:R() < .5 ? -1 : 1, l:.8 + R() * 1.2});
+      add({t:'T', u:t[0], z:t[1], wd:t[2], br:br, bc:self.haze(pick(BARK), t[1])});
+    });
+    if (this.person) add({t:'P', u:-.78, z:.62});
+    if (level === 1){
+      add({t:'F', u:0, z:.3});
+      n = 330 * d; for (i = 0; i < n; i++) tuft(-1.8 + R() * 3.6, z0(), .35, .95, .45, R() < .2);
+      n = 40 * d; for (i = 0; i < n; i++) weed(-1.8 + R() * 3.6, z0(), .8 + R() * .5);
+      n = 10 * d; for (i = 0; i < n; i++) gold(-1.8 + R() * 3.6, z0(), .9 + R() * .4);
+      for (i = 0; i < 3; i++) bush(-1.5 + R() * 3, .2 + R() * .3, .7 + R() * .4, 1.2, .3);
+    } else if (level === 2){
+      n = 360 * d; for (i = 0; i < n; i++) tuft(-1.8 + R() * 3.6, z0(), 1.1, 2.0, .55, R() < .5);
+      n = 90 * d; for (i = 0; i < n; i++) gold(-1.8 + R() * 3.6, z0(), 1.2 + R() * .7);
+      n = 14 * d; for (i = 0; i < n; i++) bush(-1.7 + R() * 3.4, z0(), .8 + R() * .7, 1 + R() * .8, .25);
+      n = 8 * d; for (i = 0; i < n; i++) briar(-1.7 + R() * 3.4, z0(), 1 + R() * .6);
+      n = 4; for (i = 0; i < n; i++) sap(-1.6 + R() * 3.2, .2 + R() * .5, 2 + R());
+    } else if (level === 3){
+      n = 200 * d; for (i = 0; i < n; i++) tuft(-1.8 + R() * 3.6, z0(), .9, 1.6, .45, R() < .3);
+      n = 30 * d; for (i = 0; i < n; i++) gold(-1.8 + R() * 3.6, z0(), 1.2 + R() * .6);
+      n = 60 * d; for (i = 0; i < n; i++) bush(-1.8 + R() * 3.6, z0(), 1.6 + R() * 1.1, 1.6 + R() * 1.4, .2);
+      n = 55 * d; for (i = 0; i < n; i++) briar(-1.8 + R() * 3.6, z0(), 1.7 + R() * .9);
+      n = 10; for (i = 0; i < n; i++) sap(-1.7 + R() * 3.4, .15 + R() * .8, 2.6 + R() * 1.4);
+    } else {
+      n = 150 * d; for (i = 0; i < n; i++) tuft(-1.8 + R() * 3.6, z0(), .8, 1.5, .4, R() < .25);
+      n = 62 * d; for (i = 0; i < n; i++) bush(-1.8 + R() * 3.6, z0(), 1.7 + R() * 1.2, 1.6 + R() * 1.4, .25);
+      n = 55 * d; for (i = 0; i < n; i++) briar(-1.8 + R() * 3.6, z0(), 1.8 + R() * .9);
+      n = 55 * d; for (i = 0; i < n; i++) sap(-1.8 + R() * 3.6, z0(), 2.6 + R() * 3);
+      n = 9; for (i = 0; i < n; i++) add({t:'L', u:-1.5 + R() * 3, z:.35 + R() * .75, l:1.6 + R() * 1.8, a:(R() - .5) * .25, c:css(this.haze([96, 82, 64], .7))});
+    }
+    /* extra briars for "thorns" and cattails for "wet" fade in by threshold */
+    n = 60 * d; for (i = 0; i < n; i++) briar(-1.8 + R() * 3.6, z0(), 1.2 + R() * (level > 2 ? 1.2 : .6), .05 + R() * .95);
+    n = 70 * d; for (i = 0; i < n; i++) cat(-1.8 + R() * 3.6, .15 + R() * 1.05, .3 + R() * .7);
+    /* debris piles left after clearing */
+    this.piles = [];
+    if (level > 1){ for (i = 0; i < 3; i++){ var pl = add({t:'K', u:-1.25 + i * 1.1 + (R() - .5) * .25, z:.2 + R() * .06, sticks:[]}); for (var k = 0; k < 46; k++) pl.sticks.push({a:R() * 3.14, x:(R() - .5) * 2.6, y:R(), l:.5 + R() * .9}); } }
+    /* ground texture + puddles */
+    this.specks = []; for (i = 0; i < 900; i++){ var zz = Math.pow(R(), .7) * 1.25; this.specks.push({u:-1.8 + R() * 3.6, z:zz, c:css(this.haze(mul(pick(GRASS), .7 + R() * .5), Math.min(zz, 1))), m:css(this.haze(R() < .5 ? [150, 120, 80] : [190, 170, 110], Math.min(zz, 1))), l:R()}); }
+    this.pud = []; for (i = 0; i < 16; i++) this.pud.push({u:-1.5 + R() * 3, z:.2 + R() * .85, r:.35 + R() * .9, thr:R() * .95});
+    this.far = []; for (i = 0; i <= 140; i++) this.far.push(R());
+    this.canopy = []; for (i = 0; i < 1400; i++){ var fx = R(); this.canopy.push({x:-.15 + fx * 1.3, y:Math.pow(R(), 1.3), r:.004 + R() * .011, c:R() < .3 ? pick(FALL) : pick(LEAF), l:R()}); }
+    P.sort(function(a, b){ return a.z - b.z; });
+    this.plants = P; this.bgKey = '';
+  };
+
+  S.set = function(k, v){ this.target[k] = v; if (this.still || reduceMotion) this.cur[k] = v; this.kick(); };
+  S.setLevel = function(l){
+    if (l === this.level) return;
+    if (!this.still && !reduceMotion){ var s = this.snap.getContext('2d'); s.setTransform(1,0,0,1,0,0); s.clearRect(0, 0, this.snap.width, this.snap.height); s.drawImage(this.c, 0, 0); this.fade = 1; }
+    this.gen(l); this.kick();
+  };
+  S.clearRun = function(){ this.parts = []; if (reduceMotion){ this.cleared = 1; this.draw(); return; } this.clr = {t0:performance.now(), d:4.2}; this.cleared = 0; this.kick(); };
+  S.unclear = function(){ this.clr = null; this.cleared = 0; this.parts = []; this.kick(); };
+
+  var reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  S.start = function(){ if (this.running) return; this.running = true; this.last = 0; var self = this; function f(ts){ if (!self.running) return; var dt = self.last ? Math.min((ts - self.last) / 1000, .05) : .016; self.last = ts; self.step(dt); self.draw(); requestAnimationFrame(f); } requestAnimationFrame(f); };
+  S.stop = function(){ this.running = false; };
+  S.kick = function(){ if (!this.running) this.draw(); };
+
+  S.step = function(dt){
+    if (!reduceMotion) this.t += dt;
+    var k = 1 - Math.exp(-dt * 3.2), c = this.cur, g = this.target;
+    for (var p in g) c[p] += (g[p] - c[p]) * k;
+    if (this.fade > 0) this.fade = Math.max(0, this.fade - dt * 1.6);
+    if (this.clr){ var q = (performance.now() - this.clr.t0) / 1000 / this.clr.d; this.cleared = q >= 1 ? 1 : q; if (q >= 1){ this.clr = null; if (this.onCleared) this.onCleared(); } }
+    var ps = this.parts;
+    for (var i = ps.length - 1; i >= 0; i--){ var o = ps[i]; o.l -= dt; if (o.l <= 0){ ps.splice(i, 1); continue; } o.x += o.vx * dt; o.y += o.vy * dt; o.vy += (o.g || 0) * dt; o.r += (o.gr || 0) * dt; }
+  };
+
+  S.uc = function(){ return -2.05 + this.cleared * 4.2; };
+  S.isCut = function(u, z){ return this.cleared > 0 && u < this.uc() + (z - .7) * .25; };
+
+  /* ---------- static background: sky, hills, tree line, ground ---------- */
+  S.drawBg = function(){
+    var c = this.cur, key = [this.level, this.w, this.h, c.slope.toFixed(3), c.wet.toFixed(2)].join('|');
+    if (key === this.bgKey) return; this.bgKey = key;
+    var x = this.bg.getContext('2d'), w = this.w, h = this.h, hy = this.hy, i;
+    x.setTransform(this.dpr, 0, 0, this.dpr, 0, 0); x.clearRect(0, 0, w, h);
+    var sk = x.createLinearGradient(0, 0, 0, hy + h * .1);
+    sk.addColorStop(0, '#6d97b4'); sk.addColorStop(.55, '#b9cfd0'); sk.addColorStop(1, '#f1ddae');
+    x.fillStyle = sk; x.fillRect(0, 0, w, h);
+    var sg = x.createRadialGradient(w * .8, hy - h * .1, 0, w * .8, hy - h * .1, h * .55);
+    sg.addColorStop(0, 'rgba(255,240,200,.95)'); sg.addColorStop(.12, 'rgba(255,226,160,.55)'); sg.addColorStop(1, 'rgba(255,220,150,0)');
+    x.fillStyle = sg; x.fillRect(0, 0, w, h);
+    this.shear(x);
+    /* far hills */
+    var hills = [[hy - h * .075, [132, 150, 150], .9, 0], [hy - h * .045, [104, 126, 112], 1.4, 2]];
+    hills.forEach(function(hl){
+      x.fillStyle = css(hl[1]); x.beginPath(); x.moveTo(-w * .3, hy + 4);
+      for (var px = -w * .3; px <= w * 1.3; px += 8){ var v = Math.sin(px / w * 3.1 * hl[2] + hl[3]) * .5 + Math.sin(px / w * 7.3 + hl[3] * 2) * .25; x.lineTo(px, hl[0] - v * h * .03); }
+      x.lineTo(w * 1.3, hy + 4); x.closePath(); x.fill();
+    });
+    /* forest edge behind the field */
+    var cy = hy - h * .02;
+    x.fillStyle = css([46, 64, 44]); x.beginPath(); x.moveTo(-w * .3, hy + 2);
+    for (i = 0; i <= 140; i++){ var px2 = -w * .3 + i / 140 * w * 1.6, fv = (this.far[i] + this.far[Math.max(0, i - 1)] + this.far[Math.min(140, i + 1)]) / 3; x.lineTo(px2, cy - h * (.085 + fv * .05 + Math.sin(i * .23) * .012)); }
+    x.lineTo(w * 1.3, hy + 2); x.closePath(); x.fill();
+    for (i = 0; i < this.canopy.length; i++){
+      var q = this.canopy[i], qx = q.x * w, qy = cy - h * (.0 + q.y * .13), lit = .8 + (q.x - .3) * .25 + (1 - q.y) * -.1 + q.l * .2;
+      x.fillStyle = css(mix(mul(q.c, lit * .85), [150, 165, 150], .35)); x.beginPath(); x.arc(qx, qy, q.r * h, 0, 6.283); x.fill();
+    }
+    /* ground */
+    var gc1 = this.level === 1 ? [150, 156, 84] : [138, 134, 76], gc2 = this.level === 1 ? [92, 112, 50] : [74, 84, 44];
+    var mud1 = [118, 112, 80], mud2 = [58, 58, 40], wt = c.wet * .55;
+    var gg = x.createLinearGradient(0, hy, 0, h);
+    gg.addColorStop(0, css(mix(mix(gc1, HAZE, .45), mud1, wt * .6))); gg.addColorStop(.35, css(mix(gc1, mud1, wt))); gg.addColorStop(1, css(mix(gc2, mud2, wt)));
+    x.fillStyle = gg; x.fillRect(-w * .3, hy, w * 1.6, h * 1.4);
+    x.fillStyle = 'rgba(255,236,190,.35)'; x.fillRect(-w * .3, hy - 1, w * 1.6, 2);
+    /* puddles */
+    for (i = 0; i < this.pud.length; i++){
+      var pd = this.pud[i], a = clamp((c.wet - pd.thr) * 3, 0, 1); if (a <= 0) continue;
+      var px3 = this.X(pd.u, pd.z), py = this.Y(pd.z), pp = this.PX(pd.z), rx = pd.r * pp * (.45 + c.wet * .55), ry = rx * (.1 + pd.z * .1);
+      x.fillStyle = 'rgba(56,58,38,' + (.55 * a) + ')'; x.beginPath(); x.ellipse(px3, py, rx * 1.12, ry * 1.25, 0, 0, 6.283); x.fill();
+      var pg = x.createLinearGradient(0, py - ry, 0, py + ry); pg.addColorStop(0, 'rgba(150,180,196,' + (.85 * a) + ')'); pg.addColorStop(1, 'rgba(232,214,170,' + (.8 * a) + ')');
+      x.fillStyle = pg; x.beginPath(); x.ellipse(px3, py, rx, ry, 0, 0, 6.283); x.fill();
+      x.strokeStyle = 'rgba(255,250,230,' + (.5 * a) + ')'; x.lineWidth = 1; x.beginPath(); x.ellipse(px3 - rx * .15, py - ry * .2, rx * .5, ry * .3, 0, 3.4, 5.6); x.stroke();
+    }
+  };
+
+  S.shear = function(x){ var k = this.cur.slope * .17; x.transform(1, -k, 0, 1, 0, k * this.w * .5); x.translate(0, this.cur.slope * this.h * .05); };
+
+  /* ---------- the frame ---------- */
+  S.draw = function(){
+    var x = this.x, w = this.w, h = this.h, c = this.cur, t = this.t, i, self = this;
+    this.drawBg();
+    x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, this.c.width, this.c.height); x.drawImage(this.bg, 0, 0);
+    x.setTransform(this.dpr, 0, 0, this.dpr, 0, 0); x.save(); this.shear(x);
+
+    /* ground specks; mulch on the cleared side */
+    var uc = this.uc();
+    for (i = 0; i < this.specks.length; i++){
+      var sp = this.specks[i], sx = this.X(sp.u, sp.z), sy = this.Y(sp.z), pp = this.PX(sp.z); if (sx < -20 || sx > w + 20) continue;
+      var cut = this.isCut(sp.u, sp.z);
+      x.fillStyle = cut ? sp.m : sp.c; if (cut){ x.beginPath(); x.arc(sx, sy, Math.max(.6, pp * .02), 0, 6.283); x.fill(); } else x.fillRect(sx, sy, Math.max(1, pp * .05), Math.max(1, pp * .02));
+    }
+    if (this.cleared > 0){
+      x.fillStyle = 'rgba(176,170,96,.28)'; x.beginPath(); x.moveTo(-w, this.hy - 2);
+      for (var zz = 0; zz <= 1.3; zz += .05) x.lineTo(this.X(uc + (zz - .7) * .25, zz), this.Y(zz));
+      x.lineTo(-w, h * 1.4); x.closePath(); x.fill();
+    }
+    /* far brush band at the field's back edge */
+    var fz = .06, fy = this.Y(fz), fp = this.PX(fz), bh = [0, .7, 1.7, 2.1, 2.4][this.level];
+    x.fillStyle = css(this.haze(this.level > 2 ? [70, 92, 50] : [150, 150, 80], .05));
+    x.beginPath(); x.moveTo(-w * .2, fy + 2);
+    for (i = 0; i <= 140; i++){ var bu = -1.9 + i / 140 * 3.8, bx = this.X(bu, fz), tall = this.isCut(bu, fz) ? .1 : bh * (.6 + this.far[i] * .6); x.lineTo(bx, fy - tall * fp); }
+    x.lineTo(w * 1.2, fy + 2); x.closePath(); x.fill();
+
+    /* plants, far to near; the machine slots in by depth */
+    var mz = .93, drawnM = false, mach = this.clr || (this.cleared > 0 && this.cleared < 1);
+    var wind = function(u, ph){ return Math.sin(t * 1.25 + u * 2.2 + ph) * .06 + Math.sin(t * 2.9 + u * 5 + ph * 1.7) * .025; };
+    var P = this.plants, piles = this.piles;
+    for (i = 0; i < P.length; i++){
+      var o = P[i];
+      if (mach && !drawnM && o.z > mz){ this.drawMachine(x, uc, mz); drawnM = true; }
+      var X = this.X(o.u, o.z); if (X < -w * .25 || X > w * 1.25) continue;
+      var Y = this.Y(o.z), p = this.PX(o.z); if (Y - p * 0.2 > h * 1.25) continue;
+      var cut = o.t !== 'T' && o.t !== 'P' && o.t !== 'F' && o.t !== 'K' && this.isCut(o.u, o.z);
+      var sw = wind(o.u, o.ph);
+      this['d_' + o.t](x, o, X, Y, p, sw, cut);
+    }
+    if (mach && !drawnM) this.drawMachine(x, uc, mz);
+    /* brush piles (debris left on site) */
+    /* particles */
+    for (i = 0; i < this.parts.length; i++){ var q = this.parts[i]; x.fillStyle = q.c.replace('A', Math.min(1, q.l / q.l0 * 1.4).toFixed(3)); x.beginPath(); x.arc(q.x, q.y, Math.max(.5, q.r), 0, 6.283); x.fill(); }
+    /* 6 ft height marker next to the person */
+    if (this.person && this.pm && !this.still){
+      var m = this.pm, hh = m.y - m.top, mx = m.x - hh * .34;
+      x.strokeStyle = 'rgba(195,176,108,.95)'; x.lineWidth = 2; x.beginPath(); x.moveTo(mx, m.y); x.lineTo(mx, m.top); x.moveTo(mx - 6, m.top); x.lineTo(mx + 6, m.top); x.moveTo(mx - 6, m.y); x.lineTo(mx + 6, m.y); x.stroke();
+      x.font = '700 13px "Big Shoulders Text","Arial Narrow",sans-serif'; var tw = x.measureText('6 FT').width;
+      x.fillStyle = 'rgba(13,21,16,.82)'; x.beginPath(); x.roundRect ? x.roundRect(mx - tw / 2 - 8, m.top - 26, tw + 16, 20, 10) : x.rect(mx - tw / 2 - 8, m.top - 26, tw + 16, 20); x.fill();
+      x.fillStyle = '#c3b06c'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('6 FT', mx, m.top - 15.5); x.textAlign = 'start'; x.textBaseline = 'alphabetic';
+    }
+    /* survey stakes + flagging tape for the area size */
+    if (c.plot > .02) this.drawPlot(x, c.plot);
+    x.restore();
+
+    /* light, haze and vignette */
+    var lg = x.createLinearGradient(w, 0, 0, h); lg.addColorStop(0, 'rgba(255,214,150,.20)'); lg.addColorStop(.6, 'rgba(255,214,150,0)');
+    x.fillStyle = lg; x.fillRect(0, 0, w, h);
+    var vg = x.createRadialGradient(w * .5, h * .45, h * .35, w * .5, h * .5, Math.max(w, h) * .78);
+    vg.addColorStop(0, 'rgba(13,21,16,0)'); vg.addColorStop(1, 'rgba(13,21,16,.55)'); x.fillStyle = vg; x.fillRect(0, 0, w, h);
+    if (this.fade > 0){ x.setTransform(1, 0, 0, 1, 0, 0); x.globalAlpha = ease(this.fade); x.drawImage(this.snap, 0, 0); x.globalAlpha = 1; }
+  };
+
+  /* ---------- plant drawers ---------- */
+  S.d_g = function(x, o, X, Y, p, sw, cut){
+    var b, i, m = Math.max(.3, p * .001);
+    if (cut){ for (i = 0; i < o.stub.length; i++){ b = o.stub[i]; x.fillStyle = b.c; x.fillRect(X + b.dx * p, Y - b.h * p, Math.max(.6, p * .012), b.h * p); } return; }
+    for (i = 0; i < o.b.length; i++){
+      b = o.b[i]; var bx = X + b.dx * p, lw = Math.max(m, b.w * p), s = sw * b.h * (1 + o.seed * .5);
+      var tx = bx + (b.lean + s) * p, ty = Y - b.h * p, cx = bx + (b.lean * .25 + s * .3) * p, cy = Y - b.h * .55 * p;
+      x.fillStyle = b.c; x.beginPath(); x.moveTo(bx - lw, Y); x.quadraticCurveTo(cx, cy, tx, ty); x.quadraticCurveTo(cx + lw * .8, cy, bx + lw, Y); x.fill();
+    }
+    if (o.pl){ x.fillStyle = o.pc; var tb = o.b[0], s2 = sw * tb.h * (1 + o.seed * .5), px = X + tb.dx * p + (tb.lean + s2) * p, py = Y - tb.h * p;
+      for (i = 0; i < o.pl.length; i++){ var q = o.pl[i]; x.beginPath(); x.ellipse(px - q.a * (tb.lean + s2) * .25 * p, py + q.a * .22 * p, q.r * p * .55, q.r * p, -.4, 0, 6.283); x.fill(); } }
+  };
+  S.d_gr = function(x, o, X, Y, p, sw, cut){
+    if (cut) return;
+    var s = (sw * 1.1 + o.lean * .3) * o.h, tx = X + s * p, ty = Y - o.h * p;
+    x.strokeStyle = o.sc; x.lineWidth = Math.max(.5, p * .012); x.beginPath(); x.moveTo(X, Y); x.quadraticCurveTo(X + s * .2 * p, Y - o.h * .6 * p, tx, ty); x.stroke();
+    for (var i = 0; i < o.d.length; i++){ var d = o.d[i], dy = d.a * .35 * o.h, dx = s * (1 - d.a * .3) + d.s * (.4 + d.a); x.fillStyle = d.c; x.beginPath(); x.arc(X + dx * p, ty + dy * p, Math.max(.6, d.r * p), 0, 6.283); x.fill(); }
+  };
+  S.d_w = function(x, o, X, Y, p, sw, cut){
+    if (cut) return;
+    var s = (sw + o.lean * .2) * o.h, tx = X + s * p, ty = Y - o.h * p;
+    x.strokeStyle = o.sc; x.lineWidth = Math.max(.5, p * .01); x.beginPath(); x.moveTo(X, Y); x.quadraticCurveTo(X, Y - o.h * .5 * p, tx, ty); x.stroke();
+    x.fillStyle = o.fc; x.beginPath(); x.ellipse(tx, ty, Math.max(1, .07 * p), Math.max(.6, .035 * p), 0, 0, 6.283); x.fill();
+  };
+  S.d_b = function(x, o, X, Y, p, sw, cut){
+    if (cut){ x.fillStyle = 'rgba(128,104,70,.75)'; for (var m = 0; m < 5; m++){ x.beginPath(); x.arc(X + (o.tw[m % o.tw.length].a - 1.6) * o.wd * .25 * p, Y - m * .006 * p, Math.max(.6, .025 * p), 0, 6.283); x.fill(); } return; }
+    var sp = this.sprite(o, p, o.wd * 1.25, o.h * 1.12, function(g, p, o){
+      var wd = o.wd, h = o.h, i;
+      g.strokeStyle = o.tc; g.lineWidth = Math.max(.5, p * .014);
+      for (i = 0; i < o.tw.length; i++){ var tw = o.tw[i]; g.beginPath(); g.moveTo(0, 0); g.lineTo(Math.cos(tw.a) * wd * .58 * p, -Math.sin(tw.a) * h * (.7 + tw.l * .45) * p); g.stroke(); }
+      g.fillStyle = css(this.haze([34, 48, 28], o.z)); g.beginPath(); g.ellipse(0, -h * .44 * p, wd * .44 * p, h * .44 * p, 0, 0, 6.283); g.fill();
+      this.leaves(g, p, o, wd * h / .0032, function(R){ var a = R() * 6.283, rr = Math.pow(R(), .6) * (R() < .1 ? 1.08 : 1); var dx = Math.cos(a) * wd * .5 * rr, dy = h * .46 + Math.sin(a) * h * .46 * rr; if (dy < .02) dy = .02 + R() * .05; return {x:dx, y:dy, lit:.55 + .55 * dy / h + .28 * dx / wd}; }, o.fall);
+    });
+    if (sp) this.drawSprite(x, o, X, Y, sw * .35);
+  };
+  S.d_br = function(x, o, X, Y, p, sw, cut){
+    if (cut) return;
+    var g = 1; if (o.thr){ g = clamp((this.cur.thorns - o.thr) * 4, 0, 1); if (g <= 0) return; }
+    var lw = Math.max(.5, p * .014), thorny = this.cur.thorns, i, j;
+    for (i = 0; i < o.cn.length; i++){
+      var cn = o.cn[i], hh = cn.h * g, rr = cn.r * g, s = sw * hh * .6;
+      var c1x = X + (rr * .25 + s) * p, c1y = Y - hh * 1.35 * p, ex = X + (rr + s * .5) * p, ey = Y - hh * .25 * p;
+      x.strokeStyle = cn.c; x.lineWidth = lw; x.beginPath(); x.moveTo(X, Y); x.quadraticCurveTo(c1x, c1y, ex, ey); x.stroke();
+      for (j = 0; j < cn.lv.length; j++){ var lv = cn.lv[j], tq = lv.p, qx = (1 - tq) * (1 - tq) * X + 2 * (1 - tq) * tq * c1x + tq * tq * ex, qy = (1 - tq) * (1 - tq) * Y + 2 * (1 - tq) * tq * c1y + tq * tq * ey;
+        x.fillStyle = lv.c; x.beginPath(); x.ellipse(qx, qy, Math.max(.7, .05 * p * g), Math.max(.5, .028 * p * g), tq * 2 + j, 0, 6.283); x.fill(); }
+      if (thorny > .15){ x.fillStyle = o.bc; for (j = 0; j < cn.be.length; j++){ var bt = cn.be[j].p, bx = (1 - bt) * (1 - bt) * X + 2 * (1 - bt) * bt * c1x + bt * bt * ex, by = (1 - bt) * (1 - bt) * Y + 2 * (1 - bt) * bt * c1y + bt * bt * ey; x.globalAlpha = clamp(thorny * 1.3, 0, 1); x.beginPath(); x.arc(bx, by + .02 * p, Math.max(.7, .018 * p), 0, 6.283); x.fill(); } x.globalAlpha = 1; }
+    }
+  };
+  S.d_s = function(x, o, X, Y, p, sw, cut){
+    if (cut){ x.fillStyle = o.bc; x.fillRect(X - o.tw * p * .6, Y - .07 * p, o.tw * p * 1.2, .07 * p); return; }
+    var s = (sw * .7 + o.lean * .15) * o.h, tx = X + s * p, ty = Y - o.h * p;
+    x.strokeStyle = o.bc; x.lineWidth = Math.max(.6, o.tw * p); x.lineCap = 'round';
+    x.beginPath(); x.moveTo(X, Y); x.quadraticCurveTo(X + s * .2 * p, Y - o.h * .5 * p, tx, ty); x.stroke();
+    x.lineWidth = Math.max(.4, o.tw * p * .45);
+    x.beginPath(); x.moveTo(X + s * .35 * p, Y - o.h * .55 * p); x.lineTo(X + (s * .6 - .4) * p, Y - o.h * .8 * p); x.moveTo(X + s * .5 * p, Y - o.h * .7 * p); x.lineTo(X + (s * .8 + .45) * p, Y - o.h * .92 * p); x.stroke();
+    x.lineCap = 'butt';
+    var cw = o.h * .62, chh = o.h * .62;
+    var sp = this.sprite(o, p, cw * 1.1, chh * 1.1, function(g, p, o){
+      var cl = [], R = rng((o.seed * 7e8) | 0); for (var k = 0; k < 5; k++) cl.push({x:(R() - .5) * cw * .55, y:chh * (.3 + R() * .45), r:cw * (.16 + R() * .12)});
+      this.leaves(g, p, o, cw * chh / .0045, function(R){ var c = cl[(R() * cl.length) | 0], a = R() * 6.283, rr = Math.sqrt(R()); var dx = c.x + Math.cos(a) * c.r * rr, dy = c.y + Math.sin(a) * c.r * rr * .8; return {x:dx, y:dy, lit:.6 + .5 * dy / chh + .3 * dx / cw}; }, .5);
+    });
+    if (sp) this.drawSprite(x, o, tx, ty + chh * .35 * p, sw * .25);
+  };
+  S.d_c = function(x, o, X, Y, p, sw, cut){
+    var a = clamp((this.cur.wet - o.thr) * 4, 0, 1); if (a <= 0 || cut) return;
+    x.globalAlpha = a; var hh = o.h * (.5 + a * .5), s = (sw * .8 + o.lean * .2) * hh, tx = X + s * p, ty = Y - hh * p;
+    x.strokeStyle = o.sc; x.lineWidth = Math.max(.5, p * .01);
+    x.beginPath(); x.moveTo(X, Y); x.quadraticCurveTo(X, Y - hh * .5 * p, tx, ty); x.moveTo(X, Y); x.quadraticCurveTo(X - .1 * p, Y - hh * .4 * p, X - (.25 - s * .5) * p, Y - hh * .75 * p); x.moveTo(X, Y); x.quadraticCurveTo(X + .1 * p, Y - hh * .4 * p, X + (.22 + s * .5) * p, Y - hh * .8 * p); x.stroke();
+    x.strokeStyle = o.hc; x.lineWidth = Math.max(1, p * .045); x.lineCap = 'round';
+    var hx = X + s * .8 * p, hy = Y - hh * .82 * p; x.beginPath(); x.moveTo(hx, hy); x.lineTo(hx + s * .1 * p, hy - .18 * p); x.stroke(); x.lineCap = 'butt'; x.globalAlpha = 1;
+  };
+  S.d_L = function(x, o, X, Y, p, sw, cut){
+    var l = o.l * p * .5; x.strokeStyle = o.c; x.lineWidth = Math.max(1, .14 * p); x.lineCap = 'round';
+    x.beginPath(); x.moveTo(X - l, Y - .06 * p - o.a * l); x.lineTo(X + l, Y - .06 * p + o.a * l); x.stroke(); x.lineCap = 'butt';
+  };
+  S.d_T = function(x, o, X, Y, p){
+    var wd = o.wd * p, top = -this.h * .1, bc = o.bc;
+    var g = x.createLinearGradient(X - wd / 2, 0, X + wd / 2, 0);
+    g.addColorStop(0, css(mul(bc, .62))); g.addColorStop(.6, css(bc)); g.addColorStop(1, css(mix(bc, [255, 226, 170], .35)));
+    x.fillStyle = g; x.beginPath(); x.moveTo(X - wd * .7, Y + 1); x.quadraticCurveTo(X - wd * .5, Y - wd, X - wd * .42, Y - wd * 2.5); x.lineTo(X - wd * .3, top); x.lineTo(X + wd * .3, top); x.lineTo(X + wd * .42, Y - wd * 2.5); x.quadraticCurveTo(X + wd * .5, Y - wd, X + wd * .7, Y + 1); x.closePath(); x.fill();
+    x.strokeStyle = css(mul(bc, .7)); x.lineWidth = Math.max(1, wd * .12);
+    for (var i = 0; i < o.br.length; i++){ var b = o.br[i], by = Y + (top - Y) * b.y; x.beginPath(); x.moveTo(X, by); x.quadraticCurveTo(X + b.dir * b.l * p * .5, by - b.l * p * .2, X + b.dir * b.l * p, by - b.l * p * .55); x.stroke(); }
+    var cw = 15, ch = 12;
+    var sp = this.sprite(o, p, cw, ch, function(g, p, o){
+      var cl = [], R = rng((o.seed * 3e8) | 0); for (var k = 0; k < 10; k++) cl.push({x:(R() - .5) * cw * .8, y:ch * (.15 + R() * .75), r:1.6 + R() * 1.8});
+      this.leaves(g, p, o, 4200, function(R){ var c = cl[(R() * cl.length) | 0], a = R() * 6.283, rr = Math.sqrt(R()); var dx = c.x + Math.cos(a) * c.r * rr, dy = c.y + Math.sin(a) * c.r * rr * .7; return {x:dx, y:dy, lit:.55 + .3 * dy / ch + .35 * dx / cw}; }, .3, 3.2);
+    });
+    if (sp) this.drawSprite(x, o, X, Y - 5.2 * p, Math.sin(this.t * .8 + o.ph) * .01);
+  };
+  S.d_P = function(x, o, X, Y, p){
+    var H = 1.83 * p, k = H / 1.83; this.pm = {x:X, y:Y, top:Y - H};
+    x.fillStyle = 'rgba(26,32,26,.92)';
+    x.beginPath(); x.arc(X, Y - H + .12 * k, .115 * k, 0, 6.283); x.fill();
+    x.fillRect(X - .16 * k, Y - H + .08 * k, .32 * k, .05 * k);
+    x.beginPath(); x.moveTo(X - .21 * k, Y - H + .3 * k); x.lineTo(X + .21 * k, Y - H + .3 * k); x.lineTo(X + .19 * k, Y - .9 * k); x.lineTo(X - .19 * k, Y - .9 * k); x.closePath(); x.fill();
+    x.fillRect(X - .17 * k, Y - .92 * k, .15 * k, .92 * k); x.fillRect(X + .02 * k, Y - .92 * k, .15 * k, .92 * k);
+    x.fillRect(X - .29 * k, Y - H + .32 * k, .09 * k, .62 * k); x.fillRect(X + .2 * k, Y - H + .32 * k, .09 * k, .62 * k);
+  };
+  S.d_F = function(x, o){
+    var z = o.z, Y = this.Y(z), p = this.PX(z), col = css(this.haze([150, 132, 104], z)), dk = css(this.haze([112, 98, 78], z));
+    x.lineCap = 'round';
+    for (var u = -1.9; u < 1.9; u += .22){
+      var a = this.X(u, z), b = this.X(u + .22, z);
+      x.strokeStyle = dk; x.lineWidth = Math.max(1, .1 * p); x.beginPath(); x.moveTo(a, Y); x.lineTo(a, Y - 1.3 * p); x.stroke();
+      x.strokeStyle = col; x.lineWidth = Math.max(1, .07 * p); x.beginPath(); x.moveTo(a, Y - 1.15 * p); x.lineTo(b, Y - 1.15 * p); x.moveTo(a, Y - .68 * p); x.lineTo(b, Y - .68 * p); x.stroke();
+    }
+    x.lineCap = 'butt';
+  };
+  S.d_K = function(x, pl, X, Y, p){
+    var a = this.cur.piles, i; if (!(this.cleared > 0 && a > .02 && this.isCut(pl.u + .3, pl.z))) return;
+    x.globalAlpha = clamp(a, 0, 1);
+    x.fillStyle = 'rgba(92,74,52,.9)'; x.beginPath(); x.ellipse(X, Y - .2 * p, 1.5 * p, .55 * p, 0, Math.PI, 0); x.fill();
+    x.lineWidth = Math.max(.6, .03 * p);
+    for (i = 0; i < pl.sticks.length; i++){ var s = pl.sticks[i], sx = X + s.x * .55 * p, sy = Y - s.y * (1 - Math.abs(s.x) / 1.6) * 1.1 * p;
+      x.strokeStyle = i % 3 ? 'rgba(120,98,70,.95)' : 'rgba(150,130,90,.95)'; x.beginPath(); x.moveTo(sx, sy); x.lineTo(sx + Math.cos(s.a) * s.l * p * .5, sy - Math.sin(s.a) * s.l * p * .25); x.stroke(); }
+    x.globalAlpha = 1;
+  };
+  S.drawPlot = function(x, a){
+    var A = this.cur.acres, s = clamp(Math.sqrt(A) / 3.3, .12, 1), hu = .22 + 1.2 * s, zn = 1.02, zf = Math.max(.1, zn - (.16 + .72 * s));
+    var pts = [[-hu, zf], [hu, zf], [hu, zn], [-hu, zn]], self = this;
+    var sp = pts.map(function(q){ return [self.X(q[0], q[1]), self.Y(q[1])]; });
+    x.globalAlpha = clamp(a, 0, 1);
+    x.fillStyle = 'rgba(239,106,42,.10)'; x.beginPath(); sp.forEach(function(q, i){ i ? x.lineTo(q[0], q[1]) : x.moveTo(q[0], q[1]); }); x.closePath(); x.fill();
+    x.setLineDash([10, 7]); x.lineDashOffset = -this.t * 18; x.strokeStyle = 'rgba(239,106,42,.95)'; x.lineWidth = 2.5; x.stroke(); x.setLineDash([]);
+    sp.forEach(function(q, i){ var z = pts[i][1], p = self.PX(z), hh = .9 * p;
+      x.strokeStyle = 'rgba(230,214,170,.95)'; x.lineWidth = Math.max(1.5, .05 * p); x.beginPath(); x.moveTo(q[0], q[1]); x.lineTo(q[0], q[1] - hh); x.stroke();
+      var fl = Math.sin(self.t * 5 + i) * .12; x.fillStyle = '#ef6a2a'; x.beginPath(); x.moveTo(q[0], q[1] - hh); x.quadraticCurveTo(q[0] + .25 * p, q[1] - hh + (.05 + fl) * p, q[0] + .45 * p, q[1] - hh + (.12 + fl) * p); x.lineTo(q[0] + .38 * p, q[1] - hh + (.22 + fl) * p); x.quadraticCurveTo(q[0] + .2 * p, q[1] - hh + (.15 + fl) * p, q[0], q[1] - hh + .14 * p); x.fill(); });
+    x.globalAlpha = 1;
+    this.plotTop = sp[0][1];
+  };
+  /* compact track loader with a brush cutter, facing right */
+  S.drawMachine = function(x, uc, z){
+    var X = this.X(uc + (z - .7) * .25, z) - .2 * this.PX(z), Y = this.Y(z), p = this.PX(z), t = this.t;
+    var bob = Math.sin(t * 38) * .012 * p;
+    function R(a, b, c, d){ x.fillRect(X + a * p, Y - d * p + bob, (c - a) * p, (d - b) * p); }
+    x.fillStyle = 'rgba(0,0,0,.28)'; x.beginPath(); x.ellipse(X + .5 * p, Y + .02 * p, 1.9 * p, .16 * p, 0, 0, 6.283); x.fill();
+    x.fillStyle = '#24261f'; x.beginPath(); x.roundRect ? x.roundRect(X - .95 * p, Y - .42 * p + bob, 1.9 * p, .42 * p, .2 * p) : x.rect(X - .95 * p, Y - .42 * p + bob, 1.9 * p, .42 * p); x.fill();
+    x.fillStyle = '#4a4b44'; for (var i = 0; i < 4; i++){ x.beginPath(); x.arc(X + (-.66 + i * .44) * p, Y - .2 * p + bob, .13 * p, 0, 6.283); x.fill(); }
+    x.fillStyle = '#7d7a6c'; for (i = 0; i < 4; i++){ var a = t * 9 + i; x.fillRect(X + (-.66 + i * .44) * p + Math.cos(a) * .06 * p - 1, Y - .2 * p + Math.sin(a) * .06 * p + bob - 1, 2, 2); }
+    x.fillStyle = '#c9a646'; R(-1.0, .42, .55, 1.05); x.fillStyle = '#a98a36'; R(-1.08, .42, -.45, .98);
+    x.fillStyle = '#1e211c'; R(-.95, .6, -.55, .66); R(-.95, .74, -.55, .8);
+    x.fillStyle = '#2b2d28'; R(-.4, 1.0, .5, 2.0); x.fillStyle = 'rgba(150,186,196,.62)'; R(-.3, 1.08, .42, 1.88);
+    x.fillStyle = 'rgba(20,24,20,.85)'; x.beginPath(); x.arc(X + .02 * p, Y - 1.55 * p + bob, .13 * p, 0, 6.283); x.fill(); R(-.12, 1.1, .16, 1.45);
+    x.fillStyle = '#1b1d19'; R(-.48, 1.98, .58, 2.08);
+    x.fillStyle = '#3a3c36'; R(-.8, 1.05, -.7, 1.32);
+    x.strokeStyle = '#b8963c'; x.lineWidth = .14 * p; x.lineCap = 'round'; x.beginPath(); x.moveTo(X - .55 * p, Y - 1.62 * p + bob); x.lineTo(X + .7 * p, Y - 1.2 * p + bob); x.lineTo(X + 1.15 * p, Y - .55 * p + bob); x.stroke(); x.lineCap = 'butt';
+    x.fillStyle = '#28372c'; R(1.0, .04, 2.05, .5); x.fillStyle = '#c3b06c'; R(1.0, .42, 2.05, .48); x.fillStyle = '#1a2219'; R(1.95, 0, 2.1, .3);
+    if (this.running && Math.random() < .9){
+      var fx = X + 2.05 * p, fy = Y - .25 * p;
+      for (i = 0; i < 3; i++){ var green = Math.random() < .5; this.parts.push({x:fx, y:fy, vx:(-.3 - Math.random() * .9) * p * 2.2, vy:(-1.4 - Math.random() * 1.6) * p, g:3.2 * p, r:.02 * p + Math.random() * .03 * p, l:.7 + Math.random() * .4, l0:1, c:green ? 'rgba(110,130,60,A)' : 'rgba(150,118,76,A)'}); }
+      if (Math.random() < .25) this.parts.push({x:X - .75 * p, y:Y - 1.34 * p, vx:-.2 * p, vy:-.45 * p, g:0, r:.03 * p, gr:.1 * p, l:1.1, l0:3.5, c:'rgba(70,70,66,A)'});
+      if (Math.random() < .5) this.parts.push({x:fx - .4 * p, y:Y, vx:(Math.random() - .5) * p, vy:-.3 * p, g:0, r:.04 * p, gr:.14 * p, l:.8, l0:4, c:'rgba(196,176,130,A)'});
+    }
+  };
+
+  Scene.levels = {
+    1:{name:'Overgrown pasture', short:'Pasture', tag:'Knee to waist high'},
+    2:{name:'Thick brush', short:'Thick brush', tag:'Up to 6 ft · grass & small bushes'},
+    3:{name:'Briars & bushes', short:'Briars', tag:'6 ft+ · thorny & dense'},
+    4:{name:'Saplings & thicket', short:'Thicket', tag:'Small trees · often on a slope'}
+  };
+  return Scene;
+})();
+
+/* ---------- Instant quote: pricing, the step-by-step flow, and lead notifications ---------- */
+(function(){
+  var root = document.getElementById('qx'); if (!root || typeof BrushScene === 'undefined') return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var PREVIEW = !!window.TP_QUOTE_PREVIEW;
+
+  /* ===== PRICING — Tim: change numbers here. Built from the Trinity Point pricing guide v1.1 ===== */
+  var PRICE = {
+    areaRate:   {1:15, 2:40, 3:60, 4:125},        // $ per 1,000 sq ft, labor (light / light-medium / medium / heavy)
+    acresPerDay:{1:2, 2:1, 3:.5, 4:.25},          // how much a 2-man crew clears in a day
+    add:  {slope:{flat:0, gentle:.10, steep:.20}, ground:{firm:0, soft:.08, wet:.15}, thorns:{none:0, some:.08, lots:.15}, access:{open:0, tight:.10, none:.25}},
+    slow: {slope:{flat:1, gentle:1.1, steep:1.3}, ground:{firm:1, soft:1.1, wet:1.25}, thorns:{none:1, some:1.05, lots:1.12}, access:{open:1, tight:1.15, none:2.2}},
+    equipDay:   {1:105, 2:415, 3:415, 4:519},      // walk-behind brush hog · mini track loader + brush hog · + grapple
+    delivery:   {1:0, 2:200, 3:200, 4:200},
+    fuel:       {1:10, 2:30, 3:30, 4:30},
+    fees: .10, markup: 1.25,
+    laborRate: 85, crew: 2,                        // travel = round trip x crew x $85, every day on site
+    minimum:    {1:1200, 2:2200, 3:2200, 4:2200},
+    haulAway: .18,                                 // rough allowance when they want debris hauled off
+    bigJob: 5000                                   // over this, the range opens up to a couple thousand each side
+  };
+  /* drive minutes from 12 Patricia Rd (one way, rough) */
+  var ZIPS = {'12601':['Poughkeepsie',12],'12603':['Poughkeepsie',6],'12604':['Poughkeepsie',10],'12538':['Hyde Park',20],'12580':['Staatsburg',25],'12572':['Rhinebeck',32],'12574':['Rhinecliff',34],'12571':['Red Hook',40],'12583':['Tivoli',45],'12504':['Annandale-on-Hudson',42],'12507':['Barrytown',40],'12569':['Pleasant Valley',14],'12578':['Salt Point',20],'12514':['Clinton Corners',25],'12581':['Stanfordville',32],'12567':['Pine Plains',45],'12545':['Millbrook',25],'12540':['LaGrangeville',16],'12590':['Wappingers Falls',18],'12537':['Hughsonville',20],'12512':['Chelsea',22],'12524':['Fishkill',24],'12508':['Beacon',28],'12533':['Hopewell Junction',22],'12582':['Stormville',28],'12570':['Poughquag',28],'12531':['Holmes',33],'12585':['Verbank',25],'12564':['Pawling',36],'12522':['Dover Plains',40],'12594':['Wingdale',43],'12592':['Wassaic',48],'12501':['Amenia',50],'12528':['Highland',15],'12547':['Milton',25],'12542':['Marlboro',30],'12548':['Modena',28],'12515':['Clintondale',25],'12561':['New Paltz',28],'12525':['Gardiner',35],'12589':['Wallkill',35],'12493':['West Park',22],'12487':['Ulster Park',28],'12401':['Kingston',35],'12477':['Saugerties',45],'12498':['Woodstock',48],'12550':['Newburgh',30],'12553':['New Windsor',32],'12584':['Vails Gate',35],'12575':['Rock Tavern',40],'12577':['Salisbury Mills',40],'12520':['Cornwall-on-Hudson',40],'12518':['Cornwall',40],'12586':['Walden',40],'12543':['Maybrook',40],'12549':['Montgomery',42],'12566':['Pine Bush',50],'10516':['Cold Spring',35],'10524':['Garrison',40],'12563':['Patterson',42],'10512':['Carmel',45],'10509':['Brewster',48],'12526':['Germantown',50]};
+
+  function roundUp(n){ var h = Math.floor(n / 100) * 100; if (n <= h) return h; if (n <= h + 90) return h + 90; return h + 100; }
+  function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+
+  function price(a){
+    var L = a.level, sqft = a.acres * 43560, g = a.ground || 'firm', s = a.slope || 'flat', th = a.thorns || 'none', ac = a.access || 'open';
+    var area = sqft / 1000 * PRICE.areaRate[L];
+    var pct = PRICE.add.slope[s] + PRICE.add.ground[g] + PRICE.add.thorns[th] + PRICE.add.access[ac];
+    var areaP = area * (1 + pct);
+    var days = a.acres / PRICE.acresPerDay[L] * PRICE.slow.slope[s] * PRICE.slow.ground[g] * PRICE.slow.thorns[th] * PRICE.slow.access[ac];
+    days = Math.max(1, Math.ceil(days * 2) / 2); var rentDays = Math.ceil(days);
+    var eL = ac === 'none' ? 1 : L, rent = PRICE.equipDay[eL] * rentDays + PRICE.delivery[eL];
+    var equip = (rent * (1 + PRICE.fees) + PRICE.fuel[eL] * rentDays) * PRICE.markup;
+    var mins = a.drive || 35, travel = (mins * 2 / 60) * PRICE.crew * PRICE.laborRate * rentDays;
+    var base = areaP + equip + travel;
+    if (a.debris === 'haul') base *= 1 + PRICE.haulAway;
+    base = Math.max(base, PRICE.minimum[L]);
+    var lo, hi;
+    if (base >= PRICE.bigJob){ lo = base - Math.min(base * .1, 1500); hi = base + Math.min(base * .35, 3000); }
+    else { lo = base * .92; hi = base * 1.3; }
+    lo = roundUp(Math.max(lo, PRICE.minimum[L])); hi = roundUp(hi); if (hi <= lo) hi = roundUp(lo * 1.2);
+    return {lo:lo, hi:hi, base:roundUp(base), area:Math.round(areaP), equip:Math.round(equip), travel:Math.round(travel), days:days, pct:pct};
+  }
+
+  /* ===== copy for each answer ===== */
+  var LV = {1:['Overgrown pasture','Tall grass & weeds, knee to waist high'], 2:['Thick brush','Up to 6 ft, grass with small bushes'], 3:['Briars & bushes','Thick bushes and briars 6 ft+'], 4:['Saplings & thicket','Small trees, thick brush, often a slope']};
+  var OPTS = {
+    ground:{label:'The ground', title:"What's the ground like?", sub:'Soft or wet ground slows the machine down.', o:[['firm','Firm & dry','You could drive a truck on it'],['soft','A few soft spots','Gets muddy after it rains'],['wet','Wet or swampy','Near a creek, pond or wetland']]},
+    slope:{label:'The lay of the land', title:'Is it flat or on a hill?', sub:'Slopes take more care and more time.', o:[['flat','Flat','Easy walking'],['gentle','Gentle slope','You feel it walking up'],['steep','Steep hill','Hard to walk up']]},
+    thorns:{label:'Thorns & vines', title:'Any thorns or poison ivy?', sub:'Pricker bushes, multiflora rose, bittersweet vines, poison ivy.', o:[['none','Not really','Mostly grass and soft brush'],['some','Some here and there','A few pricker patches'],['lots',"It's full of them","You'd get torn up walking in"]]},
+    access:{label:'Getting in', title:'Can a machine get to it?', sub:'Our track machine needs a path about 4 ft wide.', o:[['open','Wide open','Easy to drive right up to it'],['tight','Tight squeeze','Narrow gate or path, close to buildings'],['none','No machine access','Hand work only: fenced in, blocked or too steep']]}
+  };
+  var VIS = {ground:{firm:0, soft:.45, wet:1}, slope:{flat:0, gentle:.45, steep:1}, thorns:{none:0, some:.45, lots:1}};
+  var STEPS = ['contact', 'size', 'ground', 'slope', 'thorns', 'access', 'extras', 'result', 'book', 'done'];
+  var NAMES = {contact:'Contact', size:'Size', ground:'Ground', slope:'Slope', thorns:'Thorns', access:'Access', extras:'Debris & timing', result:'Saw the price', book:'Booking'};
+
+  var A = {level:1, acres:1, ground:'', slope:'', thorns:'', access:'', debris:'pile', timing:'', purpose:'', drive:35, town:'', days:[], time:''};
+  var st = {i:0, started:false, quoted:false, booked:false, left:false, id:'', price:null, maxI:0};
+
+  /* ===== DOM ===== */
+  var $ = function(s, r){ return (r || document).querySelector(s); }, $$ = function(s, r){ return [].slice.call((r || document).querySelectorAll(s)); };
+  var cv = $('#qcv'), slides = $('#qSlides'), bar = $('#qBar'), stepN = $('#qStepN');
+  var scene = null, lastFocus = null;
+
+  /* build the option steps */
+  Object.keys(OPTS).forEach(function(k){
+    var q = OPTS[k], el = $('.qs[data-step="' + k + '"]');
+    el.innerHTML = '<span class="label">' + q.label + '</span><h3>' + q.title + '</h3><p class="qsub">' + q.sub + '</p><div class="qopts" role="radiogroup" aria-label="' + q.title + '">' +
+      q.o.map(function(o){ return '<button type="button" class="qopt" role="radio" aria-checked="false" data-k="' + k + '" data-v="' + o[0] + '"><b>' + o[1] + '</b><span>' + o[2] + '</span><i aria-hidden="true"></i></button>'; }).join('') +
+      '</div><div class="qnav"><button type="button" class="qback" data-back>Back</button></div>';
+  });
+
+  function vis(k, v){ if (!scene) return; if (VIS[k]) scene.set(k === 'ground' ? 'wet' : k, VIS[k][v]); }
+  function syncScene(){
+    if (!scene) return;
+    scene.set('wet', A.ground ? VIS.ground[A.ground] : 0);
+    scene.set('slope', A.slope ? VIS.slope[A.slope] : (A.level === 4 ? .45 : 0));
+    scene.set('thorns', A.thorns ? VIS.thorns[A.thorns] : (A.level >= 3 ? .2 : 0));
+    scene.set('acres', A.acres); scene.set('piles', A.debris === 'haul' ? 0 : 1);
+  }
+
+  /* option clicks + hover preview */
+  slides.addEventListener('click', function(e){
+    var b = e.target.closest('.qopt'); if (!b) return;
+    var k = b.getAttribute('data-k'), v = b.getAttribute('data-v');
+    A[k] = v; $$('.qopt[data-k="' + k + '"]').forEach(function(o){ o.setAttribute('aria-checked', o === b ? 'true' : 'false'); });
+    syncScene(); hudChips();
+    setTimeout(function(){ go(st.i + 1); }, reduce ? 0 : 340);
+  });
+  slides.addEventListener('pointerover', function(e){ var b = e.target.closest('.qopt'); if (b && e.pointerType === 'mouse') vis(b.getAttribute('data-k'), b.getAttribute('data-v')); });
+  slides.addEventListener('pointerout', function(e){ var b = e.target.closest('.qopt'); if (b && e.pointerType === 'mouse' && !b.contains(e.relatedTarget)) syncScene(); });
+  slides.addEventListener('click', function(e){ if (e.target.closest('[data-back]')) go(st.i - 1); else if (e.target.closest('[data-next]')) go(st.i + 1); });
+
+  /* ===== contact step ===== */
+  var fFirst = $('#qFirst'), fLast = $('#qLast'), fPhone = $('#qPhone'), fZip = $('#qZip'), zipMsg = $('#qZipMsg');
+  fPhone.addEventListener('input', function(){
+    var d = fPhone.value.replace(/\D/g, '').replace(/^1/, '').slice(0, 10), o = d;
+    if (d.length > 6) o = '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6); else if (d.length > 3) o = '(' + d.slice(0, 3) + ') ' + d.slice(3); else if (d.length) o = '(' + d;
+    fPhone.value = o;
+  });
+  fZip.addEventListener('input', function(){
+    fZip.value = fZip.value.replace(/\D/g, '').slice(0, 5); var z = fZip.value, m = ZIPS[z];
+    zipMsg.className = 'qzip';
+    if (z.length < 5){ zipMsg.textContent = ''; return; }
+    if (m){ A.town = m[0]; A.drive = m[1]; zipMsg.classList.add(m[1] > 45 ? 'far' : 'ok'); zipMsg.textContent = m[1] > 45 ? m[0] + ' is a little outside our usual area. Send it anyway and Tim will let you know.' : m[0] + ': you\'re in our area.'; }
+    else { A.town = ''; A.drive = 38; zipMsg.classList.add('ok'); zipMsg.textContent = /^1[02]/.test(z) ? 'Got it. Tim will confirm the drive.' : 'We work in the Hudson Valley, NY. Send it anyway and Tim will let you know.'; }
+  });
+  function contactOk(){
+    var ok = true;
+    [[fFirst, fFirst.value.trim().length > 0], [fLast, fLast.value.trim().length > 0], [fPhone, fPhone.value.replace(/\D/g, '').length === 10], [fZip, fZip.value.length === 5]].forEach(function(p){ p[0].parentNode.classList.toggle('bad', !p[1]); if (!p[1]) ok = false; });
+    if (!ok){ var b = $('.qin.bad input'); if (b) b.focus(); }
+    return ok;
+  }
+  $('#qContactGo').addEventListener('click', function(){
+    if (!contactOk()) return;
+    if (!st.started){ st.started = true; lead('started'); }
+    go(st.i + 1);
+  });
+  $('.qs[data-step="contact"]').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); $('#qContactGo').click(); } });
+
+  /* ===== size step ===== */
+  var rng = $('#qAcres'), aVal = $('#qAcreVal'), aSub = $('#qAcreSub');
+  function fromSlider(v){ return Math.round(Math.pow(10, -1 + v / 1000 * 2.3) * 100) / 100; } // .1 .. ~20 acres
+  function toSlider(a){ return Math.round((Math.log10(a) + 1) / 2.3 * 1000); }
+  function niceAc(a){ return a < 1 ? (Math.round(a * 20) / 20).toString().replace(/^0/, '') : a < 10 ? (Math.round(a * 4) / 4).toString() : Math.round(a).toString(); }
+  function showAcres(){
+    var a = A.acres, sq = Math.round(a * 43560 / 100) * 100, ff = a / 1.32;
+    aVal.innerHTML = niceAc(a) + '<small> acre' + (a === 1 ? '' : 's') + '</small>';
+    aSub.textContent = sq.toLocaleString('en-US') + ' sq ft · ' + (ff < .5 ? 'about ' + Math.max(1, Math.round(a * 43560 / 2808)) + ' tennis courts' : 'about ' + (Math.round(ff * 10) / 10) + ' football field' + (Math.round(ff * 10) / 10 === 1 ? '' : 's'));
+    $$('.qchip[data-ac]').forEach(function(c){ c.classList.toggle('on', Math.abs(+c.getAttribute('data-ac') - a) < .01); });
+    if (scene) scene.set('acres', a); hudChips();
+  }
+  rng.addEventListener('input', function(){ A.acres = fromSlider(+rng.value); showAcres(); });
+  $$('.qchip[data-ac]').forEach(function(c){ c.addEventListener('click', function(){ A.acres = +c.getAttribute('data-ac'); rng.value = toSlider(A.acres); showAcres(); }); });
+
+  /* ===== extras step ===== */
+  $$('[data-pick]').forEach(function(g){
+    var k = g.getAttribute('data-pick'), multi = g.hasAttribute('data-multi');
+    g.addEventListener('click', function(e){
+      var c = e.target.closest('.qchip'); if (!c) return; var v = c.getAttribute('data-v');
+      if (multi){ var i = A[k].indexOf(v); if (v === 'Any weekday'){ A[k] = i < 0 ? [v] : []; } else { A[k] = A[k].filter(function(x){ return x !== 'Any weekday'; }); i = A[k].indexOf(v); i < 0 ? A[k].push(v) : A[k].splice(i, 1); } $$('.qchip', g).forEach(function(o){ o.classList.toggle('on', A[k].indexOf(o.getAttribute('data-v')) >= 0); }); }
+      else { A[k] = A[k] === v && !g.hasAttribute('data-required') ? '' : v; $$('.qchip', g).forEach(function(o){ o.classList.toggle('on', o.getAttribute('data-v') === A[k]); }); }
+      if (k === 'debris') syncScene();
+    });
+  });
+  $('#qGetPrice').addEventListener('click', function(){ go(STEPS.indexOf('result')); });
+
+  /* ===== result ===== */
+  var lo = $('#qLo'), hi = $('#qHi');
+  function countUp(el, to){
+    if (reduce){ el.textContent = money(to); return; }
+    var t0 = null; function f(ts){ if (!t0) t0 = ts; var k = Math.min((ts - t0) / 1400, 1), e = 1 - Math.pow(1 - k, 3); el.textContent = money(to * e); if (k < 1) requestAnimationFrame(f); } requestAnimationFrame(f);
+  }
+  function summary(){
+    var g = OPTS.ground.o, f = function(k){ var o = OPTS[k].o.filter(function(x){ return x[0] === A[k]; })[0]; return o ? o[1] : '—'; };
+    return [['Brush', 'Level ' + A.level + ' · ' + LV[A.level][0]], ['Size', niceAc(A.acres) + ' acre' + (A.acres === 1 ? '' : 's')], ['Ground', f('ground')], ['Slope', f('slope')], ['Thorns', f('thorns')], ['Access', f('access')], ['Debris', A.debris === 'haul' ? 'Haul it away' : 'Piled on site']];
+  }
+  function showPrice(animate){
+    var p = st.price = price(A);
+    if (animate){ countUp(lo, p.lo); countUp(hi, p.hi); } else { lo.textContent = money(p.lo); hi.textContent = money(p.hi); }
+    $('#qSum').innerHTML = summary().map(function(r){ return '<li><span>' + r[0] + '</span><b>' + r[1] + '</b></li>'; }).join('');
+    $('#qHaulNote').hidden = A.debris !== 'haul';
+    var txt = 'Hi Tim, it\'s ' + fFirst.value.trim() + '. My instant quote on your site was ' + money(p.lo) + '–' + money(p.hi) + ' for about ' + niceAc(A.acres) + ' acres (Level ' + A.level + ', ' + LV[A.level][0] + ')' + (A.town ? ' in ' + A.town : '') + '. Can we set up a walk-through?';
+    $$('[data-sms]').forEach(function(a){ a.href = 'sms:+18457181328?&body=' + encodeURIComponent(txt); });
+  }
+
+  /* ===== booking ===== */
+  $('#qBookGo').addEventListener('click', function(){
+    st.booked = true; lead('booked');
+    $('#qDoneName').textContent = fFirst.value.trim() || 'friend';
+    $('#qDonePhone').textContent = fPhone.value;
+    go(STEPS.indexOf('done'));
+  });
+
+  /* ===== navigation ===== */
+  function go(i){
+    i = Math.max(0, Math.min(STEPS.length - 1, i));
+    var name = STEPS[i], prev = STEPS[st.i];
+    st.i = i; st.maxI = Math.max(st.maxI, i);
+    $$('.qs', slides).forEach(function(s){ var k = STEPS.indexOf(s.getAttribute('data-step')); s.classList.toggle('on', k === i); s.classList.toggle('past', k < i); s.setAttribute('aria-hidden', k === i ? 'false' : 'true'); s.inert = k !== i; });
+    var qn = 7, n = Math.min(i + 1, qn);
+    bar.style.width = (i >= 7 ? 100 : (i / qn) * 100 + 4) + '%';
+    stepN.textContent = i < 7 ? 'Step ' + n + ' of ' + qn : i === 7 ? 'Your price' : i === 8 ? 'Free walk-through' : 'All set';
+    if (scene){
+      scene.set('plot', name === 'size' ? 1 : (i > 1 && i < 7 ? .45 : 0));
+      if (name === 'result' && prev !== 'result'){ badge('Clearing…'); $('#qReplay').hidden = true; scene.clearRun(); }
+      if (i < 7 && scene.cleared > 0){ scene.unclear(); badge('Before'); $('#qReplay').hidden = true; }
+    }
+    if (name === 'result'){ showPrice(prev !== 'result'); if (!st.quoted){ st.quoted = true; lead('quote'); } }
+    if (name === 'size') showAcres();
+    var cur = $('.qs.on', slides); $('.qpanel').scrollTop = 0;
+    setTimeout(function(){ var f = cur.querySelector('input,button.qopt[aria-checked="true"],button.qopt,.btn'); if (f && root.contains(document.activeElement)) try { f.focus({preventScroll:true}); } catch (e){} }, reduce ? 0 : 380);
+  }
+  function badge(t){ var b = $('#qBadge'); b.textContent = t; b.classList.toggle('after', t === 'After'); }
+  function hudChips(){
+    $('#qLvlPill').textContent = 'Level ' + A.level + ' · ' + LV[A.level][0];
+    var c = [], m = {wet:'Wet ground', soft:'Soft spots', gentle:'Gentle slope', steep:'Steep hill', some:'Some thorns', lots:'Thick thorns', tight:'Tight access', none:'Hand work only'};
+    [A.ground, A.slope, A.thorns, A.access].forEach(function(v){ if (m[v]) c.push(m[v]); });
+    $('#qHudChips').innerHTML = '<span>' + niceAc(A.acres) + ' ac</span>' + c.map(function(x){ return '<span>' + x + '</span>'; }).join('');
+    $$('#qLevels button').forEach(function(b){ b.setAttribute('aria-pressed', +b.getAttribute('data-level') === A.level ? 'true' : 'false'); });
+  }
+
+  /* ===== open / close ===== */
+  function open(level){
+    lastFocus = document.activeElement;
+    A.level = level; root.hidden = false; document.documentElement.classList.add('qlock');
+    requestAnimationFrame(function(){ root.classList.add('on'); });
+    if (!scene){ scene = new BrushScene(cv); scene.onCleared = function(){ badge('After'); $('#qReplay').hidden = false; }; }
+    scene.resize(); scene.setLevel(level); scene.fade = 0; syncScene(); scene.start();
+    hudChips();
+    if (!st.id) st.id = 'Q-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+    go(st.started ? Math.max(1, Math.min(st.i, 6)) : 0);
+    setTimeout(function(){ try { (st.started ? $('.qs.on button, .qs.on input') : fFirst).focus({preventScroll:true}); } catch (e){} }, 420);
+  }
+  function close(){
+    leftEarly('closed the quote');
+    root.classList.remove('on'); document.documentElement.classList.remove('qlock');
+    setTimeout(function(){ root.hidden = true; if (scene) scene.stop(); }, reduce ? 0 : 420);
+    if (lastFocus) try { lastFocus.focus({preventScroll:true}); } catch (e){}
+  }
+  $$('[data-quote-level]').forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); open(+b.getAttribute('data-quote-level') || 1); }); });
+  $('#qClose').addEventListener('click', close);
+  $('#qDoneClose').addEventListener('click', close);
+  root.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){ close(); return; }
+    if (e.key === 'Tab'){ var f = $$('button:not([hidden]),input,textarea,a[href]', root).filter(function(el){ return el.offsetParent !== null && !el.closest('[inert]'); }); if (!f.length) return; var a = f[0], z = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === a){ e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z){ e.preventDefault(); a.focus(); } }
+  });
+  $$('#qLevels button').forEach(function(b){ b.addEventListener('click', function(){
+    A.level = +b.getAttribute('data-level'); scene.setLevel(A.level); syncScene(); hudChips();
+    if (STEPS[st.i] === 'result'){ showPrice(true); badge('Clearing…'); $('#qReplay').hidden = true; scene.clearRun(); }
+  }); });
+  $('#qReplay').addEventListener('click', function(){ badge('Clearing…'); $('#qReplay').hidden = true; scene.clearRun(); });
+  $('#qRestart').addEventListener('click', function(){ go(1); });
+  if (window.ResizeObserver) new ResizeObserver(function(){ if (scene && !root.hidden) scene.resize(); }).observe(cv);
+
+  /* ===== leads: every stage goes to Netlify Forms, which emails Tim ===== */
+  function collect(stage){
+    var p = st.price || (A.access ? price(A) : null);
+    var name = (fFirst.value.trim() + ' ' + fLast.value.trim()).trim();
+    var d = {
+      'form-name':'quote', stage:stage, lead_id:st.id,
+      first_name:fFirst.value.trim(), last_name:fLast.value.trim(), phone:fPhone.value, zip:fZip.value, town:A.town,
+      level:'Level ' + A.level + ' - ' + LV[A.level][0] + ' (' + LV[A.level][1] + ')',
+      acres:niceAc(A.acres), sq_ft:Math.round(A.acres * 43560).toLocaleString('en-US'),
+      ground:A.ground, slope:A.slope, thorns:A.thorns, access:A.access, debris:A.debris === 'haul' ? 'haul away' : 'pile on site', timing:A.timing, purpose:A.purpose,
+      price_range:p ? money(p.lo) + ' - ' + money(p.hi) : '', price_low:p ? p.lo : '', price_high:p ? p.hi : '',
+      last_step:NAMES[STEPS[st.maxI]] || STEPS[st.maxI],
+      preferred_days:A.days.join(', '), preferred_time:A.time, email:($('#qEmail').value || '').trim(), street_address:($('#qAddr').value || '').trim(), notes:($('#qNotes').value || '').trim(),
+      internal_breakdown:p ? 'base ' + money(p.base) + ' = area ' + money(p.area) + ' (+' + Math.round(p.pct * 100) + '%) + equipment ' + money(p.equip) + ' + travel ' + money(p.travel) + ' | est ' + p.days + ' day(s), ' + A.drive + ' min drive' : '',
+      page:location.href.split('#')[0]
+    };
+    var who = name + ' · ' + fPhone.value;
+    d.subject = stage === 'started' ? 'Quote started: ' + who + ' · Level ' + A.level + ' · ' + (A.town || fZip.value)
+      : stage === 'quote' ? 'Quote ' + d.price_range + ': ' + who
+      : stage === 'booked' ? 'WALK-THROUGH REQUEST: ' + who + ' · ' + d.price_range
+      : 'Left the quote early (' + d.last_step + '): ' + who;
+    return d;
+  }
+  function lead(stage){
+    var d = collect(stage), body = new URLSearchParams(d).toString();
+    if (PREVIEW){ if (window.console) console.log('[quote preview] would send:', stage, d); toast(stage); return; }
+    if (stage === 'left' && navigator.sendBeacon){ try { if (navigator.sendBeacon('/', new Blob([body], {type:'application/x-www-form-urlencoded'}))) return; } catch (e){} }
+    try { fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:body, keepalive:true}).catch(function(){}); } catch (e){}
+  }
+  function leftEarly(){ if (st.started && !st.quoted && !st.left){ st.left = true; lead('left'); } }
+  addEventListener('pagehide', leftEarly);
+  document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden') leftEarly(); });
+  function toast(stage){ var t = document.getElementById('toast'); if (!t) return; t.textContent = {started:'Tim gets: quote started', quote:'Tim gets: the price', booked:'Tim gets: walk-through request', left:'Tim gets: left early'}[stage]; t.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(function(){ t.classList.remove('on'); }, 2200); }
+
+  /* ===== card thumbnails, painted once when the section comes near ===== */
+  var cards = $$('.qcard canvas');
+  function paintThumbs(){
+    var tmp = document.createElement('canvas'); tmp.style.cssText = 'position:fixed;left:-9999px;top:0;width:560px;height:400px'; document.body.appendChild(tmp);
+    var s = new BrushScene(tmp, {still:true}); s.resize(560, 400);
+    cards.forEach(function(c, i){
+      var L = i + 1; s.setLevel(L); s.fade = 0; s.cur.slope = s.target.slope = L === 4 ? .45 : 0; s.cur.thorns = s.target.thorns = L >= 3 ? .3 : 0; s.t = 1.3 + i; s.bgKey = ''; s.draw();
+      var r = c.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2); c.width = Math.round((r.width || 280) * d); c.height = Math.round((r.height || 200) * d);
+      var g = c.getContext('2d'), sw = tmp.width, sh = tmp.height, k = Math.max(c.width / sw, c.height / sh), w = sw * k, h = sh * k;
+      g.drawImage(tmp, (c.width - w) / 2, (c.height - h) * .55, w, h); c.classList.add('in');
+    });
+    tmp.remove();
+  }
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ io.disconnect(); setTimeout(paintThumbs, 30); } }); }, {rootMargin:'600px 0px'});
+    io.observe($('#quote'));
+  } else paintThumbs();
+})();
+
+</script>
 </body>
 </html>
