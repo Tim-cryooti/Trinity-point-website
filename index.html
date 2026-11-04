@@ -539,8 +539,9 @@ html.qlock,html.qlock body{overflow:hidden}
 
 <main id="home">
   <section class="hero" aria-label="Introduction">
-    <img class="poster" src="assets/hero-poster.jpg" alt="" aria-hidden="true">
-    <video class="hv on" autoplay muted playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true" src="assets/hero.mp4"></video>
+    <picture><source media="(max-aspect-ratio: 1/1)" srcset="assets/hero-poster-m.jpg"><img class="poster" src="assets/hero-poster.jpg" alt="" aria-hidden="true"></picture>
+    <video class="hv on" id="hv0" autoplay muted playsinline preload="auto" aria-hidden="true"></video>
+    <script>(function(){var m=window.matchMedia&&matchMedia('(max-aspect-ratio: 1/1)').matches,k=m?'m':'d',c=[];for(var i=1;i<=5;i++)c.push('assets/hero-'+k+i+'.mp4');window.__heroClips=c;var v=document.getElementById('hv0');v.poster='assets/hero-poster'+(m?'-m':'')+'.jpg';v.src=c[0];})();</script>
     <video class="hv" muted playsinline preload="auto" aria-hidden="true"></video>
     <div class="reelbar" id="reelbar" aria-hidden="true"></div>
     <div class="wrap">
@@ -772,6 +773,15 @@ html.qlock,html.qlock body{overflow:hidden}
     </div>
     <div class="reel" id="reel">
       <figure style="aspect-ratio:1148/1400;width:min(400px,80vw)"><img src="assets/before-after-woodline.webp" alt="Before and after: a wood line thick with brush and tall grass, then the same area cleared to open ground with the big trees left standing" loading="lazy"><figcaption>Wood line, before &amp; after</figcaption></figure>
+      <figure><img src="assets/grapple-log.webp" alt="Timothy moving a big log with the grapple on the tracked loader" loading="lazy"><figcaption>Moving the big stuff</figcaption></figure>
+      <figure><img src="assets/operator-pushing-brush.webp" alt="Crew member pushing cleared brush to the edge of a hilltop lot with the tracked loader" loading="lazy"><figcaption>Pushing brush back</figcaption></figure>
+      <figure class="wide"><img src="assets/crew-backlit.webp" alt="The Trinity Point crew on the tracked loader with the sun coming through the trees" loading="lazy"><figcaption>The crew</figcaption></figure>
+      <figure><img src="assets/moving-log.webp" alt="Carrying a long log out of the woods with the loader" loading="lazy"><figcaption>Hauling it out</figcaption></figure>
+      <figure><img src="assets/before-brush-pov.webp" alt="Thick brush and saplings under the trees, seen from the brush cutter before clearing" loading="lazy"><figcaption>Before we start</figcaption></figure>
+      <figure><img src="assets/operator-yard.webp" alt="Crew member running the tracked loader through a wooded backyard" loading="lazy"><figcaption>Backyard woods</figcaption></figure>
+      <figure><img src="assets/operator-field-view.webp" alt="Tracked loader clearing a wood line that opens onto a farm field" loading="lazy"><figcaption>Opening the view</figcaption></figure>
+      <figure><img src="assets/grapple-log-side.webp" alt="Side view of the grapple holding a log on the tracked loader" loading="lazy"><figcaption>Grapple work</figcaption></figure>
+      <figure class="wide"><img src="assets/crew-sunset.webp" alt="The crew on the loader at the end of the day, silhouetted against the trees" loading="lazy"><figcaption>End of the day</figcaption></figure>
       <figure><img src="assets/brush-mower-goldenrod.webp" alt="Brush mower cutting into tall goldenrod" loading="lazy"><figcaption>Into the goldenrod</figcaption></figure>
       <figure><img src="assets/skid-steer-woods.webp" alt="Tracked machine with a brush cutter parked on freshly cleared ground in the woods" loading="lazy"><figcaption>Ready to cut</figcaption></figure>
       <figure><img src="assets/skid-steer-brush-cutter.webp" alt="Tracked machine with a brush cutter clearing under pines" loading="lazy"><figcaption>Heavy clearing</figcaption></figure>
@@ -781,6 +791,7 @@ html.qlock,html.qlock body{overflow:hidden}
       <figure><img src="assets/brush-cutter-slope.webp" alt="Crew member with a brush cutter finishing a slope" loading="lazy"><figcaption>Finishing the slope</figcaption></figure>
       <figure><img src="assets/skid-steer-pov.webp" alt="View from the controls of the tracked machine looking at a cleared hillside" loading="lazy"><figcaption>From the seat</figcaption></figure>
       <figure><img src="assets/pole-trimmer.webp" alt="Crew member in a Trinity Point shirt trimming tall brush with a pole trimmer" loading="lazy"><figcaption>Taking it down</figcaption></figure>
+      <figure><img src="assets/crew.webp" alt="The Trinity Point crew on the trailer with a brush mower" loading="lazy"><figcaption>Loaded up</figcaption></figure>
       <figure><img src="assets/slope-clearing.webp" alt="Brush mower handle in the foreground and a cleared slope behind" loading="lazy"><figcaption>Cleared ground</figcaption></figure>
     </div>
   </section>
@@ -788,7 +799,7 @@ html.qlock,html.qlock body{overflow:hidden}
   <section class="band" id="crew" aria-labelledby="crew-h">
     <div class="wrap">
       <div class="crew">
-        <div class="big rv"><img data-parallax src="assets/crew.webp" alt="The Trinity Point Landscaping crew on the trailer with a brush mower" loading="lazy"></div>
+        <div class="big rv"><img data-parallax src="assets/crew-skid-steer.webp" style="object-position:42% 50%" alt="The Trinity Point Landscaping crew on the tracked loader at a brush clearing job in the fall woods" loading="lazy"></div>
         <div class="story rv d1">
           <div>
             <span class="label" id="crew-h">The crew</span>
@@ -822,7 +833,7 @@ html.qlock,html.qlock body{overflow:hidden}
           <p class="lede">Buyers can't picture a lot they can't walk. We open up listings so the land photographs well and buyers can see the usable space, with the mature trees left standing.</p>
           <div><a class="btn" href="mailto:trinitypointlandscaping@gmail.com"><svg><use href="#i-mail"/></svg>Email about a listing</a></div>
         </div>
-        <div class="pic"><img src="assets/after.webp" alt="Cleared open ground under tall fall trees" loading="lazy"></div>
+        <div class="pic"><img src="assets/crew-cleared-lot.webp" alt="The Trinity Point crew on freshly cleared ground in a wooded lot, with the big trees left standing" loading="lazy"></div>
       </div>
     </div>
   </section>
@@ -1090,7 +1101,7 @@ html.qlock,html.qlock body{overflow:hidden}
     }
   });
   // hero: crossfade through the job clips
-  var clips = ['assets/hero.mp4','assets/hero2.mp4','assets/hero4.mp4','assets/hero3.mp4','assets/hero5.mp4'];
+  var clips = window.__heroClips || ['assets/hero-d1.mp4','assets/hero-d2.mp4','assets/hero-d3.mp4','assets/hero-d4.mp4','assets/hero-d5.mp4'];
   var layers = [].slice.call(document.querySelectorAll('.hero video.hv')), cur = 0, idx = 0, bar = document.getElementById('reelbar');
   clips.forEach(function(){ var i = document.createElement('i'); i.appendChild(document.createElement('b')); bar.appendChild(i); });
   var bars = [].slice.call(bar.querySelectorAll('b'));
